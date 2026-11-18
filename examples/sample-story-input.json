@@ -1,0 +1,184 @@
+{
+  "title": "Sample Universal Story Template",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "defaultBackground": "electronics_store",
+  "defaultCharacter": "jamal",
+  "scenes": [
+    {
+      "sceneIndex": 1,
+      "title": "Scene 1: Hook & Curiosity Setup",
+      "type": "animated-scene",
+      "narration": "প্রতিদিন ৫০ হাজার টাকা বিক্রি করেও মাস শেষে দোকানদারের পকেটে টাকা থাকত না! ঘটনাটা একজন ইলেকট্রনিক্স দোকানের মালিককে নিয়ে। তার নাম জামাল সাহেব।",
+      "subtitle": "প্রতিদিন ৫০ হাজার টাকা বিক্রি, কিন্তু মাস শেষে পকেটে টাকা নেই!",
+      "highlightWords": ["৫০ হাজার", "পকেটে টাকা নেই"],
+      "character": "jamal",
+      "characterPose": "thinking",
+      "characterPosition": "center",
+      "backgroundTheme": "electronics_store",
+      "hookCard": {
+        "text": "দৈনিক বিক্রি ৫০,০০০৳ ➔ কিন্তু পকেট খালি?!",
+        "badge": "বাস্তব ব্যবসার গল্প",
+        "subtext": "ইলেকট্রনিক্স দোকান মালিক জামাল সাহেব",
+        "start": 0.8,
+        "duration": 3.2
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "title": "Scene 2: High Daily Sales Dialogue",
+      "type": "animated-scene",
+      "narration": "দোকানে প্রতিদিন ভালো বিক্রি হয়। কখনো ৩০ হাজার, কখনো ৫০ হাজার, আবার কোনোদিন ৭০ হাজার টাকাও বিক্রি হয়। তিনি প্রায়ই বন্ধুদের বলতেন, ব্যবসা করতে পারলে টাকার কোনো অভাব থাকে না!",
+      "subtitle": "কখনো ৩০ হাজার, কখনো ৭০ হাজার—ব্যবসা করতে পারলে টাকার অভাব থাকে না!",
+      "highlightWords": ["৩০ হাজার", "৭০ হাজার", "টাকার অভাব"],
+      "character": "jamal",
+      "characterPose": "presenting",
+      "characterPosition": "center",
+      "backgroundTheme": "electronics_store",
+      "speechBubbles": [
+        {
+          "text": "ব্যবসা করতে পারলে টাকার কোনো অভাব থাকে না!",
+          "speakerPosition": "center",
+          "speakerName": "জামাল সাহেব",
+          "type": "shout",
+          "start": 7.5,
+          "duration": 4.5,
+          "top": 600
+        }
+      ],
+      "pinNote": {
+        "text": "দৈনিক ক্যাশ বিক্রি: ৳৫০,০০০ - ৳৭০,০০০",
+        "theme": "success",
+        "start": 1.2,
+        "duration": 3.0
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "title": "Scene 3: Two Characters Dialogue & Conflict",
+      "type": "animated-scene",
+      "narration": "একদিন তার বন্ধু এসে বলল, কী ব্যাপার জামাল ভাই? শুনলাম এই মাসে অনেক বিক্রি হয়েছে! জামাল সাহেব দীর্ঘশ্বাস ফেলে বললেন, ভাই, বিক্রি তো হচ্ছে, কিন্তু টাকা কোথায় যাচ্ছে বুঝতে পারছি না! বন্ধু বলল, আপনি কি জানেন, এই মাসে আপনার আসল লাভ কত?",
+      "subtitle": "কী ব্যাপার জামাল ভাই? আপনি কি জানেন আপনার আসল লাভ কত?",
+      "highlightWords": ["জামাল ভাই", "আসল লাভ"],
+      "character": "jamal",
+      "characterPose": "sad",
+      "characterPosition": "right",
+      "secondaryCharacter": "friend",
+      "secondaryPose": "standing",
+      "secondaryPosition": "left",
+      "crowd": "shoppers",
+      "backgroundTheme": "electronics_store",
+      "speechBubbles": [
+        {
+          "text": "কী ব্যাপার জামাল ভাই? শুনলাম এই মাসে অনেক বিক্রি হয়েছে!",
+          "speakerPosition": "left",
+          "speakerName": "বন্ধু",
+          "type": "speech",
+          "start": 2.2,
+          "duration": 4.0,
+          "top": 640
+        },
+        {
+          "text": "ভাই, বিক্রি তো হচ্ছে, কিন্তু টাকা কোথায় যাচ্ছে বুঝতে পারছি না!",
+          "speakerPosition": "right",
+          "speakerName": "জামাল সাহেব",
+          "type": "speech",
+          "start": 6.8,
+          "duration": 4.8,
+          "top": 640
+        },
+        {
+          "text": "আপনি কি জানেন, এই মাসে আপনার আসল লাভ কত?",
+          "speakerPosition": "left",
+          "speakerName": "বন্ধু",
+          "type": "thought",
+          "start": 12.0,
+          "duration": 3.8,
+          "top": 640
+        }
+      ]
+    },
+    {
+      "sceneIndex": 4,
+      "title": "Scene 4: Action Beat (Checking Khata / Ledger)",
+      "type": "animated-scene",
+      "narration": "জামাল সাহেব এবার খাতাটা নিয়ে বসলেন। দেখা গেল, অনেক পণ্য বাকিতে বিক্রি হয়েছে। কিছু পণ্যের কেনার দাম ঠিকমতো লেখা নেই। আবার কোথাও বিক্রির হিসাব আছে, কিন্তু কেনার হিসাব নেই। সব মিলিয়ে তিনি এতদিন বিক্রির পরিমাণকেই লাভ মনে করছিলেন!",
+      "subtitle": "খাতা খুলে দেখা গেল বাকি বিক্রি ও ক্রয়ের হিসাব নেই—বিক্রিকেই লাভ মনে করছিলেন!",
+      "highlightWords": ["খাতা খুলে", "বাকি বিক্রি", "হিসাব নেই"],
+      "character": "jamal",
+      "characterPose": "checking_khata",
+      "characterPosition": "center",
+      "backgroundTheme": "electronics_store",
+      "sticker": {
+        "text": "খাতায় বাকি অপরিশোধিত! কেনার রসিদ উধাও!",
+        "style": "warning",
+        "start": 2.0,
+        "duration": 3.5
+      }
+    },
+    {
+      "sceneIndex": 5,
+      "title": "Scene 5: Motion Graphics Comparison Card",
+      "type": "motion-graphics-scene",
+      "narration": "সেদিন তিনি বুঝলেন, শুধু টাকা আসলেই ব্যবসায় লাভ হয় না। সেই টাকার পেছনে কত খরচ হয়েছে, কত টাকা বাকি আছে, আর কত টাকা হাতে আছে—সবকিছুর হিসাব জানা জরুরি। ব্যবসায় মনে রাখবেন, বিক্রি বেশি হওয়া মানেই কিন্তু লাভ বেশি হওয়া নয়।",
+      "mgType": "comparison",
+      "title": "বিক্রির পরিমাণ বনাম আসল লাভ",
+      "subtitle": "বিক্রি বেশি হওয়া মানেই লাভ বেশি হওয়া নয়!",
+      "badge": "ব্যবসায়ের মূল শিক্ষা",
+      "comparisonLeft": {
+        "title": "বিক্রির পরিমাণ (Revenue)",
+        "badge": "ভুল ধারণা ✕",
+        "color": "#ef4444",
+        "points": [
+          "মাসে ১৫ লাখ টাকার পণ্য বিক্রি",
+          "ক্যাশ কাউন্টারে সাময়িক বড় অংক",
+          "বাকি ও খরচের হিসাব বাদ পড়ে থাকে",
+          "মাস শেষে পকেট শূন্য হয়ে যায়"
+        ]
+      },
+      "comparisonRight": {
+        "title": "প্রকৃত লাভ (Net Profit)",
+        "badge": "আসল স্বাস্থ্য ✓",
+        "color": "#10b981",
+        "points": [
+          "বিক্রয় - (ক্রয়মূল্য + দোকান খরচ)",
+          "বাকি টাকা সময়মতো আদায় নিশ্চিত",
+          "প্রত্যেক পণ্যে নির্দিষ্ট মার্জিন লাভ",
+          "মাস শেষে ব্যবসায় নগদ মুনাফা থাকে"
+        ]
+      }
+    },
+    {
+      "sceneIndex": 6,
+      "title": "Scene 6: Solution Process Flow & CTA",
+      "type": "motion-graphics-scene",
+      "narration": "হিসাব ঠিকমতো না রাখলে ব্যবসা ভালো চলছে নাকি ক্ষতি হচ্ছে, সেটাই বুঝতে পারবেন না। এই হিসাবগুলো সহজে পরিচালনা করতে POS ও ইনভেন্টরি সফটওয়্যার ব্যবহার করতে পারেন। আপনার ব্যবসায়ও কি বিক্রি অনেক কিন্তু মাস শেষে টাকা থাকে না? কমেন্টে জানান!",
+      "mgType": "flow",
+      "title": "ব্যবসায়ের পূর্ণ নিয়ন্ত্রণ রাখুন",
+      "subtitle": "বিক্রির পাশাপাশি আসল লাভের নির্ভুল হিসাব রাখুন",
+      "badge": "স্মার্ট সমাধান",
+      "flowSteps": [
+        {
+          "step": 1,
+          "title": "স্বয়ংক্রিয় স্টক ও ইনভেন্টরি ট্র্যাকিং",
+          "desc": "কোন পণ্য কতটুকু আছে আর কখন শেষ হচ্ছে তা সাথে সাথে জানুন"
+        },
+        {
+          "step": 2,
+          "title": "বাকি ও দেনা-পাওনার নিখুঁত হিসাব",
+          "desc": "কার কাছে কত বাকি আছে তার স্বয়ংক্রিয় রিমাইন্ডার"
+        },
+        {
+          "step": 3,
+          "title": "বাস্তব নিট লাভ ও আর্থিক রিপোর্ট",
+          "desc": "দিন শেষে আপনার পকেটে আসল কত লাভ হলো তা এক ক্লিকে দেখুন"
+        }
+      ],
+      "optionsCTA": [
+        "আপনার দোকানেও কি বিক্রি অনেক, কিন্তু মাস শেষে টাকা থাকে না?",
+        "কমেন্টে আপনার মতামত জানান! 👇"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+template/node_modules/
+package-lock.json
+
+# Remotion build and render output
+out/
+template/out/
+*.mp4
+*.mkv
+*.webm
+
+# OS and Editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environment and sensitive keys
+.env
+.env.local
+.env.*.local
+*.log
