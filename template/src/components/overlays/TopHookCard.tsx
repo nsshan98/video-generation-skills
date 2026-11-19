@@ -9,6 +9,7 @@ export interface TopHookCardProps {
   badge?: string;
   top?: number;
   delayFrames?: number;
+  durationFrames?: number;
 }
 
 /**
@@ -17,7 +18,7 @@ export interface TopHookCardProps {
  * - Line 1 in crisp bold white (curiosity setup)
  * - Line 2 in vibrant golden-yellow (dramatic punchline/twist)
  * - Sleek dark glass capsule with golden accent border
- * - Smooth non-oscillating entrance (ZERO dizziness)
+ * - Smooth entrance and timed exit fade (Strict max 4.5-5.0s, never hangs on screen)
  */
 export const TopHookCard: React.FC<TopHookCardProps> = ({
   line1,
@@ -27,12 +28,14 @@ export const TopHookCard: React.FC<TopHookCardProps> = ({
   badge,
   top = 150,
   delayFrames = 0,
+  durationFrames = 135, // 4.5s default duration
 }) => {
   const frame = useCurrentFrame();
 
   const displayLine1 = line1 || (badge ? `★ ${badge} ★` : text) || "";
   const displayLine2 = line2 || (line1 ? subtext : text) || subtext || "";
 
+  // Entrance interpolation (10 frames)
   const enterProgress = interpolate(
     frame - delayFrames,
     [0, 10],
@@ -40,10 +43,19 @@ export const TopHookCard: React.FC<TopHookCardProps> = ({
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  const opacity = enterProgress;
-  const translateY = interpolate(enterProgress, [0, 1], [-12, 0]);
+  // Exit interpolation (last 8 frames)
+  const exitStart = delayFrames + durationFrames - 8;
+  const exitProgress = interpolate(
+    frame - exitStart,
+    [0, 8],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
-  if (frame < delayFrames) return null;
+  if (frame < delayFrames || frame >= delayFrames + durationFrames) return null;
+
+  const opacity = enterProgress * (1 - exitProgress);
+  const translateY = interpolate(enterProgress, [0, 1], [-12, 0]) - exitProgress * 10;
 
   return (
     <div

@@ -1510,6 +1510,9 @@ export const SceneBackground: React.FC<SceneBackgroundProps> = ({
         </div>
       );
 
+    case "employee_cubicle":
+    case "manager_cabin":
+    case "ceo_boardroom":
     case "corporate_office":
       return (
         <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>

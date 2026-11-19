@@ -76,7 +76,25 @@ export interface ScenePropConfig {
     | "price_board"
     | "tea_stall_chula"
     | "smartphone"
-    | "video_call";
+    | "video_call"
+    | "office_desk_computer"
+    | "executive_desk"
+    | "ceo_office_desk"
+    | "resignation_letters"
+    | "tea_stall_bench"
+    | "courtroom_desk"
+    | "hospital_bed"
+    | "classroom_desk"
+    | "dining_table"
+    | "cash_counter"
+    | "software_mockup";
+  imageSrc?: string;
+  width?: number;
+  height?: number;
+  top?: number;
+  title?: string;
+  deskName?: string;
+  screenContent?: string;
   bookAuthor?: string;
   bookTitle?: string;
   lawNumber?: string;
@@ -95,6 +113,9 @@ export interface ScenePropConfig {
   priceBoardItems?: Array<{ item: string; price?: string }>;
   callerName?: string;
   callStatus?: string;
+  chatGroupName?: string;
+  chatMessages?: Array<{ sender?: string; text: string; isMe?: boolean; status?: string }>;
+  billAmount?: string;
 }
 
 export interface PinNoteConfig {
@@ -104,6 +125,9 @@ export interface PinNoteConfig {
   position?: "top-left" | "top-right";
   rotation?: number;
   delayFrames?: number;
+  start?: number;
+  duration?: number;
+  durationFrames?: number;
 }
 
 export interface StickerConfig {
@@ -111,6 +135,9 @@ export interface StickerConfig {
   angle?: number;
   bottom?: number;
   delayFrames?: number;
+  start?: number;
+  duration?: number;
+  durationFrames?: number;
 }
 
 export interface HookCardConfig {
@@ -122,6 +149,7 @@ export interface HookCardConfig {
   start?: number;
   duration?: number;
   delayFrames?: number;
+  durationFrames?: number;
 }
 
 export interface MetaphorConfig {

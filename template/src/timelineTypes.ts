@@ -1,6 +1,13 @@
 export type MotionPreset = "zoom-in" | "zoom-out" | "pan-left" | "pan-right" | "drift" | "static";
 export type CaptionStyle = "tiktok" | "cinema" | "minimal";
 
+export type CameraAngle =
+  | "normal"
+  | "dutch_left"
+  | "dutch_right"
+  | "low_hero"
+  | "high_tension";
+
 export interface SpeechBubbleConfig {
   text: string;
   speakerPosition?: "left" | "right" | "center";
@@ -12,6 +19,65 @@ export interface SpeechBubbleConfig {
   duration?: number; // relative duration in seconds within scene
   startFrame?: number;
   durationFrames?: number;
+}
+
+export interface InteractiveCursorConfig {
+  startX?: number;
+  startY?: number;
+  targetX?: number;
+  targetY?: number;
+  clickFrame?: number;
+  label?: string;
+}
+
+export interface CountUpConfig {
+  from: number;
+  to: number;
+  prefix?: string;
+  suffix?: string;
+  durationFrames?: number;
+  label?: string;
+  position?: { x?: number; y?: number };
+}
+
+export interface ParticleBurstConfig {
+  type: "confetti" | "cash_rain" | "sparkles" | "fire";
+  triggerFrame?: number;
+  count?: number;
+}
+
+export interface MarkerHighlightConfig {
+  text: string;
+  color?: string;
+  start?: number;
+  duration?: number;
+  startFrame?: number;
+  durationFrames?: number;
+  position?: { top?: number; bottom?: number };
+}
+
+export interface TornPaperCardConfig {
+  title?: string;
+  text?: string;
+  points?: string[];
+  pinColor?: string;
+  rotation?: number;
+  badge?: string;
+  position?: { top?: number; left?: number };
+}
+
+export interface OneTakeTransitionConfig {
+  enabled?: boolean;
+  target?: "phone" | "center" | "face" | "prop";
+  zoomLevel?: number;
+  durationFrames?: number;
+}
+
+export interface TopProgressBarConfig {
+  enabled?: boolean;
+  color?: string;
+  height?: number;
+  glow?: boolean;
 }
 
 export interface ContextIconConfig {
@@ -41,6 +107,8 @@ export interface AnimatedSceneItem {
   start: number;
   duration: number;
   subtitle: string;
+  narration?: string;
+  words?: Array<{ word: string; start: number; end: number }>;
   highlightWords?: string[];
   character?: string;
   characterPose?: any;
@@ -84,16 +152,28 @@ export interface AnimatedSceneItem {
   speechBubbles?: SpeechBubbleConfig[];
   contextIcon?: ContextIconConfig;
   screenShake?: boolean;
+  interactiveCursor?: InteractiveCursorConfig;
+  countUp?: CountUpConfig;
+  particleBurst?: ParticleBurstConfig;
+  markerHighlight?: MarkerHighlightConfig;
+  tornPaperCard?: TornPaperCardConfig;
+  oneTakeTransition?: OneTakeTransitionConfig;
+  cameraAngle?: CameraAngle;
+  parallax?: boolean;
 }
 
 export interface MotionGraphicsSceneItem {
   type: "motion-graphics-scene";
   start: number;
   duration: number;
-  mgType: "comparison" | "checklist" | "flow" | "time" | "quote_cta";
+  mgType: "comparison" | "checklist" | "flow" | "time" | "quote_cta" | "app_demo";
   title: string;
   subtitle?: string;
   badge?: string;
+  imageSrc?: string;
+  narration?: string;
+  words?: Array<{ word: string; start: number; end: number }>;
+  highlightWords?: string[];
   comparisonLeft?: { title: string; points: string[]; color?: string; badge?: string };
   comparisonRight?: { title: string; points: string[]; color?: string; badge?: string };
   checklistItems?: Array<{ text: string; icon?: string; active?: boolean }>;
@@ -103,8 +183,13 @@ export interface MotionGraphicsSceneItem {
   timeIcon?: "clock" | "calendar";
   quoteText?: string;
   quoteAuthor?: string;
-  optionsCTA?: string[];
+  optionsCTA?: string[] | { header?: string; optionA?: string; optionB?: string; prompt?: string };
   backgroundGradient?: string;
+  interactiveCursor?: InteractiveCursorConfig;
+  countUp?: CountUpConfig;
+  particleBurst?: ParticleBurstConfig;
+  markerHighlight?: MarkerHighlightConfig;
+  tornPaperCard?: TornPaperCardConfig;
 }
 
 export interface ImageClipItem {
@@ -255,4 +340,14 @@ export interface UniversalTimeline {
   items?: TimelineItem[];
   scenes?: PromoSceneItem[];
   soundEffects?: SoundEffectCue[];
+  progressBar?: boolean | TopProgressBarConfig;
+  autoSfx?: boolean;
+  bgm?: {
+    src: string;
+    volume?: number;
+    duckedVolume?: number;
+    autoDucking?: boolean;
+  };
+  voiceIntervals?: Array<{ startFrame: number; endFrame: number }>;
+  cinematicOverlay?: boolean;
 }

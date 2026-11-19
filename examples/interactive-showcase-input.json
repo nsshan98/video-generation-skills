@@ -1,0 +1,78 @@
+{
+  "title": "Masterclass Interactive Showcase",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "progressBar": true,
+  "autoSfx": true,
+  "cinematicOverlay": true,
+  "scenes": [
+    {
+      "sceneIndex": 1,
+      "duration": 4.0,
+      "narration": "প্রথমে পুরো দোকানে ভিড় জমে গেল আর অর্ডার বাড়তে শুরু করল!",
+      "character": "rashed",
+      "characterPose": "happy",
+      "backgroundTheme": "clothing_store",
+      "crowd": "shoppers",
+      "parallax": true,
+      "markerHighlight": {
+        "text": "অর্ডার বাড়তে শুরু করল!",
+        "color": "#FDE047"
+      },
+      "oneTakeTransition": {
+        "enabled": true,
+        "target": "phone",
+        "zoomLevel": 1.85
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "duration": 4.5,
+      "narration": "হঠাৎ বড় একটা ঝামেলা দেখা দিল—হিসাব মিলছে না!",
+      "character": "rashed",
+      "characterPose": "concerned",
+      "backgroundTheme": "home_study",
+      "cameraAngle": "dutch_left",
+      "screenShake": true,
+      "tornPaperCard": {
+        "badge": "জরুরি সতর্কবার্তা",
+        "title": "অপ্রত্যাশিত ঘাটতি!",
+        "points": [
+          "হিসাবের গড়মিল",
+          "সিস্টেম অফলাইন",
+          "কাস্টমার অসন্তোষ"
+        ]
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "type": "motion-graphics-scene",
+      "mgType": "flow",
+      "duration": 5.0,
+      "title": "অটোমেশন সমাধান ৩টি ধাপে",
+      "subtitle": "বিদ্যুৎ গতির ডেটা প্রসেসিং",
+      "badge": "৩ স্টেপ ফ্লো",
+      "flowSteps": [
+        {
+          "step": 1,
+          "title": "অর্ডার প্লেস",
+          "desc": "কাস্টমার অ্যাপ থেকে অর্ডার দিল"
+        },
+        {
+          "step": 2,
+          "title": "অটো ভেরিফিকেশন",
+          "desc": "AI ফ্রড চেক ও কনফার্ম করল"
+        },
+        {
+          "step": 3,
+          "title": "ইনস্ট্যান্ট ডেলিভারি",
+          "desc": "রাইডারকে সরাসরি এসাইন করা হলো"
+        }
+      ],
+      "particleBurst": {
+        "type": "sparkles"
+      }
+    }
+  ]
+}

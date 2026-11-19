@@ -9,12 +9,13 @@ export interface AngledStickerProps {
   bottom?: number;
   angle?: number;
   delayFrames?: number;
+  durationFrames?: number;
 }
 
 /**
  * High-Impact Callout Sticker:
  * - Seamlessly blends with rich scenes using warm crimson/amber glass styling
- * - Smooth ease-in (NO wild spring oscillations that cause dizziness)
+ * - Smooth entrance and exit (Strict max 4.0s duration, never freezes on screen)
  */
 export const AngledSticker: React.FC<AngledStickerProps> = ({
   text,
@@ -24,6 +25,7 @@ export const AngledSticker: React.FC<AngledStickerProps> = ({
   bottom = 440,
   angle = -3,
   delayFrames = 8,
+  durationFrames = 120, // 4.0s default duration
 }) => {
   const frame = useCurrentFrame();
 
@@ -34,10 +36,19 @@ export const AngledSticker: React.FC<AngledStickerProps> = ({
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  const opacity = enterProgress;
-  const scale = interpolate(enterProgress, [0, 1], [0.94, 1.0]);
+  // Smooth exit interpolation (last 8 frames)
+  const exitStart = delayFrames + durationFrames - 8;
+  const exitProgress = interpolate(
+    frame - exitStart,
+    [0, 8],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
-  if (frame < delayFrames) return null;
+  if (frame < delayFrames || frame >= delayFrames + durationFrames) return null;
+
+  const opacity = enterProgress * (1 - exitProgress);
+  const scale = interpolate(enterProgress, [0, 1], [0.94, 1.0]);
 
   return (
     <div

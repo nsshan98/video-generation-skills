@@ -100,18 +100,41 @@ async function ttsOpenAI(text, outputPath, voice, model, apiKey) {
 async function ttsElevenLabs(text, outputPath, voiceId, model, apiKey) {
   const key = apiKey || process.env.ELEVENLABS_API_KEY;
   if (!key) throw new Error("No ElevenLabs API key. Set ELEVENLABS_API_KEY or pass --apiKey=");
-  const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId || "21m00Tcm4TlvDq8ikWAM"}`, {
-    method: "POST",
-    headers: { "xi-api-key": key, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text, model_id: model || "eleven_multilingual_v2",
-      voice_settings: { stability: 0.5, similarity_boost: 0.75 }
-    })
-  });
-  if (!res.ok) throw new Error(`ElevenLabs error (${res.status}): ${await res.text()}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  await fs.mkdir(path.dirname(outputPath), { recursive: true });
-  await fs.writeFile(outputPath, buf);
+  const targetVoice = voiceId || "pNInz6obpgDQGcFmaJgB"; // Default: Adam (Rich expressive voice)
+
+  let attempts = 0;
+  while (attempts < 3) {
+    attempts++;
+    const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${targetVoice}`, {
+      method: "POST",
+      headers: { "xi-api-key": key, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text,
+        model_id: model || "eleven_multilingual_v2",
+        voice_settings: {
+          stability: 0.45,
+          similarity_boost: 0.8,
+          style: 0.35,
+          use_speaker_boost: true
+        }
+      })
+    });
+
+    if (res.status === 429) {
+      console.warn(`    ⚠ Rate limit (429), waiting 2.5s before retry (attempt ${attempts}/3)...`);
+      await new Promise((r) => setTimeout(r, 2500));
+      continue;
+    }
+
+    if (!res.ok) throw new Error(`ElevenLabs error (${res.status}): ${await res.text()}`);
+    const buf = Buffer.from(await res.arrayBuffer());
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(outputPath, buf);
+    // Safe delay to respect rate limits
+    await new Promise((r) => setTimeout(r, 800));
+    return;
+  }
+  throw new Error("ElevenLabs failed after 3 attempts due to rate limit.");
 }
 
 async function ttsFree(text, outputPath, lang) {
@@ -195,7 +218,7 @@ async function main() {
 
   for (let i = 0; i < scenes.length; i++) {
     const scene = scenes[i];
-    const narration = scene.narration || scene.text || "";
+    const narration = scene.ttsText || scene.narration || scene.text || "";
     if (!narration) {
       console.log(`  [Scene ${i + 1}] ⚠ No narration, skipping audio.`);
       continue;

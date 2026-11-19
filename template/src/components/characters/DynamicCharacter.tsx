@@ -22,6 +22,8 @@ export interface DynamicCharacterProps {
   tremble?: boolean;
   /** Explicitly controls whether character is actively speaking (moving mouth) or listening (closed mouth) */
   isSpeaking?: boolean;
+  /** Explicitly indicates character is seated behind an office desk */
+  isSeated?: boolean;
 }
 
 export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
@@ -34,6 +36,7 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
   rackFocus = false,
   tremble = false,
   isSpeaking,
+  isSeated,
 }) => {
   const frame = useCurrentFrame();
 
@@ -42,12 +45,26 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
       ? getCharacterConfig(character, overrides)
       : { ...character, ...overrides };
 
-  // Subtle breathing idle motion
-  const breathY = Math.sin(frame * 0.08) * 3;
+  // Anchored breathing / motion engine:
+  // 1. Seated characters MUST be 100% stationary (0px bounce) - pelvis is anchored to chair/stool/desk!
+  // 2. Walking characters have a physical step bounce (foot strike vs passing leg lift)
+  // 3. Standing idle characters have a micro-subtle drift (0.8px @ 0.04fps), NOT a distracting bounce
+  const isCharacterSeated =
+    isSeated ||
+    pose === "sitting_desk" ||
+    pose === "using_computer" ||
+    pose === "sitting_stool";
 
-  // Jitter / Tremble for intense emotions (rage, fear, panic, shock)
-  const isTrembling = tremble || pose === "tremble" || (pose === "shouting" && metaphor === "inner_rage");
-  const trembleX = isTrembling ? Math.sin(frame * 1.8) * 4 : 0;
+  const isWalking = pose === "walking" || pose === "walking_phone";
+  const walkBob = isWalking ? Math.abs(Math.sin(frame * 0.28)) * 4.5 : 0;
+  const breathY = isCharacterSeated ? 0 : isWalking ? -walkBob : Math.sin(frame * 0.04) * 0.8;
+
+  // Jitter / Tremble for intense emotions (rage, fear, panic, shock) - STRICT 1.0s max decay!
+  // Rule: Never vibrate or tremble continuously across an entire 15-30s scene (causes extreme viewer fatigue).
+  const isTrembleTriggered = tremble || pose === "tremble" || (pose === "shouting" && metaphor === "inner_rage");
+  const maxTrembleFrames = 36; // Max 1.2s at 30fps
+  const trembleDecay = isTrembleTriggered && frame < maxTrembleFrames ? Math.max(0, 1 - frame / maxTrembleFrames) : 0;
+  const trembleX = trembleDecay > 0 ? Math.sin(frame * 2.2) * 3.5 * trembleDecay : 0;
 
   // Blinking: every 85 frames, eyes close for 4 frames
   const blinkCycle = frame % 85;
@@ -58,21 +75,23 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
   const isThinking = pose === "thinking";
   const isCheckingKhata = pose === "checking_khata";
   const isSearching = pose === "searching_inventory";
+  const isTyping = pose === "using_computer" || pose === "sitting_desk";
+  const isReadingDoc = pose === "reading_document";
 
   // Reactive Eye Gaze based on Action Activity:
-  // - Reading ledger: eyes look DOWN into the book
+  // - Reading ledger / typing computer / reading file: eyes look DOWN
   // - Searching shelves: eyes look UP at the clothes rack
   // - Thinking: eyes look sideways-up
-  const pupilY = isCheckingKhata ? 170 : isSearching ? 159 : isThinking ? 162 : 165;
-  const pupilXOffset = isCheckingKhata ? 0 : isSearching ? 2 : isThinking ? -2 : 1;
+  const pupilY = isCheckingKhata || isTyping || isReadingDoc ? 171 : isSearching ? 159 : isThinking ? 162 : 165;
+  const pupilXOffset = isCheckingKhata || isTyping || isReadingDoc ? 0 : isSearching ? 2 : isThinking ? -2 : 1;
 
   // Talking mouth animation:
   // ONLY animate mouth if the character is actively speaking!
   // When listening or idle, mouth stays closed in a calm resting line.
   const shouldSpeak =
     isSpeaking !== undefined
-      ? isSpeaking && !isSad && !isThinking
-      : (pose === "talking" || pose === "explaining" || pose === "shouting");
+      ? isSpeaking && !isSad && !isThinking && !isTyping
+      : (pose === "talking" || pose === "explaining" || pose === "shouting" || pose === "pointing");
 
   const mouthCycle = shouldSpeak ? Math.floor((frame % 9) / 3) : 0; // 0, 1, 2
   const mouthOpen = shouldSpeak
@@ -167,8 +186,50 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
         {/* 1. Ground Shadow */}
         <ellipse cx="160" cy="580" rx="95" ry="16" fill={`url(#shadowGrad-${config.name})`} />
 
+        {/* 1.1 Seated Ergonomic Office Chair Back (Behind character when at desk) */}
+        {(isSeated || pose === "using_computer" || pose === "sitting_desk") && (
+          <g opacity={0.95}>
+            {/* High-back Ergonomic Headrest */}
+            <rect x="110" y="80" width="100" height="42" rx="14" fill="#1e293b" stroke="#0f172a" strokeWidth="3" />
+            <rect x="125" y="88" width="70" height="26" rx="8" fill="#334155" />
+            {/* Spine Neck Support */}
+            <rect x="150" y="122" width="20" height="50" fill="#0f172a" />
+            {/* Contoured Mesh Chair Backrest */}
+            <path
+              d="M 72 175 Q 160 155 248 175 L 254 390 Q 160 410 66 390 Z"
+              fill="#1e293b"
+              stroke="#0f172a"
+              strokeWidth="4"
+            />
+            {/* Breathable Lumbar Mesh Contours */}
+            <path d="M 88 220 Q 160 210 232 220" stroke="#334155" strokeWidth="3.5" fill="none" />
+            <path d="M 86 260 Q 160 250 234 260" stroke="#334155" strokeWidth="3.5" fill="none" />
+            <path d="M 84 300 Q 160 290 236 300" stroke="#334155" strokeWidth="3.5" fill="none" />
+            <path d="M 82 340 Q 160 330 238 340" stroke="#334155" strokeWidth="3.5" fill="none" />
+            {/* Padded Armrests */}
+            <rect x="58" y="300" width="22" height="75" rx="8" fill="#0f172a" />
+            <rect x="240" y="300" width="22" height="75" rx="8" fill="#0f172a" />
+          </g>
+        )}
+
+        {/* 1.2 Rustic Wooden Stool/Bench (Behind character when at tea stall or village) */}
+        {pose === "sitting_stool" && (
+          <g>
+            {/* Wooden Stool Top Plank */}
+            <rect x="70" y="440" width="180" height="22" rx="4" fill="#92400e" stroke="#78350f" strokeWidth="3" />
+            <line x1="80" y1="450" x2="240" y2="450" stroke="#b45309" strokeWidth="2" />
+            {/* Wooden Legs angled down */}
+            <line x1="85" y1="462" x2="70" y2="580" stroke="#78350f" strokeWidth="10" strokeLinecap="round" />
+            <line x1="235" y1="462" x2="250" y2="580" stroke="#78350f" strokeWidth="10" strokeLinecap="round" />
+            <line x1="120" y1="462" x2="110" y2="580" stroke="#92400e" strokeWidth="8" strokeLinecap="round" />
+            <line x1="200" y1="462" x2="210" y2="580" stroke="#92400e" strokeWidth="8" strokeLinecap="round" />
+            {/* Support Crossbar */}
+            <line x1="78" y1="520" x2="242" y2="520" stroke="#78350f" strokeWidth="5" />
+          </g>
+        )}
+
         {/* 2. Lower Body (Legs & Shoes / Lungi) */}
-        {renderLowerBody(outfit, pantsColor, shoesColor)}
+        {renderLowerBody(outfit, pantsColor, shoesColor, pose, frame)}
 
         {/* 3. Upper Body / Torso (Outfit) */}
         {renderTorso(outfit, primaryColor, secondaryColor, accentColor, hasShawl, shawlColor, hasGamcha, gamchaColor)}
@@ -246,11 +307,20 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
 
 // --- Sub-renderers ---
 
-function renderLowerBody(outfit: string, pantsColor: string, shoesColor: string) {
+function renderLowerBody(
+  outfit: string,
+  pantsColor: string,
+  shoesColor: string,
+  pose?: CharacterPose,
+  frame: number = 0
+) {
+  const isWalking = pose === "walking" || pose === "walking_phone";
+
   // 1. Traditional Checkered Bengali Lungi
   if (outfit === "lungi_shirt") {
+    const lungiSwing = isWalking ? Math.sin(frame * 0.28) * 8 : 0;
     return (
-      <>
+      <g transform={`skewX(${lungiSwing})`}>
         {/* Lungi Fabric */}
         <path
           d="M 104 380 L 216 380 L 226 545 L 94 545 Z"
@@ -273,7 +343,7 @@ function renderLowerBody(outfit: string, pantsColor: string, shoesColor: string)
         <ellipse cx="189" cy="570" rx="20" ry="8" fill={shoesColor || "#78350f"} />
         <path d="M 120 568 Q 131 559 142 568" stroke="#451a03" strokeWidth="4" fill="none" />
         <path d="M 178 568 Q 189 559 200 568" stroke="#451a03" strokeWidth="4" fill="none" />
-      </>
+      </g>
     );
   }
 
@@ -297,6 +367,54 @@ function renderLowerBody(outfit: string, pantsColor: string, shoesColor: string)
   }
 
   const isPajama = outfit === "panjabi_kurta" || outfit === "tupi_koti";
+
+  // 3. Dynamic Walking Strides (Skeletal leg swing from hip joints)
+  if (isWalking) {
+    const walkPhase = frame * 0.28;
+    const leftLegAngle = Math.sin(walkPhase) * 20;
+    const rightLegAngle = -Math.sin(walkPhase) * 20;
+
+    return (
+      <g>
+        {/* Left Leg swinging from hip joint (137, 385) */}
+        <g transform={`rotate(${leftLegAngle}, 137, 385)`}>
+          <rect
+            x="120"
+            y="380"
+            width="35"
+            height="190"
+            rx="10"
+            fill={pantsColor}
+            stroke={isPajama ? "#cbd5e0" : "#1a202c"}
+            strokeWidth={isPajama ? 1.5 : 2}
+          />
+          <ellipse cx="132" cy="570" rx="22" ry="10" fill={shoesColor} />
+          {shoesColor === "#ffffff" && (
+            <path d="M 112 574 L 152 574" stroke="#a0aec0" strokeWidth="2" />
+          )}
+        </g>
+
+        {/* Right Leg swinging from hip joint (182, 385) */}
+        <g transform={`rotate(${rightLegAngle}, 182, 385)`}>
+          <rect
+            x="165"
+            y="380"
+            width="35"
+            height="190"
+            rx="10"
+            fill={pantsColor}
+            stroke={isPajama ? "#cbd5e0" : "#1a202c"}
+            strokeWidth={isPajama ? 1.5 : 2}
+          />
+          <ellipse cx="188" cy="570" rx="22" ry="10" fill={shoesColor} />
+          {shoesColor === "#ffffff" && (
+            <path d="M 168 574 L 208 574" stroke="#a0aec0" strokeWidth="2" />
+          )}
+        </g>
+      </g>
+    );
+  }
+
   return (
     <>
       {/* Legs / Trousers / Pajama */}
@@ -533,6 +651,60 @@ function renderArms(
       ? primaryColor
       : secondaryColor;
 
+  // Action Activity: Walking Arm Swings (Natural Contralateral Motion)
+  if (pose === "walking") {
+    const walkPhase = frame * 0.28;
+    // Left arm swings counter to left leg (-sin(walkPhase))
+    const leftArmAngle = -Math.sin(walkPhase) * 22;
+    // Right arm swings with left leg (+sin(walkPhase))
+    const rightArmAngle = Math.sin(walkPhase) * 22;
+
+    return (
+      <g>
+        {/* Left Arm swinging from shoulder (105, 245) */}
+        <g transform={`rotate(${leftArmAngle}, 105, 245)`}>
+          <path d="M 105 245 L 90 340" stroke="#0f172a" strokeWidth="26" strokeLinecap="round" fill="none" />
+          <path d="M 105 245 L 90 340" stroke={sleeveColor} strokeWidth="20" strokeLinecap="round" fill="none" />
+          <ellipse cx="88" cy="350" rx="13" ry="11" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        </g>
+
+        {/* Right Arm swinging from shoulder (215, 245) */}
+        <g transform={`rotate(${rightArmAngle}, 215, 245)`}>
+          <path d="M 215 245 L 230 340" stroke="#0f172a" strokeWidth="26" strokeLinecap="round" fill="none" />
+          <path d="M 215 245 L 230 340" stroke={sleeveColor} strokeWidth="20" strokeLinecap="round" fill="none" />
+          <ellipse cx="232" cy="350" rx="13" ry="11" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        </g>
+      </g>
+    );
+  }
+
+  // Action Activity: Walking while checking phone
+  if (pose === "walking_phone") {
+    const walkPhase = frame * 0.28;
+    const leftArmAngle = -Math.sin(walkPhase) * 20;
+
+    return (
+      <g>
+        {/* Left Arm swinging naturally from shoulder (105, 245) */}
+        <g transform={`rotate(${leftArmAngle}, 105, 245)`}>
+          <path d="M 105 245 L 90 340" stroke="#0f172a" strokeWidth="26" strokeLinecap="round" fill="none" />
+          <path d="M 105 245 L 90 340" stroke={sleeveColor} strokeWidth="20" strokeLinecap="round" fill="none" />
+          <ellipse cx="88" cy="350" rx="13" ry="11" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        </g>
+
+        {/* Right Arm bent holding phone in front of chest */}
+        <path d="M 215 245 Q 225 310 180 300" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 245 Q 225 310 180 300" stroke={sleeveColor} strokeWidth="20" strokeLinecap="round" fill="none" />
+        <ellipse cx="175" cy="298" rx="14" ry="12" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        {/* Smartphone held in hand */}
+        <g transform="translate(160, 270) rotate(-10)">
+          <rect x="0" y="0" width="22" height="38" rx="4" fill="#0f172a" stroke="#475569" strokeWidth="1.5" />
+          <rect x="2" y="3" width="18" height="30" rx="2" fill="#38bdf8" opacity="0.9" />
+        </g>
+      </g>
+    );
+  }
+
   // Action Activity 1: Checking traditional Bengali red cloth-bound ledger (লাল খাতা)
   if (pose === "checking_khata") {
     return (
@@ -700,6 +872,200 @@ function renderArms(
         <path d="M 120 300 L 140 285 L 180 285 L 200 300" fill="#a68153" />
         <circle cx="145" cy="275" r="8" fill="#48bb78" />
         <circle cx="155" cy="270" r="10" fill="#38a169" />
+      </>
+    );
+  }
+
+  if (pose === "using_computer") {
+    // Subtle typing finger jitter
+    const typeOffset = Math.sin(frame * 0.9) * 2.5;
+    return (
+      <>
+        {/* Soft screen light ambient cast on torso */}
+        <polygon points="120,410 200,410 220,250 100,250" fill="#38bdf8" opacity="0.12" />
+
+        {/* Left arm reaching forward & down directly onto keyboard */}
+        <path d="M 105 250 Q 110 340 135 412" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 105 250 Q 110 340 135 412" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        {/* Left hand & typing fingers */}
+        <circle cx="135" cy={412 + typeOffset} r="13" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        <rect x="123" y={410 + typeOffset} width="24" height="9" rx="3" fill={skinBase} stroke="#0f172a" strokeWidth="1.5" />
+
+        {/* Right arm reaching forward & down directly onto keyboard / mouse */}
+        <path d="M 215 250 Q 210 340 185 412" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 210 340 185 412" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        {/* Right hand & typing fingers */}
+        <circle cx="185" cy={412 - typeOffset} r="13" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        <rect x="173" y={410 - typeOffset} width="24" height="9" rx="3" fill={skinBase} stroke="#0f172a" strokeWidth="1.5" />
+      </>
+    );
+  }
+
+  if (pose === "sitting_desk") {
+    return (
+      <>
+        {/* Left arm resting on desk */}
+        <path d="M 105 250 Q 110 340 132 414" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="132" cy="414" rx="15" ry="10" fill={skinBase} />
+        {/* Right arm resting on desk */}
+        <path d="M 215 250 Q 210 340 188 414" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="188" cy="414" rx="15" ry="10" fill={skinBase} />
+      </>
+    );
+  }
+
+  if (pose === "pointing") {
+    return (
+      <>
+        {/* Left arm resting or clenched */}
+        <path d="M 100 250 Q 80 320 95 365" stroke={sleeveColor} strokeWidth="28" strokeLinecap="round" fill="none" />
+        <circle cx="95" cy="365" r="14" fill={skinBase} />
+        {/* Right arm pointing forward/upward decisively */}
+        <path d="M 220 250 Q 255 230 285 220 L 305 210" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 220 250 Q 255 230 285 220 L 305 210" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        {/* Pointing Hand with Index Finger extended */}
+        <circle cx="305" cy="210" r="13" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        <line x1="305" y1="210" x2="322" y2="202" stroke={skinBase} strokeWidth="6" strokeLinecap="round" />
+        <line x1="305" y1="210" x2="322" y2="202" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" />
+      </>
+    );
+  }
+
+  if (pose === "reading_document") {
+    return (
+      <>
+        {/* Left arm holding file */}
+        <path d="M 105 250 Q 110 320 135 325" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="135" cy="325" r="13" fill={skinBase} />
+        {/* Right arm holding file */}
+        <path d="M 215 250 Q 210 320 185 325" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="185" cy="325" r="13" fill={skinBase} />
+        {/* Manila Office Document Folder */}
+        <g transform="translate(130, 290)">
+          <rect x="0" y="0" width="60" height="45" rx="4" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
+          <rect x="5" y="5" width="50" height="35" rx="2" fill="#ffffff" />
+          <line x1="10" y1="12" x2="45" y2="12" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="10" y1="18" x2="40" y2="18" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="10" y1="24" x2="48" y2="24" stroke="#ef4444" strokeWidth="2" />
+        </g>
+      </>
+    );
+  }
+
+  if (pose === "celebrating") {
+    return (
+      <>
+        {/* Both arms raised up high in victory V */}
+        <path d="M 100 250 Q 70 200 65 145" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 100 250 Q 70 200 65 145" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="65" cy="145" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+
+        <path d="M 220 250 Q 250 200 255 145" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 220 250 Q 250 200 255 145" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="255" cy="145" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+      </>
+    );
+  }
+
+  if (pose === "holding_phone") {
+    return (
+      <>
+        {/* Left arm relaxed at side */}
+        <path d="M 105 250 Q 90 320 100 375" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="100" cy="375" r="14" fill={skinBase} />
+
+        {/* Right arm bent up to ear holding phone */}
+        <path d="M 215 250 Q 255 240 238 185" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 255 240 238 185" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        {/* Right hand */}
+        <circle cx="238" cy="185" r="13" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        {/* Modern Smartphone held against ear */}
+        <rect x="228" y="145" width="22" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" strokeWidth="2" />
+        <rect x="231" y="150" width="16" height="32" rx="2" fill="#0284c7" opacity="0.8" />
+        {/* Calling wave lines */}
+        <path d="M 256 155 Q 262 165 256 175" stroke="#38bdf8" strokeWidth="2" fill="none" opacity="0.8" />
+      </>
+    );
+  }
+
+  if (pose === "sitting_stool") {
+    return (
+      <>
+        {/* Arms resting naturally on thighs / knees while seated on stool */}
+        <path d="M 105 250 Q 95 330 115 390" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="115" cy="390" rx="14" ry="11" fill={skinBase} />
+        <path d="M 215 250 Q 225 330 205 390" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="205" cy="390" rx="14" ry="11" fill={skinBase} />
+      </>
+    );
+  }
+
+  if (pose === "drinking_tea") {
+    return (
+      <>
+        {/* Left arm resting */}
+        <path d="M 105 250 Q 90 320 100 375" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="100" cy="375" r="14" fill={skinBase} />
+        {/* Right arm raised holding tea glass */}
+        <path d="M 215 250 Q 240 260 215 210" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 240 260 215 210" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="215" cy="210" r="13" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+        {/* Traditional Glass of Milk Tea / Cha */}
+        <g transform="translate(205, 185)">
+          <polygon points="0,0 20,0 17,28 3,28" fill="rgba(255,255,255,0.7)" stroke="#94a3b8" strokeWidth="1.5" />
+          <polygon points="2,6 18,6 16,26 4,26" fill="#b45309" />
+          {/* Steam rising */}
+          <path d="M 7 -4 Q 10 -12 7 -18" stroke="#ffffff" strokeWidth="1.8" fill="none" opacity="0.6" />
+          <path d="M 13 -4 Q 16 -12 13 -18" stroke="#ffffff" strokeWidth="1.8" fill="none" opacity="0.6" />
+        </g>
+      </>
+    );
+  }
+
+  if (pose === "counting_money") {
+    return (
+      <>
+        {/* Left arm holding stack of cash */}
+        <path d="M 105 250 Q 115 310 145 320" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="145" cy="320" r="13" fill={skinBase} />
+        {/* Right arm counting banknotes */}
+        <path d="M 215 250 Q 205 310 175 320" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="175" cy="320" r="13" fill={skinBase} />
+        {/* Fan of Green 500/1000 Taka Banknotes */}
+        <g transform="translate(138, 295)">
+          <rect x="-8" y="6" width="46" height="26" rx="2" fill="#15803d" stroke="#166534" strokeWidth="1.5" transform="rotate(-15)" />
+          <rect x="0" y="2" width="46" height="26" rx="2" fill="#16a34a" stroke="#15803d" strokeWidth="1.5" transform="rotate(-5)" />
+          <rect x="8" y="0" width="46" height="26" rx="2" fill="#22c55e" stroke="#16a34a" strokeWidth="1.5" transform="rotate(10)" />
+          <text x="26" y="18" fill="#ffffff" fontSize="13" fontWeight="900" textAnchor="middle">৳</text>
+        </g>
+      </>
+    );
+  }
+
+  if (pose === "shocked") {
+    return (
+      <>
+        {/* Arms thrown back slightly in alarm/disbelief */}
+        <path d="M 105 250 Q 70 280 65 330" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 105 250 Q 70 280 65 330" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="65" cy="330" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+
+        <path d="M 215 250 Q 250 280 255 330" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 250 280 255 330" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="255" cy="330" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+      </>
+    );
+  }
+
+  if (pose === "nervous") {
+    // Subtle nervous twitch
+    const twitch = Math.sin(frame * 0.8) * 2;
+    return (
+      <>
+        {/* Hands clutched together nervously at upper chest */}
+        <path d="M 105 250 Q 120 320 148 335" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 200 320 172 335" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="160" cy={335 + twitch} rx="18" ry="14" fill={skinBase} stroke="#0f172a" strokeWidth="1.5" />
       </>
     );
   }
@@ -1032,36 +1398,83 @@ function renderMouth(
 }
 
 function renderActionOverlays(pose: CharacterPose, frame: number) {
-  if (pose === "searching_inventory") {
-    const searchSway = Math.sin(frame * 0.15) * 8;
-    return (
-      <g>
-        {/* Floating animated magnifying glass beside head (never hidden) */}
-        <g transform={`translate(${250 + searchSway}, 125)`}>
-          <circle cx="0" cy="0" r="22" stroke="#3b82f6" strokeWidth="4" fill="rgba(59,130,246,0.25)" />
-          <line x1="15" y1="15" x2="32" y2="32" stroke="#0f172a" strokeWidth="6" strokeLinecap="round" />
-          <text x="-7" y="8" fontSize="22" fill="#ef4444" fontWeight="900">?</text>
+  const isAngry = pose === "shouting";
+  const isTense = pose === "concerned" || pose === "nervous" || pose === "tremble";
+  const isJoyful = pose === "celebrating";
+  const isSad = pose === "sad";
+  const isShocked = pose === "shocked";
+
+  return (
+    <g>
+      {/* 1. Sweat Drop (💧) for Tension / Anxiety / Nervousness */}
+      {isTense && (
+        <g transform="translate(108, 142)">
+          <path
+            d="M 6 0 C 3 6 0 10 0 14 A 6 6 0 0 0 12 14 C 12 10 9 6 6 0 Z"
+            fill="#38bdf8"
+            stroke="#0284c7"
+            strokeWidth="1.5"
+            opacity={0.9}
+          />
+          <circle cx="4" cy="12" r="1.5" fill="#ffffff" />
         </g>
+      )}
 
-        {/* Floating "Empty Shelf" alert badge beside shoulder */}
-        <g transform="translate(38, 95)">
-          <rect x="0" y="0" width="88" height="30" rx="6" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
-          <text x="44" y="20" textAnchor="middle" fill="#ffffff" fontSize="13" fontWeight="bold">খালি তাক! ✕</text>
+      {/* 2. Comic/Anime Rage Vein Mark (💢) for Anger / Shouting */}
+      {isAngry && (
+        <g transform="translate(208, 118)">
+          <path
+            d="M 0 5 Q 8 8 16 0 M 16 0 Q 8 8 16 16 M 16 16 Q 8 8 0 16 M 0 16 Q 8 8 0 0"
+            stroke="#ef4444"
+            strokeWidth="3.5"
+            fill="none"
+            strokeLinecap="round"
+          />
         </g>
-      </g>
-    );
-  }
+      )}
 
-  if (pose === "shouting") {
-    // Dynamic angry sweat / shock action marks
-    return (
-      <g>
-        <path d="M 225 125 L 245 115" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 230 135 L 255 132" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 225 145 L 245 152" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
-      </g>
-    );
-  }
+      {/* 3. Celebration Twinkle Stars (✨) for Joy / Victory */}
+      {isJoyful && (
+        <g>
+          <g transform={`translate(80, 110) rotate(${frame * 2}) scale(${0.8 + Math.sin(frame * 0.2) * 0.2})`}>
+            <polygon points="0,-12 3,-3 12,0 3,3 0,12 -3,3 -12,0 -3,-3" fill="#facc15" stroke="#ca8a04" strokeWidth="1.5" />
+          </g>
+          <g transform={`translate(240, 105) rotate(${-frame * 2}) scale(${0.8 + Math.cos(frame * 0.2) * 0.2})`}>
+            <polygon points="0,-10 2.5,-2.5 10,0 2.5,2.5 0,10 -2.5,2.5 -10,0 -2.5,-2.5" fill="#facc15" stroke="#ca8a04" strokeWidth="1.5" />
+          </g>
+        </g>
+      )}
 
-  return null;
+      {/* 4. Tear Glisten (😢) on Cheek for Sadness / Remorse */}
+      {isSad && (
+        <ellipse cx="146" cy="184" rx="2.5" ry="4" fill="#38bdf8" opacity={0.75} />
+      )}
+
+      {/* 5. Shock Action Lines for Sudden Shock / Disbelief */}
+      {isShocked && (
+        <g stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" opacity={0.85}>
+          <line x1="120" y1="80" x2="120" y2="60" />
+          <line x1="140" y1="72" x2="140" y2="52" />
+          <line x1="160" y1="70" x2="160" y2="48" />
+          <line x1="180" y1="72" x2="180" y2="52" />
+          <line x1="200" y1="80" x2="200" y2="60" />
+        </g>
+      )}
+
+      {/* Searching Inventory Overlay */}
+      {pose === "searching_inventory" && (
+        <g>
+          <g transform={`translate(${250 + Math.sin(frame * 0.15) * 8}, 125)`}>
+            <circle cx="0" cy="0" r="22" stroke="#3b82f6" strokeWidth="4" fill="rgba(59,130,246,0.25)" />
+            <line x1="15" y1="15" x2="32" y2="32" stroke="#0f172a" strokeWidth="6" strokeLinecap="round" />
+            <text x="-7" y="8" fontSize="22" fill="#ef4444" fontWeight="900">?</text>
+          </g>
+          <g transform="translate(38, 95)">
+            <rect x="0" y="0" width="88" height="30" rx="6" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
+            <text x="44" y="20" textAnchor="middle" fill="#ffffff" fontSize="13" fontWeight="bold">খালি তাক! ✕</text>
+          </g>
+        </g>
+      )}
+    </g>
+  );
 }

@@ -14,6 +14,8 @@ import {
 import timelineData from "./timeline.json";
 import { AnimatedStoryScene } from "./components/scenes/AnimatedStoryScene";
 import { MotionGraphicsScene } from "./components/scenes/MotionGraphicsScene";
+import { TopProgressBar } from "./components/interactive/TopProgressBar";
+import { CinematicOverlay } from "./components/overlays/CinematicOverlay";
 import {
   TimelineItem,
   ImageClipItem,
@@ -219,6 +221,39 @@ const CaptionOverlay: React.FC<{
   );
 };
 
+// Smart BGM Auto-Ducking Component (HRuiCcc/RuiC-motion-reel)
+const DuckedBgmTrack: React.FC<{
+  src: string;
+  baseVolume?: number;
+  duckedVolume?: number;
+  autoDucking?: boolean;
+  voiceIntervals?: Array<{ startFrame: number; endFrame: number }>;
+}> = ({
+  src,
+  baseVolume = 0.32,
+  duckedVolume = 0.08,
+  autoDucking = true,
+  voiceIntervals = [],
+}) => {
+  const frame = useCurrentFrame();
+
+  if (!autoDucking || voiceIntervals.length === 0) {
+    return <Audio src={staticFile(src)} volume={baseVolume} loop />;
+  }
+
+  // Check if current frame falls inside any voice interval (with 6 frames anticipation and 10 frames decay)
+  let isVoiceActive = false;
+  for (const interval of voiceIntervals) {
+    if (frame >= interval.startFrame - 6 && frame <= interval.endFrame + 10) {
+      isVoiceActive = true;
+      break;
+    }
+  }
+
+  const currentVol = isVoiceActive ? duckedVolume : baseVolume;
+  return <Audio src={staticFile(src)} volume={currentVol} loop />;
+};
+
   export interface VideoProps {
     timeline?: UniversalTimeline;
   }
@@ -246,6 +281,8 @@ const CaptionOverlay: React.FC<{
                     <AnimatedStoryScene
                       sceneIndex={item.sceneIndex}
                       subtitle={item.subtitle}
+                      narration={(item as any).narration}
+                      words={(item as any).words}
                       durationInFrames={duration}
                       highlightWords={item.highlightWords}
                       character={item.character}
@@ -272,6 +309,14 @@ const CaptionOverlay: React.FC<{
                       crowd={item.crowd}
                       contextIcon={item.contextIcon}
                       screenShake={item.screenShake}
+                      interactiveCursor={(item as any).interactiveCursor}
+                      countUp={(item as any).countUp}
+                      particleBurst={(item as any).particleBurst}
+                      markerHighlight={(item as any).markerHighlight}
+                      tornPaperCard={(item as any).tornPaperCard}
+                      oneTakeTransition={(item as any).oneTakeTransition}
+                      cameraAngle={(item as any).cameraAngle}
+                      parallax={(item as any).parallax}
                     />
                   </Sequence>
                 );
@@ -286,6 +331,10 @@ const CaptionOverlay: React.FC<{
                       title={item.title}
                       subtitle={item.subtitle}
                       badge={item.badge}
+                      imageSrc={(item as any).imageSrc}
+                      narration={(item as any).narration}
+                      words={(item as any).words}
+                      highlightWords={(item as any).highlightWords}
                       comparisonLeft={item.comparisonLeft}
                       comparisonRight={item.comparisonRight}
                       checklistItems={item.checklistItems}
@@ -297,6 +346,12 @@ const CaptionOverlay: React.FC<{
                       quoteAuthor={item.quoteAuthor}
                       optionsCTA={item.optionsCTA}
                       backgroundGradient={item.backgroundGradient}
+                      browserUrl={(item as any).browserUrl}
+                      interactiveCursor={(item as any).interactiveCursor}
+                      countUp={(item as any).countUp}
+                      particleBurst={(item as any).particleBurst}
+                      markerHighlight={(item as any).markerHighlight}
+                      tornPaperCard={(item as any).tornPaperCard}
                     />
                   </Sequence>
                 );
@@ -359,6 +414,22 @@ const CaptionOverlay: React.FC<{
                   );
                 })
               }
+          {/* Top Retention Progress Bar across entire video (ViralForge) */}
+          <TopProgressBar config={activeTimeline.progressBar} />
+
+          {/* Cinematic Edge Vignette (Vibha-Ramprakash/claude-video-effects) */}
+          <CinematicOverlay enabled={activeTimeline.cinematicOverlay ?? true} />
+
+          {/* Smart BGM Auto-Ducking Background Music (HRuiCcc/RuiC-motion-reel) */}
+          {activeTimeline.bgm?.src && (
+            <DuckedBgmTrack
+              src={activeTimeline.bgm.src}
+              baseVolume={activeTimeline.bgm.volume ?? 0.32}
+              duckedVolume={activeTimeline.bgm.duckedVolume ?? 0.08}
+              autoDucking={activeTimeline.bgm.autoDucking !== false}
+              voiceIntervals={activeTimeline.voiceIntervals ?? []}
+            />
+          )}
     </AbsoluteFill>
     );
   };

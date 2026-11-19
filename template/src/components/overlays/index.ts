@@ -4,3 +4,6 @@ export * from "./PushpinNote";
 export * from "./SpeechCalloutBubble";
 export * from "./SubtitlePill";
 export * from "./TopHookCard";
+export * from "./MarkerHighlight";
+export * from "./TornPaperCard";
+export * from "./CinematicOverlay";

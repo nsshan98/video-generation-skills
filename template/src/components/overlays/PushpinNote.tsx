@@ -10,13 +10,14 @@ export interface PushpinNoteProps {
   right?: number;
   rotation?: number;
   delayFrames?: number;
+  durationFrames?: number;
 }
 
 /**
  * Broadcast-Grade Scene Title Card:
  * - Seamlessly blends with any background using frosted glassmorphism
  * - Completely stable, zero camera jitter, zero subpixel wobble (no dizziness!)
- * - Silky smooth glide-and-fade entrance without bouncy spring oscillations
+ * - Silky smooth entrance and exit (Strict max 4.5s duration, never freezes on screen)
  */
 export const PushpinNote: React.FC<PushpinNoteProps> = ({
   category,
@@ -26,6 +27,7 @@ export const PushpinNote: React.FC<PushpinNoteProps> = ({
   left,
   right,
   delayFrames = 0,
+  durationFrames = 135, // 4.5s default duration
 }) => {
   const frame = useCurrentFrame();
 
@@ -37,10 +39,19 @@ export const PushpinNote: React.FC<PushpinNoteProps> = ({
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  const opacity = enterProgress;
-  const translateY = interpolate(enterProgress, [0, 1], [-12, 0]);
+  // Smooth exit interpolation (last 8 frames)
+  const exitStart = delayFrames + durationFrames - 8;
+  const exitProgress = interpolate(
+    frame - exitStart,
+    [0, 8],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
-  if (frame < delayFrames) return null;
+  if (frame < delayFrames || frame >= delayFrames + durationFrames) return null;
+
+  const opacity = enterProgress * (1 - exitProgress);
+  const translateY = interpolate(enterProgress, [0, 1], [-12, 0]) - exitProgress * 10;
 
   return (
     <div

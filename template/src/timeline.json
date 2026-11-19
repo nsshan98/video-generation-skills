@@ -2,373 +2,249 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "durationInFrames": 3887,
-  "title": "Jamal Electronics Story - Revenue vs Net Profit",
+  "durationInFrames": 405,
+  "title": "Masterclass Interactive Showcase",
+  "progressBar": true,
+  "autoSfx": true,
   "items": [
     {
       "type": "animated-scene",
       "sceneIndex": 1,
       "start": 0,
-      "duration": 10.07,
-      "subtitle": "প্রতিদিন ৫০ হাজার টাকা বিক্রি, কিন্তু মাস শেষে পকেটে টাকা নেই!",
-      "highlightWords": [
-        "৫০ হাজার",
-        "পকেটে টাকা নেই"
+      "duration": 4,
+      "subtitle": "",
+      "narration": "প্রথমে পুরো দোকানে ভিড় জমে গেল আর অর্ডার বাড়তে শুরু করল!",
+      "words": [
+        {
+          "word": "প্রথমে",
+          "start": 0,
+          "end": 0.47
+        },
+        {
+          "word": "পুরো",
+          "start": 0.47,
+          "end": 0.8
+        },
+        {
+          "word": "দোকানে",
+          "start": 0.8,
+          "end": 1.27
+        },
+        {
+          "word": "ভিড়",
+          "start": 1.27,
+          "end": 1.53
+        },
+        {
+          "word": "জমে",
+          "start": 1.53,
+          "end": 1.8
+        },
+        {
+          "word": "গেল",
+          "start": 1.8,
+          "end": 2.07
+        },
+        {
+          "word": "আর",
+          "start": 2.07,
+          "end": 2.27
+        },
+        {
+          "word": "অর্ডার",
+          "start": 2.27,
+          "end": 2.73
+        },
+        {
+          "word": "বাড়তে",
+          "start": 2.73,
+          "end": 3.13
+        },
+        {
+          "word": "শুরু",
+          "start": 3.13,
+          "end": 3.47
+        },
+        {
+          "word": "করল!",
+          "start": 3.47,
+          "end": 4
+        }
       ],
-      "character": "jamal",
-      "characterPose": "thinking",
+      "highlightWords": [],
+      "character": "rashed",
+      "characterPose": "happy",
       "characterPosition": "center",
-      "backgroundTheme": "electronics_store",
-      "hookCard": {
-        "text": "দৈনিক বিক্রি ৫০,০০০৳ ➔ কিন্তু পকেট খালি?!",
-        "badge": "বাস্তব ব্যবসার গল্প",
-        "subtext": "ইলেকট্রনিক্স দোকান মালিক জামাল সাহেব",
-        "start": 0.8,
-        "duration": 3.2
+      "crowd": "shoppers",
+      "backgroundTheme": "clothing_store",
+      "screenShake": false,
+      "markerHighlight": {
+        "text": "অর্ডার বাড়তে শুরু করল!",
+        "color": "#FDE047"
       },
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-1.mp3",
-      "start": 0,
-      "duration": 10.07,
-      "volume": 1
+      "oneTakeTransition": {
+        "enabled": true,
+        "target": "phone",
+        "zoomLevel": 1.85
+      },
+      "parallax": true
     },
     {
       "type": "animated-scene",
       "sceneIndex": 2,
-      "start": 10.07,
-      "duration": 12.78,
-      "subtitle": "কখনো ৩০ হাজার, কখনো ৭০ হাজার—ব্যবসা করতে পারলে টাকার অভাব থাকে না!",
-      "highlightWords": [
-        "৩০ হাজার",
-        "৭০ হাজার",
-        "টাকার অভাব"
+      "start": 4,
+      "duration": 4.5,
+      "subtitle": "",
+      "narration": "হঠাৎ বড় একটা ঝামেলা দেখা দিল—হিসাব মিলছে না!",
+      "words": [
+        {
+          "word": "হঠাৎ",
+          "start": 0,
+          "end": 0.45
+        },
+        {
+          "word": "বড়",
+          "start": 0.45,
+          "end": 0.73
+        },
+        {
+          "word": "একটা",
+          "start": 0.73,
+          "end": 1.18
+        },
+        {
+          "word": "ঝামেলা",
+          "start": 1.18,
+          "end": 1.82
+        },
+        {
+          "word": "দেখা",
+          "start": 1.82,
+          "end": 2.27
+        },
+        {
+          "word": "দিল—হিসাব",
+          "start": 2.27,
+          "end": 3.32
+        },
+        {
+          "word": "মিলছে",
+          "start": 3.32,
+          "end": 3.86
+        },
+        {
+          "word": "না!",
+          "start": 3.86,
+          "end": 4.5
+        }
       ],
-      "character": "jamal",
-      "characterPose": "presenting",
+      "highlightWords": [],
+      "character": "rashed",
+      "characterPose": "concerned",
       "characterPosition": "center",
-      "backgroundTheme": "electronics_store",
-      "speechBubbles": [
-        {
-          "text": "ব্যবসা করতে পারলে টাকার কোনো অভাব থাকে না!",
-          "speakerPosition": "center",
-          "speakerName": "জামাল সাহেব",
-          "type": "shout",
-          "start": 7.5,
-          "duration": 4.5,
-          "top": 600
-        }
-      ],
-      "pinNote": {
-        "text": "দৈনিক ক্যাশ বিক্রি: ৳৫০,০০০ - ৳৭০,০০০",
-        "theme": "success",
-        "start": 1.2,
-        "duration": 3
+      "backgroundTheme": "home_study",
+      "screenShake": true,
+      "tornPaperCard": {
+        "badge": "জরুরি সতর্কবার্তা",
+        "title": "অপ্রত্যাশিত ঘাটতি!",
+        "points": [
+          "হিসাবের গড়মিল",
+          "সিস্টেম অফলাইন",
+          "কাস্টমার অসন্তোষ"
+        ]
       },
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-2.mp3",
-      "start": 10.07,
-      "duration": 12.78,
-      "volume": 1
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 3,
-      "start": 22.85,
-      "duration": 10.38,
-      "subtitle": "কর্মচারীর বেতন, নতুন স্টক, দোকানভাড়া—অথচ হাতে কোনো টাকা নেই!",
-      "highlightWords": [
-        "বেতন",
-        "দোকানভাড়া",
-        "টাকা নেই"
-      ],
-      "character": "jamal",
-      "characterPose": "tremble",
-      "characterPosition": "center",
-      "backgroundTheme": "electronics_store",
-      "sticker": {
-        "text": "বেতন? ভাড়া? স্টক? ➔ হাতে ক্যাশ ৳০!",
-        "style": "urgent",
-        "start": 1.8,
-        "duration": 3.2
-      },
-      "contextIcon": {
-        "icon": "alert",
-        "position": {
-          "x": 540,
-          "y": 620
-        },
-        "size": 72,
-        "animation": "shake",
-        "start": 1.5,
-        "duration": 3
-      },
-      "screenShake": true
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-3.mp3",
-      "start": 22.85,
-      "duration": 10.38,
-      "volume": 1
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 4,
-      "start": 33.23,
-      "duration": 16.31,
-      "subtitle": "কী ব্যাপার জামাল ভাই? আপনি কি জানেন আপনার আসল লাভ কত?",
-      "highlightWords": [
-        "জামাল ভাই",
-        "আসল লাভ"
-      ],
-      "character": "jamal",
-      "characterPose": "sad",
-      "characterPosition": "right",
-      "secondaryCharacter": "friend",
-      "secondaryPose": "standing",
-      "secondaryPosition": "left",
-      "backgroundTheme": "electronics_store",
-      "speechBubbles": [
-        {
-          "text": "কী ব্যাপার জামাল ভাই? শুনলাম এই মাসে অনেক বিক্রি হয়েছে!",
-          "speakerPosition": "left",
-          "speakerName": "বন্ধু",
-          "type": "speech",
-          "start": 2.2,
-          "duration": 4,
-          "top": 640
-        },
-        {
-          "text": "ভাই, বিক্রি তো হচ্ছে, কিন্তু টাকা কোথায় যাচ্ছে বুঝতে পারছি না!",
-          "speakerPosition": "right",
-          "speakerName": "জামাল সাহেব",
-          "type": "speech",
-          "start": 6.8,
-          "duration": 4.8,
-          "top": 640
-        },
-        {
-          "text": "আপনি কি জানেন, এই মাসে আপনার আসল লাভ কত?",
-          "speakerPosition": "left",
-          "speakerName": "বন্ধু",
-          "type": "thought",
-          "start": 12,
-          "duration": 3.8,
-          "top": 640
-        }
-      ],
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-4.mp3",
-      "start": 33.23,
-      "duration": 16.31,
-      "volume": 1
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 5,
-      "start": 49.54,
-      "duration": 14.22,
-      "subtitle": "এই মাসে ১৫ লাখ টাকা বিক্রি করেছি! কিন্তু লাভের কথা জিজ্ঞেস করেছি, বিক্রির না!",
-      "highlightWords": [
-        "১৫ লাখ",
-        "বিক্রি",
-        "লাভের কথা"
-      ],
-      "character": "jamal",
-      "characterPose": "explaining",
-      "characterPosition": "right",
-      "secondaryCharacter": "friend",
-      "secondaryPose": "standing",
-      "secondaryPosition": "left",
-      "backgroundTheme": "electronics_store",
-      "speechBubbles": [
-        {
-          "text": "কেন জানব না? এই মাসে প্রায় ১৫ লাখ টাকার পণ্য বিক্রি করেছি!",
-          "speakerPosition": "right",
-          "speakerName": "জামাল সাহেব",
-          "type": "speech",
-          "start": 2.2,
-          "duration": 4.5,
-          "top": 640
-        },
-        {
-          "text": "আমি তো আপনার লাভের কথা জিজ্ঞেস করেছি, বিক্রির কথা না!",
-          "speakerPosition": "left",
-          "speakerName": "বন্ধু",
-          "type": "speech",
-          "start": 7.2,
-          "duration": 4.5,
-          "top": 640
-        }
-      ],
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-5.mp3",
-      "start": 49.54,
-      "duration": 14.22,
-      "volume": 1
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 6,
-      "start": 63.76,
-      "duration": 15.92,
-      "subtitle": "১০ হাজারে কিনে ১২ হাজারে বিক্রি—খরচ বাদ না দিলে আসল লাভ বুঝবেন কীভাবে?",
-      "highlightWords": [
-        "১০ হাজার",
-        "১২ হাজার",
-        "খরচ বাদ",
-        "আসল লাভ"
-      ],
-      "character": "jamal",
-      "characterPose": "thinking",
-      "characterPosition": "right",
-      "secondaryCharacter": "friend",
-      "secondaryPose": "explaining",
-      "secondaryPosition": "left",
-      "backgroundTheme": "electronics_store",
-      "speechBubbles": [
-        {
-          "text": "১০ হাজারে কিনে ১২ হাজারে বিক্রি করলে লাভ ২ হাজার। কিন্তু বাড়তি খরচ বাদ না দিলে আসল লাভ কোথায়?",
-          "speakerPosition": "left",
-          "speakerName": "বন্ধু",
-          "type": "speech",
-          "start": 2,
-          "duration": 9.5,
-          "top": 640
-        }
-      ],
-      "hookCard": {
-        "text": "১০,০০০৳ ক্রয় + ২,০০০৳ খরচ ➔ নিট লাভ ৳০!",
-        "badge": "লাভের সহজ ফর্মুলা",
-        "subtext": "বিক্রয়মূল্য - প্রকৃত খরচ = আসল লাভ",
-        "start": 2.5,
-        "duration": 3.5
-      },
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-6.mp3",
-      "start": 63.76,
-      "duration": 15.92,
-      "volume": 1
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 7,
-      "start": 79.68,
-      "duration": 16.47,
-      "subtitle": "খাতা খুলে দেখা গেল বাকি বিক্রি ও ক্রয়ের হিসাব নেই—বিক্রিকেই লাভ মনে করছিলেন!",
-      "highlightWords": [
-        "খাতা খুলে",
-        "বাকি বিক্রি",
-        "হিসাব নেই"
-      ],
-      "character": "jamal",
-      "characterPose": "checking_khata",
-      "characterPosition": "center",
-      "backgroundTheme": "electronics_store",
-      "sticker": {
-        "text": "খাতায় বাকি অপরিশোধিত! কেনার রসিদ উধাও!",
-        "style": "warning",
-        "start": 2,
-        "duration": 3.5
-      },
-      "screenShake": false
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-7.mp3",
-      "start": 79.68,
-      "duration": 16.47,
-      "volume": 1
+      "cameraAngle": "dutch_left",
+      "parallax": true
     },
     {
       "type": "motion-graphics-scene",
-      "start": 96.15,
-      "duration": 17.12,
-      "mgType": "comparison",
-      "title": "বিক্রির পরিমাণ বনাম আসল লাভ",
-      "subtitle": "বিক্রি বেশি হওয়া মানেই লাভ বেশি হওয়া নয়!",
-      "badge": "ব্যবসায়ের মূল শিক্ষা",
-      "comparisonLeft": {
-        "title": "বিক্রির পরিমাণ (Revenue)",
-        "badge": "ভুল ধারণা ✕",
-        "color": "#ef4444",
-        "points": [
-          "মাসে ১৫ লাখ টাকার পণ্য বিক্রি",
-          "ক্যাশ কাউন্টারে সাময়িক বড় অংক",
-          "বাকি ও খরচের হিসাব বাদ পড়ে থাকে",
-          "মাস শেষে পকেট শূন্য হয়ে যায়"
-        ]
-      },
-      "comparisonRight": {
-        "title": "প্রকৃত লাভ (Net Profit)",
-        "badge": "আসল স্বাস্থ্য ✓",
-        "color": "#10b981",
-        "points": [
-          "বিক্রয় - (ক্রয়মূল্য + দোকান খরচ)",
-          "বাকি টাকা সময়মতো আদায় নিশ্চিত",
-          "প্রত্যেক পণ্যে নির্দিষ্ট মার্জিন লাভ",
-          "মাস শেষে ব্যবসায় নগদ মুনাফা থাকে"
-        ]
-      }
-    },
-    {
-      "type": "audio",
-      "src": "media/vo-elec-8.mp3",
-      "start": 96.15,
-      "duration": 17.12,
-      "volume": 1
-    },
-    {
-      "type": "motion-graphics-scene",
-      "start": 113.27,
-      "duration": 16.31,
+      "start": 8.5,
+      "duration": 5,
       "mgType": "flow",
-      "title": "ব্যবসায়ের পূর্ণ নিয়ন্ত্রণ রাখুন Bikroy+ POS-এ",
-      "subtitle": "বিক্রির পাশাপাশি আসল লাভের নির্ভুল হিসাব রাখুন",
-      "badge": "স্মার্ট সমাধান",
+      "title": "অটোমেশন সমাধান ৩টি ধাপে",
+      "subtitle": "বিদ্যুৎ গতির ডেটা প্রসেসিং",
+      "badge": "৩ স্টেপ ফ্লো",
+      "narration": "বিদ্যুৎ গতির ডেটা প্রসেসিং",
+      "words": [
+        {
+          "word": "বিদ্যুৎ",
+          "start": 0,
+          "end": 1.48
+        },
+        {
+          "word": "গতির",
+          "start": 1.48,
+          "end": 2.41
+        },
+        {
+          "word": "ডেটা",
+          "start": 2.41,
+          "end": 3.33
+        },
+        {
+          "word": "প্রসেসিং",
+          "start": 3.33,
+          "end": 5
+        }
+      ],
+      "highlightWords": [],
       "flowSteps": [
         {
           "step": 1,
-          "title": "স্বয়ংক্রিয় স্টক ও ইনভেন্টরি ট্র্যাকিং",
-          "desc": "কোন পণ্য কতটুকু আছে আর কখন শেষ হচ্ছে তা সাথে সাথে জানুন"
+          "title": "অর্ডার প্লেস",
+          "desc": "কাস্টমার অ্যাপ থেকে অর্ডার দিল"
         },
         {
           "step": 2,
-          "title": "বাকি ও দেনা-পাওনার নিখুঁত হিসাব",
-          "desc": "কার কাছে কত বাকি আছে তার স্বয়ংক্রিয় রিমাইন্ডার"
+          "title": "অটো ভেরিফিকেশন",
+          "desc": "AI ফ্রড চেক ও কনফার্ম করল"
         },
         {
           "step": 3,
-          "title": "বাস্তব নিট লাভ ও আর্থিক রিপোর্ট",
-          "desc": "দিন শেষে আপনার পকেটে আসল কত লাভ হলো তা এক ক্লিকে দেখুন"
+          "title": "ইনস্ট্যান্ট ডেলিভারি",
+          "desc": "রাইডারকে সরাসরি এসাইন করা হলো"
         }
       ],
-      "optionsCTA": [
-        "আপনার দোকানেও কি বিক্রি অনেক, কিন্তু মাস শেষে টাকা থাকে না?",
-        "কমেন্টে আপনার মতামত জানান! 👇"
-      ]
+      "particleBurst": {
+        "type": "sparkles"
+      }
+    }
+  ],
+  "soundEffects": [
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 8,
+      "durationInFrames": 21,
+      "volume": 0.22
     },
     {
-      "type": "audio",
-      "src": "media/vo-elec-9.mp3",
-      "start": 113.27,
-      "duration": 16.31,
-      "volume": 1
+      "src": "media/sfx/whoosh.wav",
+      "frame": 120,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 128,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 255,
+      "durationInFrames": 11,
+      "volume": 0.18
     }
-  ]
+  ],
+  "voiceIntervals": [
+    {
+      "startFrame": 0,
+      "endFrame": 120
+    },
+    {
+      "startFrame": 120,
+      "endFrame": 255
+    }
+  ],
+  "cinematicOverlay": true
 }

@@ -8,7 +8,14 @@ import {
   SpeechCalloutBubble,
   AnimatedIconOverlay,
   ContextIconType,
+  MarkerHighlight,
+  TornPaperCard,
 } from "../overlays";
+import {
+  AnimatedCursor,
+  CountUpNumber,
+  ParticleBurst,
+} from "../interactive";
 import { DynamicCharacter } from "../characters/DynamicCharacter";
 import { SceneBackground } from "./SceneBackground";
 import { ScenePropRenderer } from "./ScenePropRenderer";
@@ -26,6 +33,8 @@ import { CharacterPose } from "../characters/characterPresets";
 export interface AnimatedStorySceneProps {
   sceneIndex: number;
   subtitle: string;
+  narration?: string;
+  words?: Array<{ word: string; start: number; end: number }>;
   durationInFrames?: number;
   highlightWords?: string[];
   character?: string;
@@ -99,6 +108,14 @@ export interface AnimatedStorySceneProps {
     label?: string;
   };
   screenShake?: boolean;
+  interactiveCursor?: any;
+  countUp?: any;
+  particleBurst?: any;
+  markerHighlight?: any;
+  tornPaperCard?: any;
+  oneTakeTransition?: any;
+  cameraAngle?: any;
+  parallax?: boolean;
 }
 
 export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => {
@@ -205,11 +222,54 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
     }
   }
 
-  // Subtle camera zoom-in across scene
-  const cameraScale = interpolate(frame, [0, 300], [1.0, 1.05], {
+  // Dynamic camera: slow continuous cinematic zoom-in across the full scene duration
+  const totalFrames = props.durationInFrames || 300;
+  const baseCameraZoom = interpolate(frame, [0, totalFrames], [1.0, 1.08], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+  // Dynamic camera punch on active dialogue
+  const punchZoom = activeBubble ? 1.05 : 1.0;
+  let cameraScale = baseCameraZoom * punchZoom;
+
+  // One-Take Continuous Zoom Transition (feitangyuan/onetake)
+  let oneTakeX = 0;
+  let oneTakeY = 0;
+  if (props.oneTakeTransition?.enabled) {
+    const otFrames = props.oneTakeTransition.durationFrames ?? 16;
+    if (frame > totalFrames - otFrames) {
+      const otProgress = interpolate(frame, [totalFrames - otFrames, totalFrames], [0, 1], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      });
+      const zoomTarget = props.oneTakeTransition.zoomLevel ?? 1.85;
+      cameraScale = cameraScale * (1.0 + (zoomTarget - 1.0) * Math.pow(otProgress, 2));
+      if (props.oneTakeTransition.target === "phone") {
+        oneTakeX = -100 * otProgress;
+        oneTakeY = -180 * otProgress;
+      }
+    }
+  }
+
+  // Shotcraft Camera Angles (Dutch Tilt & Dynamic Angles - kingselyjoe/video-shotcraft-dsh)
+  let cameraRotation = 0;
+  let cameraAngleOffsetY = 0;
+  if (props.cameraAngle === "dutch_left") {
+    cameraRotation = interpolate(frame, [0, 15], [0, -4.5], { extrapolateRight: "clamp" });
+  } else if (props.cameraAngle === "dutch_right") {
+    cameraRotation = interpolate(frame, [0, 15], [0, 4.5], { extrapolateRight: "clamp" });
+  } else if (props.cameraAngle === "low_hero") {
+    cameraAngleOffsetY = 24;
+  } else if (props.cameraAngle === "high_tension") {
+    cameraScale = cameraScale * 1.06;
+    cameraRotation = Math.sin(frame * 0.25) * 0.8;
+  }
+
+  // 2.5D Multi-Plane Parallax Camera Drift (sanskarprajapati/parallax-doc)
+  const isParallax = props.parallax ?? true;
+  const parallaxDrift = isParallax
+    ? interpolate(frame, [0, totalFrames], [-18, 18], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
+    : 0;
 
   // Emotional screen shake (shock / impact) - STRICT 1.0 to 1.2 seconds maximum (30-36 frames)!
   // Never shake continuously across an entire 10-15s scene (causes extreme viewer fatigue).
@@ -226,17 +286,17 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
   const shakeY = shakeIntensity > 0 ? Math.cos(frame * 3.6) * 3 * shakeIntensity : 0;
 
   // Selective Caption Rule:
-  // When a callout bubble or primary card is active, do NOT show duplicate bottom captions.
+  // When a callout bubble or primary full-screen center card is active, do NOT show duplicate bottom captions.
   const hasCallout = Boolean(activeBubble || props.prop?.type === "dialogue");
   const hasActiveCard = Boolean(
-    props.hookCard ||
-      (props.prop &&
-        ["comparison_table", "tiered_benefit", "price_board", "book", "chart"].includes(
-          props.prop.type
-        ))
+    props.prop &&
+      ["comparison_table", "tiered_benefit", "price_board", "book", "chart"].includes(
+        props.prop.type
+      )
   );
+  const captionText = (props.narration || props.subtitle || "").trim();
   const showBottomCaption =
-    !hasCallout && !hasActiveCard && Boolean(props.subtitle && props.subtitle.trim().length > 0);
+    !hasCallout && !hasActiveCard && captionText.length > 0;
 
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: "#0f172a" }}>
@@ -245,7 +305,7 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
         style={{
           width: "100%",
           height: "100%",
-          transform: `scale(${cameraScale}) translate(${shakeX}px, ${shakeY}px)`,
+          transform: `scale(${cameraScale}) rotate(${cameraRotation}deg) translate(${shakeX + oneTakeX + parallaxDrift}px, ${shakeY + oneTakeY + cameraAngleOffsetY}px)`,
           transformOrigin: "center center",
           position: "relative",
         }}
@@ -284,7 +344,7 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
       )}
 
       {/* 4. Screen-Space Motion Graphics (Only when no conflicting callout) */}
-      {props.hookCard && !props.speechBubble && (
+      {props.hookCard && !activeBubble && (
         <TopHookCard
           line1={props.hookCard.line1}
           line2={props.hookCard.line2}
@@ -292,13 +352,13 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
           subtext={props.hookCard.subtext}
           badge={props.hookCard.badge}
           delayFrames={props.hookCard.delayFrames ?? (props.hookCard.start !== undefined ? Math.round(props.hookCard.start * 30) : 0)}
+          durationFrames={props.hookCard.durationFrames ?? (props.hookCard.duration ? Math.round(props.hookCard.duration * 30) : 135)}
         />
       )}
 
-      {/* Avoid clutter: Never render PinNote if Callout, HookCard or full-width Hero Card is active */}
+      {/* Avoid clutter: Never render PinNote if active speech bubble is open right now */}
       {props.pinNote &&
-        !props.speechBubble &&
-        !props.hookCard &&
+        !activeBubble &&
         props.prop?.type !== "comparison_table" &&
         props.prop?.type !== "tiered_benefit" &&
         props.prop?.type !== "price_board" &&
@@ -311,24 +371,51 @@ export const AnimatedStoryScene: React.FC<AnimatedStorySceneProps> = (props) => 
             top={140}
             left={props.pinNote.position === "top-right" ? undefined : 60}
             right={props.pinNote.position === "top-right" ? 60 : undefined}
-            delayFrames={props.pinNote.delayFrames ?? 0}
+            delayFrames={props.pinNote.delayFrames ?? (props.pinNote.start !== undefined ? Math.round(props.pinNote.start * 30) : 0)}
+            durationFrames={props.pinNote.durationFrames ?? (props.pinNote.duration ? Math.round(props.pinNote.duration * 30) : 135)}
           />
         )}
 
-      {props.sticker && !props.speechBubble && (
+      {props.sticker && !activeBubble && (
         <AngledSticker
           text={props.sticker.text}
           bottom={props.sticker.bottom ?? 440}
           angle={props.sticker.angle ?? -3}
-          delayFrames={props.sticker.delayFrames ?? 8}
+          delayFrames={props.sticker.delayFrames ?? (props.sticker.start !== undefined ? Math.round(props.sticker.start * 30) : 8)}
+          durationFrames={props.sticker.durationFrames ?? (props.sticker.duration ? Math.round(props.sticker.duration * 30) : 120)}
         />
+      )}
+
+      {/* Vox-Style Torn Paper Card */}
+      {props.tornPaperCard && !activeBubble && (
+        <TornPaperCard config={props.tornPaperCard} />
+      )}
+
+      {/* Vox-Style Marker Highlight */}
+      {props.markerHighlight && (
+        <MarkerHighlight config={props.markerHighlight} />
+      )}
+
+      {/* UI Micro-Interactions: Live Number Ticker & Animated Mouse Cursor */}
+      {props.countUp && (
+        <CountUpNumber config={props.countUp} />
+      )}
+
+      {props.interactiveCursor && (
+        <AnimatedCursor config={props.interactiveCursor} />
+      )}
+
+      {/* Dynamic Particle Burst (Confetti / Cash Rain / Sparkles) */}
+      {props.particleBurst && (
+        <ParticleBurst config={props.particleBurst} />
       )}
 
       {/* 5. Selective Bottom Subtitle: Only shown when no Callout Bubble or Center Card is active */}
       {showBottomCaption && (
         <SubtitlePill
           sceneIndex={props.sceneIndex}
-          text={props.subtitle}
+          text={captionText}
+          words={props.words}
           highlightWords={props.highlightWords ?? []}
           bottom={75}
           durationInFrames={props.durationInFrames ?? 240}
@@ -580,7 +667,12 @@ function renderDynamicScene(
           <div
             style={{
               position: "absolute",
-              bottom: 160,
+              bottom:
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+                  ? 195
+                  : 160,
               left: secondaryPosition === "left" ? 20 : undefined,
               right: secondaryPosition === "right" ? 20 : undefined,
               zIndex: 18,
@@ -592,6 +684,11 @@ function renderDynamicScene(
               scale={1.55}
               flip={secondaryPosition === "right"}
               isSpeaking={isSecondarySpeaking}
+              isSeated={
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+              }
             />
           </div>
 
@@ -599,7 +696,12 @@ function renderDynamicScene(
           <div
             style={{
               position: "absolute",
-              bottom: 160,
+              bottom:
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+                  ? 195
+                  : 160,
               left: tertiaryPosition === "left" ? 20 : tertiaryPosition === "right" ? undefined : "50%",
               right: tertiaryPosition === "right" ? 20 : undefined,
               transform: tertiaryPosition === "center" ? "translateX(-50%)" : undefined,
@@ -612,6 +714,11 @@ function renderDynamicScene(
               scale={1.55}
               flip={tertiaryPosition === "right"}
               isSpeaking={isTertiarySpeaking}
+              isSeated={
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+              }
             />
           </div>
 
@@ -619,7 +726,12 @@ function renderDynamicScene(
           <div
             style={{
               position: "absolute",
-              bottom: 160,
+              bottom:
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+                  ? 195
+                  : 160,
               left: characterPosition === "left" ? 20 : undefined,
               right: characterPosition === "right" ? 20 : undefined,
               zIndex: 18,
@@ -633,6 +745,11 @@ function renderDynamicScene(
               metaphor={props.metaphor?.type}
               rackFocus={props.rackFocus}
               isSpeaking={isPrimarySpeaking}
+              isSeated={
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+              }
             />
           </div>
         </>
@@ -643,7 +760,12 @@ function renderDynamicScene(
           <div
             style={{
               position: "absolute",
-              bottom: 160,
+              bottom:
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+                  ? 195
+                  : 160,
               left: secondaryPosition === "left" ? 80 : undefined,
               right: secondaryPosition === "right" ? 80 : undefined,
               zIndex: 18,
@@ -655,6 +777,11 @@ function renderDynamicScene(
               scale={1.75}
               flip={secondaryPosition === "right"}
               isSpeaking={isSecondarySpeaking}
+              isSeated={
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+              }
             />
           </div>
 
@@ -662,7 +789,12 @@ function renderDynamicScene(
           <div
             style={{
               position: "absolute",
-              bottom: 160,
+              bottom:
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+                  ? 195
+                  : 160,
               left: characterPosition === "left" ? 80 : undefined,
               right: characterPosition === "right" ? 80 : undefined,
               zIndex: 18,
@@ -676,51 +808,89 @@ function renderDynamicScene(
               metaphor={props.metaphor?.type}
               rackFocus={props.rackFocus}
               isSpeaking={isPrimarySpeaking}
+              isSeated={
+                prop?.type === "dining_table" ||
+                prop?.type === "courtroom_desk" ||
+                prop?.type === "tea_stall_bench"
+              }
             />
           </div>
         </>
-      ) : (
+      ) : character && character !== "none" ? (
         /* Single Main Character */
         <div
           style={{
             position: "absolute",
             bottom:
-              prop?.type === "comparison_table" ||
-              prop?.type === "tiered_benefit" ||
-              prop?.type === "smartphone" ||
-              prop?.type === "video_call"
-                ? 120
-                : 160,
+              prop?.type === "software_mockup"
+                ? 30
+                : prop?.type === "office_desk_computer" ||
+              prop?.type === "executive_desk" ||
+              prop?.type === "ceo_office_desk" ||
+              prop?.type === "courtroom_desk" ||
+              prop?.type === "cash_counter" ||
+              prop?.type === "dining_table"
+                ? 195
+                : prop?.type === "tea_stall_bench" || activePrimaryPose === "sitting_stool"
+                  ? 140
+                  : prop?.type === "comparison_table" ||
+                    prop?.type === "tiered_benefit" ||
+                    prop?.type === "smartphone" ||
+                    prop?.type === "video_call"
+                    ? 120
+                    : 160,
             left:
-              characterPosition === "left"
+              prop?.type === "software_mockup"
+                ? undefined
+                : characterPosition === "left"
                 ? 80
                 : characterPosition === "right"
                   ? undefined
                   : "50%",
-            right: characterPosition === "right" ? 80 : undefined,
+            right:
+              prop?.type === "software_mockup"
+                ? 30
+                : characterPosition === "right" ? 80 : undefined,
             transform:
-              characterPosition === "center" ? "translateX(-50%)" : undefined,
-            zIndex: 18,
+              prop?.type === "software_mockup"
+                ? "none"
+                : characterPosition === "center" ? "translateX(-50%)" : undefined,
+            zIndex: prop?.type === "software_mockup" ? 40 : 18,
           }}
         >
           <DynamicCharacter
             character={character}
             pose={activePrimaryPose}
             scale={
-              prop?.type === "comparison_table" ||
-              prop?.type === "tiered_benefit" ||
-              prop?.type === "smartphone" ||
-              prop?.type === "video_call"
-                ? 1.45
-                : 1.85
+              prop?.type === "software_mockup"
+                ? 1.12
+                : prop?.type === "office_desk_computer" ||
+              prop?.type === "executive_desk" ||
+              prop?.type === "ceo_office_desk" ||
+              prop?.type === "dining_table"
+                ? 1.75
+                : prop?.type === "comparison_table" ||
+                  prop?.type === "tiered_benefit" ||
+                  prop?.type === "smartphone" ||
+                  prop?.type === "video_call"
+                  ? 1.45
+                  : 1.85
             }
             flip={characterPosition === "right"}
             metaphor={props.metaphor?.type}
             rackFocus={props.rackFocus}
             isSpeaking={isPrimarySpeaking}
+            isSeated={
+              prop?.type === "office_desk_computer" ||
+              prop?.type === "executive_desk" ||
+              prop?.type === "ceo_office_desk" ||
+              prop?.type === "courtroom_desk" ||
+              prop?.type === "cash_counter" ||
+              prop?.type === "dining_table"
+            }
           />
         </div>
-      )}
+      ) : null}
     </>
   );
 }

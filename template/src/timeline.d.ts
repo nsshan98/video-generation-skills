@@ -38,6 +38,8 @@ declare module "*.json" {
     start: number;
     duration: number;
     subtitle: string;
+    narration?: string;
+    words?: Array<{ word: string; start: number; end: number }>;
     highlightWords?: string[];
     character?: string;
     characterPose?:
@@ -104,7 +106,7 @@ declare module "*.json" {
     timeIcon?: "clock" | "calendar";
     quoteText?: string;
     quoteAuthor?: string;
-    optionsCTA?: string[];
+    optionsCTA?: string[] | { header?: string; optionA?: string; optionB?: string; prompt?: string };
     backgroundGradient?: string;
   }
 

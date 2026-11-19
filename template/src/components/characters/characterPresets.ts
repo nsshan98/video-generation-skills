@@ -28,7 +28,20 @@ export type CharacterPose =
   | "checking_khata"
   | "searching_inventory"
   | "arms_crossed"
-  | "holding_shirt";
+  | "holding_shirt"
+  | "using_computer"
+  | "sitting_desk"
+  | "pointing"
+  | "reading_document"
+  | "celebrating"
+  | "holding_phone"
+  | "sitting_stool"
+  | "counting_money"
+  | "drinking_tea"
+  | "shocked"
+  | "nervous"
+  | "walking"
+  | "walking_phone";
 
 export interface SkinPalette {
   base: string;

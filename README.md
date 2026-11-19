@@ -71,16 +71,16 @@ Install directly using the official [skills.sh](https://skills.sh) CLI:
 
 ```bash
 # 1. Install globally from GitHub across any agent (Antigravity, Claude Code, Cursor, Copilot)
-npx skills add <your-github-username>/video-generation-skills -g
+npx skills add nsshan98/video-generation-skills -g
 
 # 2. Or install locally from your current machine
-npx skills add /home/sakib/Downloads/video-generation-skills -g
+npx skills add . -g
 ```
 
 Alternatively, link via manual symlink:
 ```bash
 mkdir -p ~/.agents/skills
-ln -sfn /home/sakib/Downloads/video-generation-skills ~/.agents/skills/video-generation-skills
+ln -sfn $(pwd) ~/.agents/skills/video-generation-skills
 ```
 
 ---
