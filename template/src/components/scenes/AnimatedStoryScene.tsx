@@ -755,67 +755,83 @@ function renderDynamicScene(
         </>
       ) : secondaryCharacter ? (
         /* 2-Character Staging (Scale 1.75) */
-        <>
-          {/* Secondary Character (e.g. Mentor / Father / Boss / Customer / Employee) */}
-          <div
-            style={{
-              position: "absolute",
-              bottom:
-                prop?.type === "dining_table" ||
-                prop?.type === "courtroom_desk" ||
-                prop?.type === "tea_stall_bench"
-                  ? 195
-                  : 160,
-              left: secondaryPosition === "left" ? 80 : undefined,
-              right: secondaryPosition === "right" ? 80 : undefined,
-              zIndex: 18,
-            }}
-          >
-            <DynamicCharacter
-              character={secondaryCharacter}
-              pose={activeSecondaryPose}
-              scale={1.75}
-              flip={secondaryPosition === "right"}
-              isSpeaking={isSecondarySpeaking}
-              isSeated={
-                prop?.type === "dining_table" ||
-                prop?.type === "courtroom_desk" ||
-                prop?.type === "tea_stall_bench"
-              }
-            />
-          </div>
+        (() => {
+          const isSecSeated =
+            activeSecondaryPose === "sitting_desk" ||
+            activeSecondaryPose === "using_computer" ||
+            prop?.type === "dining_table" ||
+            prop?.type === "courtroom_desk" ||
+            prop?.type === "tea_stall_bench";
 
-          {/* Main Protagonist Character */}
-          <div
-            style={{
-              position: "absolute",
-              bottom:
-                prop?.type === "dining_table" ||
-                prop?.type === "courtroom_desk" ||
-                prop?.type === "tea_stall_bench"
-                  ? 195
-                  : 160,
-              left: characterPosition === "left" ? 80 : undefined,
-              right: characterPosition === "right" ? 80 : undefined,
-              zIndex: 18,
-            }}
-          >
-            <DynamicCharacter
-              character={character}
-              pose={activePrimaryPose}
-              scale={1.75}
-              flip={characterPosition === "right"}
-              metaphor={props.metaphor?.type}
-              rackFocus={props.rackFocus}
-              isSpeaking={isPrimarySpeaking}
-              isSeated={
-                prop?.type === "dining_table" ||
-                prop?.type === "courtroom_desk" ||
-                prop?.type === "tea_stall_bench"
-              }
-            />
-          </div>
-        </>
+          const isPrimSeated =
+            activePrimaryPose === "sitting_desk" ||
+            activePrimaryPose === "using_computer" ||
+            prop?.type === "dining_table" ||
+            prop?.type === "courtroom_desk" ||
+            prop?.type === "tea_stall_bench";
+
+          const isWalking =
+            activePrimaryPose === "walking" ||
+            activePrimaryPose === "walking_phone";
+          const walkEntranceX = isWalking
+            ? interpolate(
+                frame,
+                [0, 90],
+                [characterPosition === "right" ? 220 : -220, 0],
+                { extrapolateRight: "clamp" }
+              )
+            : 0;
+
+          return (
+            <>
+              {/* Secondary Character (e.g. Rafiq Saheb / Senior Mentor) */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: isSecSeated ? 195 : 160,
+                  left: secondaryPosition === "left" ? 80 : undefined,
+                  right: secondaryPosition === "right" ? 80 : undefined,
+                  zIndex: 18,
+                }}
+              >
+                <DynamicCharacter
+                  character={secondaryCharacter}
+                  pose={activeSecondaryPose}
+                  scale={1.75}
+                  flip={secondaryPosition === "right"}
+                  isSpeaking={isSecondarySpeaking}
+                  isSeated={isSecSeated}
+                />
+              </div>
+
+              {/* Main Protagonist Character (e.g. Asif) */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: isPrimSeated ? 195 : 160,
+                  left: characterPosition === "left" ? 80 : undefined,
+                  right: characterPosition === "right" ? 80 : undefined,
+                  transform:
+                    walkEntranceX !== 0
+                      ? `translateX(${walkEntranceX}px)`
+                      : undefined,
+                  zIndex: isPrimSeated ? 18 : 25,
+                }}
+              >
+                <DynamicCharacter
+                  character={character}
+                  pose={activePrimaryPose}
+                  scale={1.75}
+                  flip={characterPosition === "right"}
+                  metaphor={props.metaphor?.type}
+                  rackFocus={props.rackFocus}
+                  isSpeaking={isPrimarySpeaking}
+                  isSeated={isPrimSeated}
+                />
+              </div>
+            </>
+          );
+        })()
       ) : character && character !== "none" ? (
         /* Single Main Character */
         <div
@@ -836,7 +852,12 @@ function renderDynamicScene(
                   : prop?.type === "comparison_table" ||
                     prop?.type === "tiered_benefit" ||
                     prop?.type === "smartphone" ||
-                    prop?.type === "video_call"
+                    prop?.type === "video_call" ||
+                    prop?.type === "calendar" ||
+                    prop?.type === "bill_receipt" ||
+                    prop?.type === "leaky_bucket" ||
+                    prop?.type === "credit_card_swipe" ||
+                    prop?.type === "empty_pocket"
                     ? 120
                     : 160,
             left:
@@ -872,7 +893,12 @@ function renderDynamicScene(
                 : prop?.type === "comparison_table" ||
                   prop?.type === "tiered_benefit" ||
                   prop?.type === "smartphone" ||
-                  prop?.type === "video_call"
+                  prop?.type === "video_call" ||
+                  prop?.type === "calendar" ||
+                  prop?.type === "bill_receipt" ||
+                  prop?.type === "leaky_bucket" ||
+                  prop?.type === "credit_card_swipe" ||
+                  prop?.type === "empty_pocket"
                   ? 1.45
                   : 1.85
             }

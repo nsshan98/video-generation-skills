@@ -1700,26 +1700,29 @@ export const ScenePropRenderer: React.FC<ScenePropRendererProps> = ({
               </linearGradient>
             </defs>
 
-            {/* Floating Live Work HUD Card on Top-Right */}
-            <g transform="translate(650, -25)">
-              <rect x="0" y="0" width="390" height="190" rx="14" fill="rgba(15, 23, 42, 0.94)" stroke="#0284c7" strokeWidth="2.5" filter="drop-shadow(0 12px 28px rgba(0,0,0,0.6))" />
-              {/* Card Header */}
-              <rect x="0" y="0" width="390" height="38" rx="14" fill="#1e293b" />
-              <circle cx="20" cy="19" r="4.5" fill="#ef4444" />
-              <circle cx="34" cy="19" r="4.5" fill="#facc15" />
-              <circle cx="48" cy="19" r="4.5" fill="#22c55e" />
-              <text x="68" y="24" fill="#38bdf8" fontSize="14" fontWeight="800">💻 কোডিং ও প্রজেক্ট ডেডলাইন</text>
-              {/* Task list items */}
-              <text x="20" y="66" fill="#4ade80" fontSize="14" fontWeight="700">✓ ডাটাবেজ অপ্টিমাইজেশন</text>
-              <text x="20" y="94" fill="#4ade80" fontSize="14" fontWeight="700">✓ বাৎসরিক সেলস রিপোর্ট রেন্ডার</text>
-              <text x="20" y="122" fill="#fde047" fontSize="14" fontWeight="700">⏳ ব্যাকআপ প্রসেসিং (৮৫%)</text>
-              {/* Progress bar */}
-              <rect x="20" y="134" width="348" height="10" rx="5" fill="#334155" />
-              <rect x="20" y="134" width="295" height="10" rx="5" fill="#38bdf8" />
-              {/* Footer status */}
-              <text x="20" y="168" fill="#94a3b8" fontSize="13" fontWeight="600">কাজের চাপ: ৮৫% | অতিরিক্ত দায়িত্ব</text>
-              <circle cx="365" cy="165" r="4.5" fill="#22c55e" />
-            </g>
+            {/* Floating Live Work HUD Card on Top-Right (Data-driven) */}
+            {prop.hudCard && (
+              <g transform="translate(650, -25)">
+                <rect x="0" y="0" width="390" height="190" rx="14" fill="rgba(15, 23, 42, 0.94)" stroke="#0284c7" strokeWidth="2.5" filter="drop-shadow(0 12px 28px rgba(0,0,0,0.6))" />
+                <rect x="0" y="0" width="390" height="38" rx="14" fill="#1e293b" />
+                <circle cx="20" cy="19" r="4.5" fill="#ef4444" />
+                <circle cx="34" cy="19" r="4.5" fill="#facc15" />
+                <circle cx="48" cy="19" r="4.5" fill="#22c55e" />
+                <text x="68" y="24" fill="#38bdf8" fontSize="14" fontWeight="800">
+                  {prop.hudCard.title || "💻 প্রজেক্ট স্ট্যাটাস"}
+                </text>
+                {(prop.hudCard.items || []).map((item, idx) => (
+                  <text key={idx} x="20" y={66 + idx * 28} fill={idx === 0 ? "#4ade80" : idx === 1 ? "#38bdf8" : "#fde047"} fontSize="14" fontWeight="700">
+                    {item}
+                  </text>
+                ))}
+                {prop.hudCard.footer && (
+                  <text x="20" y="168" fill="#94a3b8" fontSize="13" fontWeight="600">
+                    {prop.hudCard.footer}
+                  </text>
+                )}
+              </g>
+            )}
 
             {/* Laptop Screen Open Angled (Lid facing camera, Screen illuminates Rakib) */}
             <g transform="translate(420, 60)">
@@ -1769,19 +1772,26 @@ export const ScenePropRenderer: React.FC<ScenePropRendererProps> = ({
     }
 
     case "executive_desk": {
+      const isLeft = prop.deskPosition === "left";
+      const deskW = isLeft ? 650 : 1080;
+      const laptopX = isLeft ? 130 : 420;
+      const nameplateX = isLeft ? 130 : 410;
+      const phoneX = isLeft ? 460 : 840;
+
       return (
         <div
           style={{
             position: "absolute",
             bottom: 0,
             left: 0,
-            right: 0,
+            right: isLeft ? undefined : 0,
+            width: isLeft ? deskW : "100%",
             height: 750,
             zIndex: 22,
             pointerEvents: "none",
           }}
         >
-          <svg viewBox="0 0 1080 750" style={{ width: "100%", height: "100%" }}>
+          <svg viewBox={`0 0 ${deskW} 750`} style={{ width: "100%", height: "100%" }}>
             <defs>
               <linearGradient id="walnutGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#451a03" />
@@ -1799,37 +1809,40 @@ export const ScenePropRenderer: React.FC<ScenePropRendererProps> = ({
               </linearGradient>
             </defs>
 
-            {/* Floating Executive Dashboard HUD Card on Top-Left */}
-            <g transform="translate(40, -25)">
-              <rect x="0" y="0" width="390" height="190" rx="14" fill="rgba(24, 10, 4, 0.94)" stroke="#ca8a04" strokeWidth="2.5" filter="drop-shadow(0 12px 28px rgba(0,0,0,0.6))" />
-              {/* Card Header */}
-              <rect x="0" y="0" width="390" height="38" rx="14" fill="#3b1502" />
-              <circle cx="20" cy="19" r="4.5" fill="#ef4444" />
-              <circle cx="34" cy="19" r="4.5" fill="#facc15" />
-              <circle cx="48" cy="19" r="4.5" fill="#22c55e" />
-              <text x="68" y="24" fill="#fef08a" fontSize="14" fontWeight="800">📊 ম্যানেজার ড্যাশবোর্ড</text>
-              {/* KPI items */}
-              <text x="20" y="66" fill="#f87171" fontSize="14" fontWeight="700">⚠ শোকজ নোটিশ জারি: ৩টি</text>
-              <text x="20" y="94" fill="#fbbf24" fontSize="14" fontWeight="700">⏱ ৫ মিনিট দেরি: ৭ জন কর্মী</text>
-              <text x="20" y="122" fill="#f87171" fontSize="14" fontWeight="700">📉 টিম মনোবল: নিম্নমুখী (৪০%)</text>
-              {/* Progress bar */}
-              <rect x="20" y="134" width="348" height="10" rx="5" fill="#291102" />
-              <rect x="20" y="134" width="140" height="10" rx="5" fill="#ef4444" />
-              {/* Footer status */}
-              <text x="20" y="168" fill="#d97706" fontSize="13" fontWeight="600">কড়া শাসন | দূরত্বের দেয়াল</text>
-              <circle cx="365" cy="165" r="4.5" fill="#ef4444" />
-            </g>
+            {/* Floating Executive Dashboard HUD Card on Top-Left (Data-driven) */}
+            {prop.hudCard && (
+              <g transform={isLeft ? "translate(20, -25)" : "translate(40, -25)"}>
+                <rect x="0" y="0" width="390" height="190" rx="14" fill="rgba(24, 10, 4, 0.94)" stroke="#ca8a04" strokeWidth="2.5" filter="drop-shadow(0 12px 28px rgba(0,0,0,0.6))" />
+                <rect x="0" y="0" width="390" height="38" rx="14" fill="#3b1502" />
+                <circle cx="20" cy="19" r="4.5" fill="#ef4444" />
+                <circle cx="34" cy="19" r="4.5" fill="#facc15" />
+                <circle cx="48" cy="19" r="4.5" fill="#22c55e" />
+                <text x="68" y="24" fill="#fef08a" fontSize="14" fontWeight="800">
+                  {prop.hudCard.title || "📊 ড্যাশবোর্ড"}
+                </text>
+                {(prop.hudCard.items || []).map((item, idx) => (
+                  <text key={idx} x="20" y={66 + idx * 28} fill={idx === 0 ? "#f87171" : idx === 1 ? "#fbbf24" : "#4ade80"} fontSize="14" fontWeight="700">
+                    {item}
+                  </text>
+                ))}
+                {prop.hudCard.footer && (
+                  <text x="20" y="168" fill="#d97706" fontSize="13" fontWeight="600">
+                    {prop.hudCard.footer}
+                  </text>
+                )}
+              </g>
+            )}
 
-            {/* Modern Silver Executive Laptop (Right in front of Manager Rakib) */}
-            <g transform="translate(420, 60)">
-              {/* Light beam radiating up onto Manager Rakib */}
+            {/* Modern Silver Executive Laptop */}
+            <g transform={`translate(${laptopX}, 60)`}>
+              {/* Light beam radiating up onto character */}
               <polygon points="30,0 210,0 290,-160 -50,-160" fill="url(#managerBeam)" />
-              {/* Laptop Screen Lid (Back facing camera, premium silver aluminum) */}
+              {/* Laptop Screen Lid */}
               <polygon points="30,0 210,0 228,166 12,166" fill="#020617" stroke="#cbd5e1" strokeWidth="3.5" />
               {/* Gold Executive Emblem on lid */}
               <polygon points="120,64 134,88 106,88" fill="#ca8a04" />
               <circle cx="120" cy="80" r="5" fill="#fef08a" />
-              {/* Laptop Keyboard Base (Right under Manager's hands) */}
+              {/* Laptop Keyboard Base */}
               <polygon points="0,166 240,166 260,226 -20,226" fill="#94a3b8" stroke="#475569" strokeWidth="2.5" />
               <polygon points="18,172 222,172 238,218 2,218" fill="#334155" />
               {/* Keyboard keys backlight */}
@@ -1838,24 +1851,24 @@ export const ScenePropRenderer: React.FC<ScenePropRendererProps> = ({
               <line x1="18" y1="208" x2="222" y2="208" stroke="#64748b" strokeWidth="3" strokeDasharray="18 4" />
             </g>
 
-            {/* Luxury Walnut Desk Top (Starts right at Y=226, matching character hands at Y=1396) */}
-            <polygon points="20,226 1060,226 1080,310 0,310" fill="url(#walnutGrad)" stroke="#78350f" strokeWidth="5" />
+            {/* Luxury Walnut Desk Top */}
+            <polygon points={`0,226 ${deskW - 20},226 ${deskW},310 0,310`} fill="url(#walnutGrad)" stroke="#78350f" strokeWidth="5" />
             {/* Front Mahogany Panel */}
-            <rect x="0" y="310" width="1080" height="440" fill="#1c0b02" stroke="#451a03" strokeWidth="4" />
+            <rect x="0" y="310" width={deskW} height="440" fill="#1c0b02" stroke="#451a03" strokeWidth="4" />
             {/* Decorative Gold Inlay Lines */}
-            <line x1="60" y1="340" x2="1020" y2="340" stroke="#b45309" strokeWidth="3" />
-            <line x1="60" y1="680" x2="1020" y2="680" stroke="#b45309" strokeWidth="3" />
+            <line x1="40" y1="340" x2={deskW - 40} y2="340" stroke="#b45309" strokeWidth="3" />
+            <line x1="40" y1="680" x2={deskW - 40} y2="680" stroke="#b45309" strokeWidth="3" />
 
-            {/* Executive Brass Nameplate (Centered right below laptop on desk) */}
-            <g transform="translate(410, 275)">
+            {/* Executive Brass Nameplate */}
+            <g transform={`translate(${nameplateX}, 275)`}>
               <polygon points="0,0 260,0 274,40 -14,40" fill="url(#goldPlate)" stroke="#854d0e" strokeWidth="2.5" />
-              <text x="130" y="27" fill="#451a03" fontSize="18" fontWeight="900" textAnchor="middle" letterSpacing="2">
-                {prop.deskName || "RAKIB | MANAGER"}
+              <text x="130" y="27" fill="#451a03" fontSize={isLeft ? 15 : 18} fontWeight="900" textAnchor="middle" letterSpacing="1.5">
+                {prop.deskName || "ASIF • IT EXECUTIVE"}
               </text>
             </g>
 
-            {/* Executive Desk Phone & Pen Stand on Right */}
-            <g transform="translate(840, 240)">
+            {/* Executive Desk Phone & Pen Stand */}
+            <g transform={`translate(${phoneX}, 240)`}>
               <rect x="0" y="15" width="95" height="68" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="2" />
               <rect x="10" y="25" width="40" height="30" fill="#38bdf8" rx="2" />
               <circle cx="70" cy="32" r="4.5" fill="#4ade80" />
@@ -2198,6 +2211,572 @@ export const ScenePropRenderer: React.FC<ScenePropRendererProps> = ({
               <rect x="85" y="-6" width="50" height="14" rx="3" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
             </g>
           </svg>
+        </div>
+      );
+    }
+
+    case "calendar": {
+      const start = prop.startDay ?? 1;
+      const target = prop.endDay ?? 20;
+      // Flip progress over first 36 frames
+      const flipProgress = Math.min(1, Math.max(0, (frame - 6) / 36));
+      const currentDay = Math.round(start + (target - start) * flipProgress);
+      const isReached = currentDay >= target;
+      const month = prop.month || "চলতি মাস";
+      const cardTitle = prop.calendarTitle || prop.title;
+
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: prop.top ?? 220,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 480,
+            zIndex: 35,
+          }}
+        >
+          {/* Wall Calendar Frame */}
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              borderRadius: 28,
+              overflow: "hidden",
+              boxShadow:
+                "0 25px 60px rgba(0,0,0,0.7), 0 0 35px rgba(239, 68, 68, 0.2)",
+              border: "4px solid #e2e8f0",
+              textAlign: "center",
+            }}
+          >
+            {/* Top Red Metal Bar with Hanging Rings */}
+            <div
+              style={{
+                backgroundColor: "#dc2626",
+                padding: "18px 24px",
+                color: "#ffffff",
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/* Silver Hanging Rings */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 60,
+                  top: -12,
+                  width: 16,
+                  height: 28,
+                  borderRadius: 8,
+                  backgroundColor: "#cbd5e1",
+                  border: "2px solid #64748b",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  right: 60,
+                  top: -12,
+                  width: 16,
+                  height: 28,
+                  borderRadius: 8,
+                  backgroundColor: "#cbd5e1",
+                  border: "2px solid #64748b",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "'Hind Siliguri', sans-serif",
+                  fontSize: 28,
+                  fontWeight: 900,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                }}
+              >
+                📅 {month}
+              </span>
+            </div>
+
+            {/* Calendar Body: Big Bold Flipping Date */}
+            <div style={{ padding: "36px 20px 28px", position: "relative" }}>
+              <div
+                style={{
+                  fontFamily: "'Hind Siliguri', sans-serif",
+                  fontSize: 140,
+                  fontWeight: 900,
+                  color: isReached ? "#dc2626" : "#0f172a",
+                  lineHeight: 1,
+                  display: "inline-block",
+                  position: "relative",
+                }}
+              >
+                {currentDay}
+
+                {/* Animated Red Marker Circle when Target Date is Reached */}
+                {isReached && (
+                  <svg
+                    style={{
+                      position: "absolute",
+                      inset: -25,
+                      width: "calc(100% + 50px)",
+                      height: "calc(100% + 50px)",
+                      pointerEvents: "none",
+                    }}
+                    viewBox="0 0 200 200"
+                  >
+                    <path
+                      d="M 30,100 C 25,40 170,30 175,95 C 180,160 35,170 30,110 C 28,85 100,50 160,55"
+                      fill="none"
+                      stroke="#ef4444"
+                      strokeWidth="7"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                )}
+              </div>
+
+              {/* Status / Alert Banner Below Date */}
+              {cardTitle && (
+                <div
+                  style={{
+                    marginTop: 18,
+                    padding: "10px 24px",
+                    borderRadius: 999,
+                    backgroundColor: isReached ? "#fee2e2" : "#f1f5f9",
+                    color: isReached ? "#b91c1c" : "#475569",
+                    fontFamily: "'Hind Siliguri', sans-serif",
+                    fontSize: 22,
+                    fontWeight: 800,
+                    display: "inline-block",
+                  }}
+                >
+                  {cardTitle}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    case "bill_receipt": {
+      const dropSpring = Math.sin(Math.min(Math.PI / 2, frame * 0.12));
+      const title = prop.billTitle || "বাড়িভাড়ার রসিদ ও ভাউচার";
+      const total = prop.totalAmount || "৳১৫,০০০";
+      const stamp = prop.stampText || "UNPAID / বকেয়া";
+      const stampColor = prop.stampColor || "#ef4444";
+      const isStamped = frame >= 18;
+
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: (prop.top ?? 200) + (1 - dropSpring) * -120,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 520,
+            zIndex: 35,
+            opacity: dropSpring,
+          }}
+        >
+          {/* Thermal Paper Bill Slip */}
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              borderRadius: "16px 16px 0 0",
+              padding: "28px 32px 20px",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7)",
+              position: "relative",
+            }}
+          >
+            {/* Header: Barcode & Title */}
+            <div style={{ textAlign: "center", borderBottom: "2px dashed #cbd5e1", paddingBottom: 16 }}>
+              {/* Minimal SVG Barcode */}
+              <div style={{ display: "flex", justifyContent: "center", gap: 3, marginBottom: 12, height: 32 }}>
+                {[4, 2, 6, 2, 4, 8, 2, 5, 2, 6, 4, 2, 7, 3, 5, 2, 4].map((w, idx) => (
+                  <div key={idx} style={{ width: w, height: "100%", backgroundColor: "#0f172a" }} />
+                ))}
+              </div>
+              <div style={{ fontFamily: "'Hind Siliguri', sans-serif", fontSize: 24, fontWeight: 900, color: "#0f172a" }}>
+                🧾 {title}
+              </div>
+              <div style={{ fontSize: 14, color: "#64748b", fontWeight: 600, marginTop: 4 }}>
+                {prop.billNumber || "INVOICE #DUE-2024"} | তারিখ: ২২শে চলতি মাস
+              </div>
+            </div>
+
+            {/* Line Items */}
+            <div style={{ padding: "18px 0", display: "flex", flexDirection: "column", gap: 10, fontFamily: "'Hind Siliguri', sans-serif" }}>
+              {(prop.billItems && prop.billItems.length > 0) ? (
+                prop.billItems.map((item, idx) => (
+                  <div key={idx} style={{ display: "flex", justifyContent: "space-between", fontSize: 18, color: "#334155", fontWeight: 700 }}>
+                    <span>• {item.label}</span>
+                    <span>{item.amount}</span>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, color: "#334155", fontWeight: 700 }}>
+                    <span>• মাসিক বাড়িভাড়া বকেয়া</span>
+                    <span>৳১৫,০০০</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, color: "#334155", fontWeight: 700 }}>
+                    <span>• সার্ভিস ও বিদ্যুৎ চার্জ</span>
+                    <span>৳২,৫০০</span>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Total Row */}
+            <div
+              style={{
+                borderTop: "3px solid #0f172a",
+                paddingTop: 14,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontFamily: "'Hind Siliguri', sans-serif",
+              }}
+            >
+              <span style={{ fontSize: 22, fontWeight: 900, color: "#0f172a" }}>সর্বমোট বকেয়া:</span>
+              <span style={{ fontSize: 32, fontWeight: 900, color: "#dc2626" }}>{total}</span>
+            </div>
+
+            {/* SERRATED / ZIGZAG PAPER TEAR BOTTOM */}
+            <svg
+              style={{ position: "absolute", bottom: -20, left: 0, width: "100%", height: 20 }}
+              viewBox="0 0 520 20"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                points="0,0 20,20 40,0 60,20 80,0 100,20 120,0 140,20 160,0 180,20 200,0 220,20 240,0 260,20 280,0 300,20 320,0 340,20 360,0 380,20 400,0 420,20 440,0 460,20 480,0 500,20 520,0"
+                fill="#ffffff"
+              />
+            </svg>
+
+            {/* GIANT SLAMMING RUBBER STAMP */}
+            {isStamped && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "45%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%) rotate(-14deg)",
+                  border: `6px dashed ${stampColor}`,
+                  borderRadius: 16,
+                  padding: "10px 24px",
+                  color: stampColor,
+                  fontFamily: "'Hind Siliguri', sans-serif",
+                  fontSize: 38,
+                  fontWeight: 900,
+                  letterSpacing: 3,
+                  textTransform: "uppercase",
+                  backgroundColor: "rgba(254, 242, 242, 0.92)",
+                  boxShadow: "0 8px 24px rgba(220, 38, 38, 0.35)",
+                  pointerEvents: "none",
+                }}
+              >
+                {stamp}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    case "leaky_bucket": {
+      const inflowText = prop.waterInflowLabel || "মাসিক বেতন (৳৭০,০০০)";
+      const leakText = prop.leaksLabel || "১০টি অদৃশ্য ফুটো (অপচয়)";
+      const dropOffset = (frame * 12) % 60;
+      const sprayWave = Math.sin(frame * 0.5) * 6;
+
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: prop.top ?? 180,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 640,
+            height: 700,
+            zIndex: 35,
+          }}
+        >
+          <svg viewBox="0 0 640 700" style={{ width: "100%", height: "100%" }}>
+            <defs>
+              <linearGradient id="bucketGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#1e3a8a" />
+                <stop offset="50%" stopColor="#2563eb" />
+                <stop offset="100%" stopColor="#1d4ed8" />
+              </linearGradient>
+              <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#67e8f9" />
+                <stop offset="100%" stopColor="#0284c7" />
+              </linearGradient>
+            </defs>
+
+            {/* Top Inflow Pipe / Tap */}
+            <g transform="translate(300, 10)">
+              <rect x="-30" y="0" width="60" height="40" fill="#64748b" stroke="#334155" strokeWidth="3" rx="4" />
+              {/* Animated Pouring Water Stream */}
+              <rect x="-14" y="40" width="28" height="150" fill="url(#waterGrad)" opacity="0.85" rx="6" />
+              {/* Splashing Drops Falling */}
+              <circle cx="0" cy={50 + dropOffset} r="7" fill="#38bdf8" />
+              <circle cx="-6" cy={80 + dropOffset} r="5" fill="#38bdf8" />
+              <circle cx="8" cy={110 + dropOffset} r="6" fill="#38bdf8" />
+            </g>
+
+            {/* Inflow Badge Card */}
+            <g transform="translate(320, 65)">
+              <rect x="0" y="0" width="260" height="48" rx="24" fill="#0284c7" stroke="#ffffff" strokeWidth="2.5" />
+              <text x="130" y="31" fill="#ffffff" fontSize="16" fontWeight="900" textAnchor="middle" fontFamily="'Hind Siliguri', sans-serif">
+                💧 {inflowText}
+              </text>
+            </g>
+
+            {/* The Leaky Bucket Body */}
+            <g transform="translate(140, 190)">
+              {/* Top Bucket Rim Oval */}
+              <ellipse cx="180" cy="20" rx="180" ry="32" fill="#1e40af" stroke="#60a5fa" strokeWidth="4" />
+
+              {/* Bucket Main Trapezoid Hull */}
+              <path
+                d="M 10 24 L 60 380 Q 180 410 300 380 L 350 24"
+                fill="url(#bucketGrad)"
+                stroke="#1e3a8a"
+                strokeWidth="4"
+              />
+
+              {/* Water Surface inside Bucket */}
+              <ellipse cx="180" cy="180" rx="140" ry="24" fill="url(#waterGrad)" opacity="0.9" />
+
+              {/* Metal Reinforcement Rings on Bucket */}
+              <path d="M 28 140 Q 180 165 332 140" stroke="#93c5fd" strokeWidth="6" fill="none" opacity="0.7" />
+              <path d="M 44 260 Q 180 285 316 260" stroke="#93c5fd" strokeWidth="6" fill="none" opacity="0.7" />
+
+              {/* LEAK HOLE 1 (Left Middle) & Spray Jet */}
+              <circle cx="34" cy="180" r="7" fill="#0f172a" />
+              <path d={`M 30 180 Q -30 ${170 + sprayWave} -90 ${210 + sprayWave}`} stroke="#38bdf8" strokeWidth="6" fill="none" strokeLinecap="round" />
+              <circle cx={-95} cy={215 + sprayWave} r="5" fill="#38bdf8" />
+
+              {/* LEAK HOLE 2 (Left Bottom) & Spray Jet */}
+              <circle cx="50" cy="310" r="7" fill="#0f172a" />
+              <path d={`M 46 310 Q -10 ${300 - sprayWave} -70 ${340 - sprayWave}`} stroke="#38bdf8" strokeWidth="6" fill="none" strokeLinecap="round" />
+
+              {/* LEAK HOLE 3 (Right Middle) & Spray Jet */}
+              <circle cx="326" cy="180" r="7" fill="#0f172a" />
+              <path d={`M 330 180 Q 390 ${170 - sprayWave} 450 ${210 - sprayWave}`} stroke="#38bdf8" strokeWidth="6" fill="none" strokeLinecap="round" />
+              <circle cx={455} cy={215 - sprayWave} r="5" fill="#38bdf8" />
+
+              {/* LEAK HOLE 4 (Right Bottom) & Spray Jet */}
+              <circle cx="310" cy="310" r="7" fill="#0f172a" />
+              <path d={`M 314 310 Q 370 ${300 + sprayWave} 430 ${340 + sprayWave}`} stroke="#38bdf8" strokeWidth="6" fill="none" strokeLinecap="round" />
+
+              {/* Bottom Leak Holes 5 & 6 */}
+              <circle cx="120" cy="392" r="6" fill="#0f172a" />
+              <path d="M 120 395 L 120 440" stroke="#38bdf8" strokeWidth="5" strokeLinecap="round" />
+              <circle cx="240" cy="392" r="6" fill="#0f172a" />
+              <path d="M 240 395 L 240 440" stroke="#38bdf8" strokeWidth="5" strokeLinecap="round" />
+
+              {/* Leaks Warning Tag */}
+              <g transform="translate(50, 430)">
+                <rect x="0" y="0" width="260" height="46" rx="23" fill="#ef4444" stroke="#ffffff" strokeWidth="2.5" />
+                <text x="130" y="29" fill="#ffffff" fontSize="16" fontWeight="900" textAnchor="middle" fontFamily="'Hind Siliguri', sans-serif">
+                  ⚠ {leakText}
+                </text>
+              </g>
+            </g>
+
+            {/* Bottom Takeaway Card */}
+            <g transform="translate(60, 640)">
+              <rect x="0" y="0" width="520" height="52" rx="14" fill="rgba(15, 23, 42, 0.94)" stroke="#eab308" strokeWidth="2.5" />
+              <text x="260" y="33" fill="#fef08a" fontSize="18" fontWeight="800" textAnchor="middle" fontFamily="'Hind Siliguri', sans-serif">
+                ফুটো বন্ধ না করলে বালতি কখনই ভরবে না!
+              </text>
+            </g>
+          </svg>
+        </div>
+      );
+    }
+
+    case "credit_card_swipe": {
+      const swipeY = Math.min(60, frame * 3.5);
+      const isDeclined = frame >= 24;
+      const statusText = prop.cardStatusText || "লিমিট শেষ! কার্ড রিজেক্টেড";
+
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: prop.top ?? 220,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 480,
+            zIndex: 35,
+          }}
+        >
+          {/* POS Terminal Frame */}
+          <div
+            style={{
+              backgroundColor: "#1e293b",
+              borderRadius: 32,
+              padding: "24px 28px",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.85)",
+              border: `4px solid ${isDeclined ? "#ef4444" : "#475569"}`,
+              position: "relative",
+            }}
+          >
+            {/* Terminal Screen */}
+            <div
+              style={{
+                backgroundColor: isDeclined ? "#7f1d1d" : "#0f172a",
+                border: `2px solid ${isDeclined ? "#ef4444" : "#38bdf8"}`,
+                borderRadius: 18,
+                padding: "20px 16px",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ fontSize: 14, color: "#94a3b8", fontWeight: 700, marginBottom: 6 }}>
+                💳 POS পেমেন্ট টার্মিনাল
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Hind Siliguri', sans-serif",
+                  fontSize: 26,
+                  fontWeight: 900,
+                  color: isDeclined ? "#fee2e2" : "#38bdf8",
+                }}
+              >
+                {isDeclined ? "⚠ DECLINED" : "PROCESSING..."}
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Hind Siliguri', sans-serif",
+                  fontSize: 18,
+                  fontWeight: 800,
+                  color: isDeclined ? "#fca5a5" : "#4ade80",
+                  marginTop: 6,
+                }}
+              >
+                {isDeclined ? statusText : "কার্ড সোয়াইপ হচ্ছে..."}
+              </div>
+            </div>
+
+            {/* Credit Card Slot & Sliding Card */}
+            <div style={{ marginTop: 20, position: "relative", height: 110, overflow: "hidden", borderRadius: 16 }}>
+              {/* Card */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 20,
+                  right: 20,
+                  top: -40 + swipeY,
+                  height: 120,
+                  borderRadius: 14,
+                  background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)",
+                  border: "2px solid #60a5fa",
+                  padding: "16px 20px",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  {/* Gold Chip */}
+                  <div style={{ width: 34, height: 26, borderRadius: 6, backgroundColor: "#ca8a04", border: "1px solid #fde047" }} />
+                  <span style={{ color: "#ffffff", fontWeight: 900, fontSize: 16, letterSpacing: 2 }}>PLATINUM</span>
+                </div>
+                <div style={{ color: "#cbd5e1", fontSize: 13, fontWeight: 700, marginTop: 14 }}>
+                  •••• •••• •••• 8842
+                </div>
+              </div>
+            </div>
+
+            {/* Terminal Keypad Dots */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginTop: 16 }}>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+                <div
+                  key={n}
+                  style={{
+                    backgroundColor: "#334155",
+                    borderRadius: 10,
+                    height: 34,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#94a3b8",
+                    fontWeight: 800,
+                    fontSize: 15,
+                  }}
+                >
+                  {n}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    case "empty_pocket": {
+      const shakeX = frame < 40 ? Math.sin(frame * 0.9) * 5 : 0;
+      const title = prop.title || "পকেট পুরোপুরি গড়ের মাঠ!";
+
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: prop.top ?? 220,
+            left: "50%",
+            transform: `translateX(calc(-50% + ${shakeX}px))`,
+            width: 480,
+            zIndex: 35,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "rgba(15, 23, 42, 0.94)",
+              borderRadius: 28,
+              border: "3px solid #ef4444",
+              padding: "32px 24px",
+              textAlign: "center",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.8)",
+            }}
+          >
+            {/* Denim Pocket SVG with inside-out white lining */}
+            <svg viewBox="0 0 240 180" style={{ width: 220, height: 165, margin: "0 auto" }}>
+              {/* Blue Denim Background shape */}
+              <path d="M 20 20 L 220 20 L 200 160 Q 120 185 40 160 Z" fill="#1e3a8a" stroke="#3b82f6" strokeWidth="4" />
+              {/* Stitches */}
+              <path d="M 32 30 L 208 30 L 190 148 Q 120 170 50 148 Z" fill="none" stroke="#facc15" strokeWidth="2.5" strokeDasharray="5,3" />
+              {/* Inside-out white pocket lining drooping out */}
+              <path d="M 60 20 Q 50 110 90 130 Q 120 140 150 130 Q 190 110 180 20 Z" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="3" />
+              {/* Empty air / dust particles drifting down */}
+              <circle cx="110" cy="155" r="3.5" fill="#94a3b8" opacity="0.6" />
+              <circle cx="130" cy="165" r="2.5" fill="#94a3b8" opacity="0.5" />
+            </svg>
+
+            {/* Empty Alert Banner */}
+            <div
+              style={{
+                marginTop: 20,
+                backgroundColor: "#7f1d1d",
+                color: "#fecaca",
+                fontFamily: "'Hind Siliguri', sans-serif",
+                fontSize: 26,
+                fontWeight: 900,
+                padding: "12px 24px",
+                borderRadius: 999,
+                display: "inline-block",
+                border: "2px solid #ef4444",
+              }}
+            >
+              💸 {title}
+            </div>
+            <div style={{ color: "#94a3b8", fontSize: 18, fontWeight: 700, marginTop: 10, fontFamily: "'Hind Siliguri', sans-serif" }}>
+              অবশিষ্ট ব্যালেন্স: ০ টাকা
+            </div>
+          </div>
         </div>
       );
     }

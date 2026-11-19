@@ -41,7 +41,9 @@ export type CharacterPose =
   | "shocked"
   | "nervous"
   | "walking"
-  | "walking_phone";
+  | "walking_phone"
+  | "head_in_hands"
+  | "writing_pen";
 
 export interface SkinPalette {
   base: string;

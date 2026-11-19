@@ -85,6 +85,14 @@ ln -sfn $(pwd) ~/.agents/skills/video-generation-skills
 
 ---
 
+## Audio & Voiceover Decision Flow (3-Tier Priority)
+
+1. **Priority 1 (User Audio):** If user provides `voice.mp3` or their own recorded audio (+ optional SRT), sync directly with the timeline.
+2. **Priority 2 (User API Key):** If no audio is provided, ask the user if they have an API key (`ElevenLabs`, `Gemini`, `Cartesia`, `OpenAI`). Synthesize high-quality narration using their preferred provider.
+3. **Priority 3 (Default Fallback):** If neither audio nor API key is available, generate narration automatically using the built-in free TTS engine (`node scripts/tts-engine.mjs`) to render the full video without blocking.
+
+---
+
 ## Quick Start Commands
 
 ```bash

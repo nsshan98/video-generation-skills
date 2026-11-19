@@ -32,7 +32,7 @@ export interface MotionGraphicsSceneProps {
   comparisonLeft?: { title: string; points: string[]; color?: string; badge?: string };
   comparisonRight?: { title: string; points: string[]; color?: string; badge?: string };
   // Checklist
-  checklistItems?: Array<{ text: string; icon?: string; active?: boolean }>;
+  checklistItems?: Array<string | { text: string; icon?: string; active?: boolean }>;
   // Flow
   flowSteps?: Array<{ step: number; title: string; desc?: string }>;
   // Time
@@ -220,7 +220,7 @@ export const MotionGraphicsScene: React.FC<MotionGraphicsSceneProps> = ({
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  {comparisonLeft.points.map((pt, i) => {
+                  {(comparisonLeft.points || (comparisonLeft.desc ? [comparisonLeft.desc] : [])).map((pt, i) => {
                     // Stagger points: 0.5s, 2.0s, 3.8s, 5.5s
                     const ptStart = Math.round(fps * (0.5 + i * 1.6));
                     const isPtVisible = frame >= ptStart;
@@ -292,7 +292,7 @@ export const MotionGraphicsScene: React.FC<MotionGraphicsSceneProps> = ({
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  {comparisonRight.points.map((pt, i) => {
+                  {(comparisonRight.points || (comparisonRight.desc ? [comparisonRight.desc] : [])).map((pt, i) => {
                     // Stagger points: 9.0s, 11.0s, 13.0s, 15.0s
                     const ptStart = bottomCardStartFrame + Math.round(fps * (0.5 + i * 1.8));
                     const isPtVisible = frame >= ptStart;
@@ -338,19 +338,35 @@ export const MotionGraphicsScene: React.FC<MotionGraphicsSceneProps> = ({
               gap: 26,
             }}
           >
-            {checklistItems.map((item, i) => {
+            {checklistItems.map((item: any, i) => {
               const itemDelay = i * 4;
               const itemSpring = spring({
                 frame: Math.max(0, frame - itemDelay),
                 fps,
                 config: { damping: 14, stiffness: 160 },
               });
+              const text = typeof item === "string" ? item : item?.text || "";
+              const isWarning =
+                text.includes("অপচয়") ||
+                text.includes("উধাও") ||
+                text.includes("বিল") ||
+                text.includes("রাইড");
+              const defaultIcon = isWarning ? "⚠" : "✔";
+              const icon =
+                typeof item === "string" ? defaultIcon : item?.icon || defaultIcon;
+              const isActive =
+                typeof item === "string" ? true : item?.active !== false;
+              const badgeColor = isWarning
+                ? "#ef4444"
+                : isActive
+                ? "#22c55e"
+                : "#e11d48";
               return (
                 <div
                   key={i}
                   style={{
                     backgroundColor: "rgba(30, 41, 59, 0.94)",
-                    border: "2.5px solid #3b82f6",
+                    border: `2.5px solid ${isWarning ? "#ef4444" : "#3b82f6"}`,
                     borderRadius: 24,
                     padding: "26px 32px",
                     display: "flex",
@@ -365,7 +381,7 @@ export const MotionGraphicsScene: React.FC<MotionGraphicsSceneProps> = ({
                       width: 60,
                       height: 60,
                       borderRadius: "50%",
-                      backgroundColor: item.active !== false ? "#22c55e" : "#e11d48",
+                      backgroundColor: badgeColor,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -374,10 +390,17 @@ export const MotionGraphicsScene: React.FC<MotionGraphicsSceneProps> = ({
                       flexShrink: 0,
                     }}
                   >
-                    {item.icon || "✅"}
+                    {icon}
                   </div>
-                  <div style={{ color: "#f8fafc", fontSize: 32, fontWeight: 700, lineHeight: 1.3 }}>
-                    {item.text}
+                  <div
+                    style={{
+                      color: "#f8fafc",
+                      fontSize: 32,
+                      fontWeight: 700,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {text}
                   </div>
                 </div>
               );

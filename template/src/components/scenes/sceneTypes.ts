@@ -87,7 +87,12 @@ export interface ScenePropConfig {
     | "classroom_desk"
     | "dining_table"
     | "cash_counter"
-    | "software_mockup";
+    | "software_mockup"
+    | "calendar"
+    | "bill_receipt"
+    | "leaky_bucket"
+    | "credit_card_swipe"
+    | "empty_pocket";
   imageSrc?: string;
   width?: number;
   height?: number;
@@ -116,6 +121,30 @@ export interface ScenePropConfig {
   chatGroupName?: string;
   chatMessages?: Array<{ sender?: string; text: string; isMe?: boolean; status?: string }>;
   billAmount?: string;
+  deskPosition?: "left" | "right" | "center";
+  fileLabel?: string;
+  hudCard?: {
+    title?: string;
+    items?: string[];
+    footer?: string;
+  };
+  // Universal Storytelling Props (Sus Lessons style)
+  month?: string;
+  startDay?: number;
+  endDay?: number;
+  markerCircle?: boolean;
+  calendarTitle?: string;
+  billTitle?: string;
+  billNumber?: string;
+  billItems?: Array<{ label: string; amount: string }>;
+  stampText?: string;
+  stampColor?: string;
+  waterInflowLabel?: string;
+  leaksLabel?: string;
+  leaksCount?: number;
+  cardStatus?: "DECLINED" | "APPROVED";
+  cardStatusText?: string;
+  cardName?: string;
 }
 
 export interface PinNoteConfig {

@@ -137,15 +137,84 @@ async function ttsElevenLabs(text, outputPath, voiceId, model, apiKey) {
   throw new Error("ElevenLabs failed after 3 attempts due to rate limit.");
 }
 
+async function ttsEdge(text, outputPath, voice, lang) {
+  const { EdgeTTS } = await import(path.join(TEMPLATE_DIR, "node_modules/node-edge-tts/dist/edge-tts.js"));
+  const detectedLang = lang || detectLanguage(text);
+  const defaultVoice = detectedLang === "bn" ? "bn-BD-PradeepNeural" : "en-US-AndrewMultilingualNeural";
+  const tts = new EdgeTTS({
+    voice: voice || defaultVoice,
+    lang: detectedLang === "bn" ? "bn-BD" : "en-US"
+  });
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await tts.ttsPromise(text, outputPath);
+}
+
+async function ttsGemini(text, outputPath, voice, model, apiKey) {
+  const key = apiKey || process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("No Gemini API key. Set GEMINI_API_KEY or pass --apiKey=");
+
+  const targetModel = model || "gemini-3.8-flash-tts";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${key}`;
+
+  let attempts = 0;
+  while (attempts < 8) {
+    attempts++;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text }] }],
+        generationConfig: {
+          responseModalities: ["AUDIO"],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: { voiceName: voice || "Charon" }
+            }
+          }
+        }
+      })
+    });
+
+    if (res.status === 429) {
+      console.warn(`    ⚠ Rate limit (429 - 3 RPM limit on Gemini Free Tier). Waiting 62s for full quota window reset (attempt ${attempts}/8)...`);
+      await new Promise((r) => setTimeout(r, 62000));
+      continue;
+    }
+
+    if (!res.ok) throw new Error(`Gemini Audio error (${res.status}): ${await res.text()}`);
+    const data = await res.json();
+    const part = data.candidates?.[0]?.content?.parts?.[0];
+    if (!part?.inlineData?.data) throw new Error("No audio returned from Gemini");
+    const wavBuf = Buffer.from(part.inlineData.data, "base64");
+
+    const tmpWav = outputPath.replace(/\.mp3$/, ".tmp.wav");
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(tmpWav, wavBuf);
+
+    try {
+      const ffmpeg = path.join(TEMPLATE_DIR, "node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg");
+      execSync(`"${ffmpeg}" -y -i "${tmpWav}" -b:a 192k "${outputPath}"`, { stdio: "ignore" });
+      await fs.unlink(tmpWav).catch(() => { });
+    } catch {
+      await fs.rename(tmpWav, outputPath);
+    }
+
+    // Safe pause between calls to respect 3 RPM rate limit on Gemini Free Tier
+    await new Promise((r) => setTimeout(r, 22000));
+    return;
+  }
+  throw new Error("Gemini Audio failed after 8 attempts due to rate limit.");
+}
+
 async function ttsFree(text, outputPath, lang) {
   const detectedLang = lang || detectLanguage(text);
   // Split long text to avoid Google TTS truncation
   const parts = text.length > 150
     ? text.split(/(?<=[।?!.,\n])/).reduce((acc, p) => {
-        if (!acc.length || (acc[acc.length - 1] + p).length > 140) acc.push(p.trim());
-        else acc[acc.length - 1] += p;
-        return acc;
-      }, []).filter(Boolean)
+      if (!acc.length || (acc[acc.length - 1] + p).length > 140) acc.push(p.trim());
+      else acc[acc.length - 1] += p;
+      return acc;
+    }, []).filter(Boolean)
     : [text.trim()];
 
   const buffers = [];
@@ -162,9 +231,11 @@ async function ttsFree(text, outputPath, lang) {
 
 // ─── Duration Probe ────────────────────────────────────────────────────────
 function probeDuration(filePath) {
+  const gnuProbe = path.join(TEMPLATE_DIR, "node_modules/@remotion/compositor-linux-x64-gnu/ffprobe");
+  const bin = existsSync(gnuProbe) ? gnuProbe : "npx remotion ffprobe";
   try {
     const out = execSync(
-      `npx remotion ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${filePath}"`,
+      `"${bin}" -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${filePath}"`,
       { cwd: TEMPLATE_DIR, encoding: "utf-8" }
     ).trim();
     const sec = parseFloat(out);
@@ -203,9 +274,10 @@ async function main() {
 
   // Provider selection: CLI arg > env var > default
   const provider = args.provider ||
-    (process.env.CARTESIA_API_KEY ? "cartesia" :
-      process.env.OPENAI_API_KEY ? "openai" :
-        process.env.ELEVENLABS_API_KEY ? "elevenlabs" : "free");
+    (process.env.ELEVENLABS_API_KEY ? "elevenlabs" :
+      process.env.GEMINI_API_KEY ? "gemini" :
+        process.env.CARTESIA_API_KEY ? "cartesia" :
+          process.env.OPENAI_API_KEY ? "openai" : "edge");
 
   const padding = parseFloat(args.padding ?? 0.35);
 
@@ -227,21 +299,30 @@ async function main() {
     const filename = `media/${prefix}-${i + 1}.mp3`;
     const fullOut = path.join(TEMPLATE_DIR, "public", filename);
     const shortText = narration.slice(0, 45).replace(/\n/g, " ");
-    console.log(`  [${i + 1}/${scenes.length}] "${shortText}..."`);
 
-    try {
-      if (provider === "cartesia") {
-        await ttsCartesia(narration, fullOut, args.voiceId || scene.voiceId, args.model, args.apiKey);
-      } else if (provider === "openai") {
-        await ttsOpenAI(narration, fullOut, args.voice || scene.voice, args.model, args.apiKey);
-      } else if (provider === "elevenlabs") {
-        await ttsElevenLabs(narration, fullOut, args.voiceId || scene.voiceId, args.model, args.apiKey);
-      } else {
-        await ttsFree(narration, fullOut, args.lang || scene.lang);
+    const alreadyExists = existsSync(fullOut) && (await fs.stat(fullOut)).size > 1000;
+    if (alreadyExists) {
+      console.log(`  [${i + 1}/${scenes.length}] ♻ (Cached) "${shortText}..."`);
+    } else {
+      console.log(`  [${i + 1}/${scenes.length}] "${shortText}..."`);
+      try {
+        if (provider === "elevenlabs") {
+          await ttsElevenLabs(narration, fullOut, args.voiceId || scene.voiceId, args.model, args.apiKey);
+        } else if (provider === "gemini") {
+          await ttsGemini(narration, fullOut, args.voice || scene.voice, args.model, args.apiKey);
+        } else if (provider === "cartesia") {
+          await ttsCartesia(narration, fullOut, args.voiceId || scene.voiceId, args.model, args.apiKey);
+        } else if (provider === "openai") {
+          await ttsOpenAI(narration, fullOut, args.voice || scene.voice, args.model, args.apiKey);
+        } else if (provider === "edge") {
+          await ttsEdge(narration, fullOut, args.voice || scene.voice, args.lang || scene.lang);
+        } else {
+          await ttsFree(narration, fullOut, args.lang || scene.lang);
+        }
+      } catch (err) {
+        console.error(`  ❌ Scene ${i + 1} failed: ${err.message}`);
+        process.exit(1);
       }
-    } catch (err) {
-      console.error(`  ❌ Scene ${i + 1} failed: ${err.message}`);
-      process.exit(1);
     }
 
     const audioDuration = probeDuration(fullOut);

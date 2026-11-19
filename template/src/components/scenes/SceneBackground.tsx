@@ -462,20 +462,41 @@ export const SceneBackground: React.FC<SceneBackgroundProps> = ({
                 "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%)",
             }}
           />
-          {/* Modern city skyline silhouette */}
+          {/* City skyline silhouettes */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 220,
+              left: 0,
+              right: 0,
+              height: 280,
+              opacity: 0.25,
+              pointerEvents: "none",
+            }}
+          >
+            <svg viewBox="0 0 1080 280" style={{ width: "100%", height: "100%" }}>
+              <rect x="60" y="80" width="90" height="200" fill="#7c2d12" />
+              <rect x="180" y="40" width="110" height="240" fill="#9a3412" />
+              <rect x="320" y="100" width="80" height="180" fill="#7c2d12" />
+              <rect x="440" y="20" width="130" height="260" fill="#c2410c" />
+              <rect x="600" y="70" width="90" height="210" fill="#9a3412" />
+              <rect x="720" y="50" width="120" height="230" fill="#7c2d12" />
+              <rect x="870" y="90" width="100" height="190" fill="#c2410c" />
+            </svg>
+          </div>
+          {/* Warm Observation Deck Floor */}
           <div
             style={{
               position: "absolute",
               bottom: 0,
               left: 0,
               right: 0,
-              height: 600,
-              background: "#1e293b",
-              borderTop: "8px solid #0f172a",
+              height: 220,
+              background: "linear-gradient(180deg, #451a03 0%, #1c0b02 100%)",
+              borderTop: "5px solid #ca8a04",
+              boxShadow: "0 -8px 24px rgba(0,0,0,0.4)",
             }}
-          >
-            <div style={{ width: 14, height: "100%", backgroundColor: "#facc15", margin: "0 auto" }} />
-          </div>
+          />
         </>
       );
 

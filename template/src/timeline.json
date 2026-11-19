@@ -2,8 +2,8 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "durationInFrames": 405,
-  "title": "Masterclass Interactive Showcase",
+  "durationInFrames": 5582,
+  "title": "আসিফের ফুটো বালতি — শিক্ষণীয় গল্প",
   "progressBar": true,
   "autoSfx": true,
   "items": [
@@ -11,203 +11,2642 @@
       "type": "animated-scene",
       "sceneIndex": 1,
       "start": 0,
-      "duration": 4,
-      "subtitle": "",
-      "narration": "প্রথমে পুরো দোকানে ভিড় জমে গেল আর অর্ডার বাড়তে শুরু করল!",
+      "duration": 6.81,
+      "subtitle": "৭০ হাজার বেতন, অথচ ২০ তারিখেই পকেট ফাঁকা!",
+      "narration": "প্রতি মাসে ৭০ হাজার টাকা বেতন, অথচ মাসের বিশ তারিখ আসতেই পকেট পুরোপুরি গড়ের মাঠ!",
       "words": [
         {
-          "word": "প্রথমে",
+          "word": "প্রতি",
           "start": 0,
           "end": 0.47
         },
         {
-          "word": "পুরো",
+          "word": "মাসে",
           "start": 0.47,
-          "end": 0.8
+          "end": 0.87
         },
         {
-          "word": "দোকানে",
-          "start": 0.8,
-          "end": 1.27
+          "word": "৭০",
+          "start": 0.87,
+          "end": 1.1
         },
         {
-          "word": "ভিড়",
-          "start": 1.27,
-          "end": 1.53
+          "word": "হাজার",
+          "start": 1.1,
+          "end": 1.57
         },
         {
-          "word": "জমে",
-          "start": 1.53,
-          "end": 1.8
+          "word": "টাকা",
+          "start": 1.57,
+          "end": 1.97
         },
         {
-          "word": "গেল",
-          "start": 1.8,
-          "end": 2.07
+          "word": "বেতন,",
+          "start": 1.97,
+          "end": 2.56
         },
         {
-          "word": "আর",
-          "start": 2.07,
-          "end": 2.27
+          "word": "অথচ",
+          "start": 2.56,
+          "end": 2.87
         },
         {
-          "word": "অর্ডার",
-          "start": 2.27,
-          "end": 2.73
+          "word": "মাসের",
+          "start": 2.87,
+          "end": 3.35
         },
         {
-          "word": "বাড়তে",
-          "start": 2.73,
-          "end": 3.13
+          "word": "বিশ",
+          "start": 3.35,
+          "end": 3.66
         },
         {
-          "word": "শুরু",
-          "start": 3.13,
-          "end": 3.47
+          "word": "তারিখ",
+          "start": 3.66,
+          "end": 4.13
         },
         {
-          "word": "করল!",
-          "start": 3.47,
-          "end": 4
+          "word": "আসতেই",
+          "start": 4.13,
+          "end": 4.61
+        },
+        {
+          "word": "পকেট",
+          "start": 4.61,
+          "end": 5
+        },
+        {
+          "word": "পুরোপুরি",
+          "start": 5,
+          "end": 5.71
+        },
+        {
+          "word": "গড়ের",
+          "start": 5.71,
+          "end": 6.18
+        },
+        {
+          "word": "মাঠ!",
+          "start": 6.18,
+          "end": 6.81
         }
       ],
-      "highlightWords": [],
-      "character": "rashed",
-      "characterPose": "happy",
-      "characterPosition": "center",
-      "crowd": "shoppers",
-      "backgroundTheme": "clothing_store",
-      "screenShake": false,
-      "markerHighlight": {
-        "text": "অর্ডার বাড়তে শুরু করল!",
-        "color": "#FDE047"
-      },
-      "oneTakeTransition": {
-        "enabled": true,
-        "target": "phone",
-        "zoomLevel": 1.85
-      },
-      "parallax": true
-    },
-    {
-      "type": "animated-scene",
-      "sceneIndex": 2,
-      "start": 4,
-      "duration": 4.5,
-      "subtitle": "",
-      "narration": "হঠাৎ বড় একটা ঝামেলা দেখা দিল—হিসাব মিলছে না!",
-      "words": [
+      "highlightWords": [
+        "৭০ হাজার",
+        "পকেট পুরোপুরি",
+        "গড়ের মাঠ"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
         {
-          "word": "হঠাৎ",
+          "pose": "using_computer",
           "start": 0,
-          "end": 0.45
+          "duration": 3
         },
         {
-          "word": "বড়",
-          "start": 0.45,
-          "end": 0.73
-        },
-        {
-          "word": "একটা",
-          "start": 0.73,
-          "end": 1.18
-        },
-        {
-          "word": "ঝামেলা",
-          "start": 1.18,
-          "end": 1.82
-        },
-        {
-          "word": "দেখা",
-          "start": 1.82,
-          "end": 2.27
-        },
-        {
-          "word": "দিল—হিসাব",
-          "start": 2.27,
-          "end": 3.32
-        },
-        {
-          "word": "মিলছে",
-          "start": 3.32,
-          "end": 3.86
-        },
-        {
-          "word": "না!",
-          "start": 3.86,
-          "end": 4.5
+          "pose": "concerned",
+          "start": 3,
+          "duration": 3.81
         }
       ],
-      "highlightWords": [],
-      "character": "rashed",
-      "characterPose": "concerned",
-      "characterPosition": "center",
-      "backgroundTheme": "home_study",
-      "screenShake": true,
-      "tornPaperCard": {
-        "badge": "জরুরি সতর্কবার্তা",
-        "title": "অপ্রত্যাশিত ঘাটতি!",
-        "points": [
-          "হিসাবের গড়মিল",
-          "সিস্টেম অফলাইন",
-          "কাস্টমার অসন্তোষ"
-        ]
+      "characterPosition": "right",
+      "backgroundTheme": "corporate_office",
+      "pinNote": {
+        "title": "বেতন ৳৭০,০০০ | ২০ তারিখেই শেষ!",
+        "color": "#ef4444",
+        "side": "top_right"
       },
+      "prop": {
+        "type": "calendar",
+        "month": "চলতি মাস",
+        "startDay": 1,
+        "endDay": 20,
+        "markerCircle": true,
+        "calendarTitle": "২০ তারিখেই পকেট ফাঁকা!"
+      },
+      "metaphor": {
+        "type": "money_loss"
+      },
+      "screenShake": true,
       "cameraAngle": "dutch_left",
       "parallax": true
     },
     {
-      "type": "motion-graphics-scene",
-      "start": 8.5,
-      "duration": 5,
-      "mgType": "flow",
-      "title": "অটোমেশন সমাধান ৩টি ধাপে",
-      "subtitle": "বিদ্যুৎ গতির ডেটা প্রসেসিং",
-      "badge": "৩ স্টেপ ফ্লো",
-      "narration": "বিদ্যুৎ গতির ডেটা প্রসেসিং",
+      "type": "audio",
+      "src": "media/vo-asif-1.mp3",
+      "start": 0,
+      "duration": 6.81,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 2,
+      "start": 6.81,
+      "duration": 14.68,
+      "subtitle": "আইটি এক্সিকিউটিভ আসিফ — বাইরে থেকে কোনো অপ্রাপ্তি নেই",
+      "narration": "ঘটনাটা একটি নামী আইটি প্রতিষ্ঠানের তরুণ এক্সিকিউটিভ আসিফের। চকচকে অফিস, ফিটফাট জামাকাপড়, আর হাতে লেটেস্ট মডেলের স্মার্টফোন... বাইরে থেকে দেখলে মনে হবে আসিফের জীবনে কোনো অপ্রাপ্তি নেই।",
       "words": [
         {
-          "word": "বিদ্যুৎ",
+          "word": "ঘটনাটা",
           "start": 0,
-          "end": 1.48
+          "end": 0.53
         },
         {
-          "word": "গতির",
-          "start": 1.48,
-          "end": 2.41
+          "word": "একটি",
+          "start": 0.53,
+          "end": 0.91
         },
         {
-          "word": "ডেটা",
-          "start": 2.41,
-          "end": 3.33
+          "word": "নামী",
+          "start": 0.91,
+          "end": 1.29
         },
         {
-          "word": "প্রসেসিং",
-          "start": 3.33,
-          "end": 5
+          "word": "আইটি",
+          "start": 1.29,
+          "end": 1.66
+        },
+        {
+          "word": "প্রতিষ্ঠানের",
+          "start": 1.66,
+          "end": 2.65
+        },
+        {
+          "word": "তরুণ",
+          "start": 2.65,
+          "end": 3.03
+        },
+        {
+          "word": "এক্সিকিউটিভ",
+          "start": 3.03,
+          "end": 3.93
+        },
+        {
+          "word": "আসিফের।",
+          "start": 3.93,
+          "end": 4.77
+        },
+        {
+          "word": "চকচকে",
+          "start": 4.77,
+          "end": 5.22
+        },
+        {
+          "word": "অফিস,",
+          "start": 5.22,
+          "end": 5.79
+        },
+        {
+          "word": "ফিটফাট",
+          "start": 5.79,
+          "end": 6.32
+        },
+        {
+          "word": "জামাকাপড়,",
+          "start": 6.32,
+          "end": 7.26
+        },
+        {
+          "word": "আর",
+          "start": 7.26,
+          "end": 7.49
+        },
+        {
+          "word": "হাতে",
+          "start": 7.49,
+          "end": 7.87
+        },
+        {
+          "word": "লেটেস্ট",
+          "start": 7.87,
+          "end": 8.48
+        },
+        {
+          "word": "মডেলের",
+          "start": 8.48,
+          "end": 9
+        },
+        {
+          "word": "স্মার্টফোন...",
+          "start": 9,
+          "end": 10.06
+        },
+        {
+          "word": "বাইরে",
+          "start": 10.06,
+          "end": 10.52
+        },
+        {
+          "word": "থেকে",
+          "start": 10.52,
+          "end": 10.9
+        },
+        {
+          "word": "দেখলে",
+          "start": 10.9,
+          "end": 11.35
+        },
+        {
+          "word": "মনে",
+          "start": 11.35,
+          "end": 11.65
+        },
+        {
+          "word": "হবে",
+          "start": 11.65,
+          "end": 11.96
+        },
+        {
+          "word": "আসিফের",
+          "start": 11.96,
+          "end": 12.49
+        },
+        {
+          "word": "জীবনে",
+          "start": 12.49,
+          "end": 12.94
+        },
+        {
+          "word": "কোনো",
+          "start": 12.94,
+          "end": 13.32
+        },
+        {
+          "word": "অপ্রাপ্তি",
+          "start": 13.32,
+          "end": 14.07
+        },
+        {
+          "word": "নেই।",
+          "start": 14.07,
+          "end": 14.68
+        }
+      ],
+      "highlightWords": [
+        "আইটি প্রতিষ্ঠানের",
+        "স্মার্টফোন",
+        "কোনো অপ্রাপ্তি নেই"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "holding_phone",
+          "start": 0,
+          "duration": 6
+        },
+        {
+          "pose": "presenting",
+          "start": 6,
+          "duration": 8.68
+        }
+      ],
+      "characterPosition": "center",
+      "backgroundTheme": "manager_cabin",
+      "hookCard": {
+        "line1": "চকচকে জীবনের আড়ালে...",
+        "line2": "বাইরে ফিটফাট, ভেতরে টানাপোড়েন",
+        "subtext": "আইটি এক্সিকিউটিভ আসিফ"
+      },
+      "metaphor": {
+        "type": "idea_bulb"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-2.mp3",
+      "start": 6.81,
+      "duration": 14.68,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 3,
+      "start": 21.49,
+      "duration": 22.53,
+      "subtitle": "দামি ক্যাফে, ফুড ডেলিভারি আর দেখনদারির খরচ",
+      "narration": "কিন্তু প্রতি মাসের মাঝামাঝি সময়েই... তার কপালে গভীর চিন্তার ভাঁজ পড়ে যেত। প্রতিদিন দামি ক্যাফের প্রিমিয়াম কফি, কথায় কথায় অনলাইন ফুড ডেলিভারি, আর সপ্তাহান্তের আড্ডায় বন্ধুদের বিল একাই দেওয়ার দেখনদারি। আসিফ ভাবত, ঢাকা শহরে এই সামান্য টাকায় চলা অসম্ভব... কোম্পানি তাকে যথেষ্ট মূল্যায়ন করছে না!",
+      "words": [
+        {
+          "word": "কিন্তু",
+          "start": 0,
+          "end": 0.52
+        },
+        {
+          "word": "প্রতি",
+          "start": 0.52,
+          "end": 0.96
+        },
+        {
+          "word": "মাসের",
+          "start": 0.96,
+          "end": 1.41
+        },
+        {
+          "word": "মাঝামাঝি",
+          "start": 1.41,
+          "end": 2.07
+        },
+        {
+          "word": "সময়েই...",
+          "start": 2.07,
+          "end": 2.74
+        },
+        {
+          "word": "তার",
+          "start": 2.74,
+          "end": 3.03
+        },
+        {
+          "word": "কপালে",
+          "start": 3.03,
+          "end": 3.48
+        },
+        {
+          "word": "গভীর",
+          "start": 3.48,
+          "end": 3.85
+        },
+        {
+          "word": "চিন্তার",
+          "start": 3.85,
+          "end": 4.44
+        },
+        {
+          "word": "ভাঁজ",
+          "start": 4.44,
+          "end": 4.81
+        },
+        {
+          "word": "পড়ে",
+          "start": 4.81,
+          "end": 5.11
+        },
+        {
+          "word": "যেত।",
+          "start": 5.11,
+          "end": 5.7
+        },
+        {
+          "word": "প্রতিদিন",
+          "start": 5.7,
+          "end": 6.36
+        },
+        {
+          "word": "দামি",
+          "start": 6.36,
+          "end": 6.73
+        },
+        {
+          "word": "ক্যাফের",
+          "start": 6.73,
+          "end": 7.33
+        },
+        {
+          "word": "প্রিমিয়াম",
+          "start": 7.33,
+          "end": 8.06
+        },
+        {
+          "word": "কফি,",
+          "start": 8.06,
+          "end": 8.55
+        },
+        {
+          "word": "কথায়",
+          "start": 8.55,
+          "end": 8.92
+        },
+        {
+          "word": "কথায়",
+          "start": 8.92,
+          "end": 9.29
+        },
+        {
+          "word": "অনলাইন",
+          "start": 9.29,
+          "end": 9.8
+        },
+        {
+          "word": "ফুড",
+          "start": 9.8,
+          "end": 10.1
+        },
+        {
+          "word": "ডেলিভারি,",
+          "start": 10.1,
+          "end": 10.95
+        },
+        {
+          "word": "আর",
+          "start": 10.95,
+          "end": 11.17
+        },
+        {
+          "word": "সপ্তাহান্তের",
+          "start": 11.17,
+          "end": 12.13
+        },
+        {
+          "word": "আড্ডায়",
+          "start": 12.13,
+          "end": 12.65
+        },
+        {
+          "word": "বন্ধুদের",
+          "start": 12.65,
+          "end": 13.32
+        },
+        {
+          "word": "বিল",
+          "start": 13.32,
+          "end": 13.61
+        },
+        {
+          "word": "একাই",
+          "start": 13.61,
+          "end": 13.98
+        },
+        {
+          "word": "দেওয়ার",
+          "start": 13.98,
+          "end": 14.5
+        },
+        {
+          "word": "দেখনদারি।",
+          "start": 14.5,
+          "end": 15.46
+        },
+        {
+          "word": "আসিফ",
+          "start": 15.46,
+          "end": 15.83
+        },
+        {
+          "word": "ভাবত,",
+          "start": 15.83,
+          "end": 16.39
+        },
+        {
+          "word": "ঢাকা",
+          "start": 16.39,
+          "end": 16.76
+        },
+        {
+          "word": "শহরে",
+          "start": 16.76,
+          "end": 17.13
+        },
+        {
+          "word": "এই",
+          "start": 17.13,
+          "end": 17.35
+        },
+        {
+          "word": "সামান্য",
+          "start": 17.35,
+          "end": 17.94
+        },
+        {
+          "word": "টাকায়",
+          "start": 17.94,
+          "end": 18.39
+        },
+        {
+          "word": "চলা",
+          "start": 18.39,
+          "end": 18.68
+        },
+        {
+          "word": "অসম্ভব...",
+          "start": 18.68,
+          "end": 19.42
+        },
+        {
+          "word": "কোম্পানি",
+          "start": 19.42,
+          "end": 20.09
+        },
+        {
+          "word": "তাকে",
+          "start": 20.09,
+          "end": 20.46
+        },
+        {
+          "word": "যথেষ্ট",
+          "start": 20.46,
+          "end": 20.98
+        },
+        {
+          "word": "মূল্যায়ন",
+          "start": 20.98,
+          "end": 21.64
+        },
+        {
+          "word": "করছে",
+          "start": 21.64,
+          "end": 22.01
+        },
+        {
+          "word": "না!",
+          "start": 22.01,
+          "end": 22.53
+        }
+      ],
+      "highlightWords": [
+        "গভীর চিন্তার ভাঁজ",
+        "অনলাইন ফুড ডেলিভারি",
+        "দেখনদারি",
+        "মূল্যায়ন করছে না"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "drinking_tea",
+          "start": 0,
+          "duration": 6.5
+        },
+        {
+          "pose": "talking",
+          "start": 6.5,
+          "duration": 8
+        },
+        {
+          "pose": "concerned",
+          "start": 14.5,
+          "duration": 8.03
+        }
+      ],
+      "characterPosition": "center",
+      "backgroundTheme": "cafe",
+      "prop": {
+        "type": "dining_table"
+      },
+      "metaphor": {
+        "type": "sweat_drop"
+      },
+      "screenShake": false,
+      "tornPaperCard": {
+        "title": "অহেতুক ব্যয়ের তালিকা",
+        "headline": "যেখানে টাকা উধাও হতো",
+        "points": [
+          "☕ দামি ক্যাফের প্রিমিয়াম কফি",
+          "🍔 কথায় কথায় অনলাইন ফুড ডেলিভারি",
+          "💸 বন্ধুদের বিল একা দেওয়ার দেখনদারি"
+        ],
+        "top": 120
+      },
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-3.mp3",
+      "start": 21.49,
+      "duration": 22.53,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 4,
+      "start": 44.02,
+      "duration": 16.21,
+      "subtitle": "২২ তারিখেই পকেট শূন্য, ক্রেডিট কার্ডের সীমা শেষ!",
+      "narration": "দেখতে দেখতে মাসের বাইশ তারিখ এসে হাজির। বাড়িভাড়ার বাকি টাকা দেওয়ার মতো আর একটি পয়সাও পকেটে অবশিষ্ট নেই। ক্রেডিট কার্ডের সীমাও শেষ। আসিফ ডেস্কে বসে কপালে হাত দিয়ে ভাবছিল... এখন কার কাছে ধার চাওয়া যায়?",
+      "words": [
+        {
+          "word": "দেখতে",
+          "start": 0,
+          "end": 0.46
+        },
+        {
+          "word": "দেখতে",
+          "start": 0.46,
+          "end": 0.92
+        },
+        {
+          "word": "মাসের",
+          "start": 0.92,
+          "end": 1.38
+        },
+        {
+          "word": "বাইশ",
+          "start": 1.38,
+          "end": 1.76
+        },
+        {
+          "word": "তারিখ",
+          "start": 1.76,
+          "end": 2.22
+        },
+        {
+          "word": "এসে",
+          "start": 2.22,
+          "end": 2.52
+        },
+        {
+          "word": "হাজির।",
+          "start": 2.52,
+          "end": 3.29
+        },
+        {
+          "word": "বাড়িভাড়ার",
+          "start": 3.29,
+          "end": 4.05
+        },
+        {
+          "word": "বাকি",
+          "start": 4.05,
+          "end": 4.43
+        },
+        {
+          "word": "টাকা",
+          "start": 4.43,
+          "end": 4.82
+        },
+        {
+          "word": "দেওয়ার",
+          "start": 4.82,
+          "end": 5.35
+        },
+        {
+          "word": "মতো",
+          "start": 5.35,
+          "end": 5.66
+        },
+        {
+          "word": "আর",
+          "start": 5.66,
+          "end": 5.89
+        },
+        {
+          "word": "একটি",
+          "start": 5.89,
+          "end": 6.27
+        },
+        {
+          "word": "পয়সাও",
+          "start": 6.27,
+          "end": 6.73
+        },
+        {
+          "word": "পকেটে",
+          "start": 6.73,
+          "end": 7.19
+        },
+        {
+          "word": "অবশিষ্ট",
+          "start": 7.19,
+          "end": 7.8
+        },
+        {
+          "word": "নেই।",
+          "start": 7.8,
+          "end": 8.41
+        },
+        {
+          "word": "ক্রেডিট",
+          "start": 8.41,
+          "end": 9.02
+        },
+        {
+          "word": "কার্ডের",
+          "start": 9.02,
+          "end": 9.63
+        },
+        {
+          "word": "সীমাও",
+          "start": 9.63,
+          "end": 10.09
+        },
+        {
+          "word": "শেষ।",
+          "start": 10.09,
+          "end": 10.7
+        },
+        {
+          "word": "আসিফ",
+          "start": 10.7,
+          "end": 11.09
+        },
+        {
+          "word": "ডেস্কে",
+          "start": 11.09,
+          "end": 11.62
+        },
+        {
+          "word": "বসে",
+          "start": 11.62,
+          "end": 11.93
+        },
+        {
+          "word": "কপালে",
+          "start": 11.93,
+          "end": 12.39
+        },
+        {
+          "word": "হাত",
+          "start": 12.39,
+          "end": 12.69
+        },
+        {
+          "word": "দিয়ে",
+          "start": 12.69,
+          "end": 13.08
+        },
+        {
+          "word": "ভাবছিল...",
+          "start": 13.08,
+          "end": 13.84
+        },
+        {
+          "word": "এখন",
+          "start": 13.84,
+          "end": 14.15
+        },
+        {
+          "word": "কার",
+          "start": 14.15,
+          "end": 14.45
+        },
+        {
+          "word": "কাছে",
+          "start": 14.45,
+          "end": 14.83
+        },
+        {
+          "word": "ধার",
+          "start": 14.83,
+          "end": 15.14
+        },
+        {
+          "word": "চাওয়া",
+          "start": 15.14,
+          "end": 15.6
+        },
+        {
+          "word": "যায়?",
+          "start": 15.6,
+          "end": 16.21
+        }
+      ],
+      "highlightWords": [
+        "বাইশ তারিখ",
+        "একটি পয়সাও অবশিষ্ট নেই",
+        "ক্রেডিট কার্ডের সীমা",
+        "কার কাছে ধার"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "head_in_hands",
+          "start": 0,
+          "duration": 6
+        },
+        {
+          "pose": "shocked",
+          "start": 6,
+          "duration": 10.21
+        }
+      ],
+      "characterPosition": "right",
+      "backgroundTheme": "employee_cubicle",
+      "pinNote": {
+        "title": "কার কাছে ধার চাওয়া যায়?",
+        "color": "#ef4444",
+        "side": "top_left"
+      },
+      "prop": {
+        "type": "bill_receipt",
+        "billTitle": "বাড়িভাড়ার বকেয়া রসিদ",
+        "billNumber": "RENT-DUE #22",
+        "billItems": [
+          {
+            "label": "বাড়িভাড়া বকেয়া",
+            "amount": "৳১৫,০০০"
+          },
+          {
+            "label": "ক্রেডিট কার্ড লিমিট",
+            "amount": "০ টাকা (শেষ)"
+          }
+        ],
+        "totalAmount": "৳১৫,০০০",
+        "stampText": "UNPAID / বকেয়া",
+        "stampColor": "#ef4444"
+      },
+      "metaphor": {
+        "type": "exclamation"
+      },
+      "screenShake": true,
+      "cameraAngle": "zoom_in",
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-4.mp3",
+      "start": 44.02,
+      "duration": 16.21,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 5,
+      "start": 60.23,
+      "duration": 25.33,
+      "subtitle": "পঁয়ত্রিশ হাজার বেতনের রফিক সাহেব — মুখে অদ্ভুত শান্ত তৃপ্তি",
+      "narration": "দ্বিধা আর প্রবল লজ্জা কাটিয়ে সে এগিয়ে গেল তার পাশের ডেস্কেই বসা সিনিয়র ডিজাইনার রফিক সাহেবের কাছে। রফিক সাহেবের বয়স পঞ্চাশের কাছাকাছি। তিনি এই কোম্পানিতেই মাত্র পঁয়ত্রিশ হাজার টাকা বেতনে কাজ করেন... যা আসিফের বেতনের ঠিক অর্ধেক! অথচ মানুষটির মুখে সবসময় এক অদ্ভুত শান্ত তৃপ্তি লেগে থাকে।",
+      "words": [
+        {
+          "word": "দ্বিধা",
+          "start": 0,
+          "end": 0.59
+        },
+        {
+          "word": "আর",
+          "start": 0.59,
+          "end": 0.85
+        },
+        {
+          "word": "প্রবল",
+          "start": 0.85,
+          "end": 1.36
+        },
+        {
+          "word": "লজ্জা",
+          "start": 1.36,
+          "end": 1.87
+        },
+        {
+          "word": "কাটিয়ে",
+          "start": 1.87,
+          "end": 2.46
+        },
+        {
+          "word": "সে",
+          "start": 2.46,
+          "end": 2.72
+        },
+        {
+          "word": "এগিয়ে",
+          "start": 2.72,
+          "end": 3.23
+        },
+        {
+          "word": "গেল",
+          "start": 3.23,
+          "end": 3.57
+        },
+        {
+          "word": "তার",
+          "start": 3.57,
+          "end": 3.91
+        },
+        {
+          "word": "পাশের",
+          "start": 3.91,
+          "end": 4.42
+        },
+        {
+          "word": "ডেস্কেই",
+          "start": 4.42,
+          "end": 5.1
+        },
+        {
+          "word": "বসা",
+          "start": 5.1,
+          "end": 5.44
+        },
+        {
+          "word": "সিনিয়র",
+          "start": 5.44,
+          "end": 6.03
+        },
+        {
+          "word": "ডিজাইনার",
+          "start": 6.03,
+          "end": 6.8
+        },
+        {
+          "word": "রফিক",
+          "start": 6.8,
+          "end": 7.22
+        },
+        {
+          "word": "সাহেবের",
+          "start": 7.22,
+          "end": 7.9
+        },
+        {
+          "word": "কাছে।",
+          "start": 7.9,
+          "end": 8.67
+        },
+        {
+          "word": "রফিক",
+          "start": 8.67,
+          "end": 9.09
+        },
+        {
+          "word": "সাহেবের",
+          "start": 9.09,
+          "end": 9.77
+        },
+        {
+          "word": "বয়স",
+          "start": 9.77,
+          "end": 10.11
+        },
+        {
+          "word": "পঞ্চাশের",
+          "start": 10.11,
+          "end": 10.88
+        },
+        {
+          "word": "কাছাকাছি।",
+          "start": 10.88,
+          "end": 11.98
+        },
+        {
+          "word": "তিনি",
+          "start": 11.98,
+          "end": 12.41
+        },
+        {
+          "word": "এই",
+          "start": 12.41,
+          "end": 12.67
+        },
+        {
+          "word": "কোম্পানিতেই",
+          "start": 12.67,
+          "end": 13.69
+        },
+        {
+          "word": "মাত্র",
+          "start": 13.69,
+          "end": 14.2
+        },
+        {
+          "word": "পঁয়ত্রিশ",
+          "start": 14.2,
+          "end": 14.96
+        },
+        {
+          "word": "হাজার",
+          "start": 14.96,
+          "end": 15.47
+        },
+        {
+          "word": "টাকা",
+          "start": 15.47,
+          "end": 15.9
+        },
+        {
+          "word": "বেতনে",
+          "start": 15.9,
+          "end": 16.41
+        },
+        {
+          "word": "কাজ",
+          "start": 16.41,
+          "end": 16.75
+        },
+        {
+          "word": "করেন...",
+          "start": 16.75,
+          "end": 17.43
+        },
+        {
+          "word": "যা",
+          "start": 17.43,
+          "end": 17.68
+        },
+        {
+          "word": "আসিফের",
+          "start": 17.68,
+          "end": 18.27
+        },
+        {
+          "word": "বেতনের",
+          "start": 18.27,
+          "end": 18.87
+        },
+        {
+          "word": "ঠিক",
+          "start": 18.87,
+          "end": 19.21
+        },
+        {
+          "word": "অর্ধেক!",
+          "start": 19.21,
+          "end": 20.14
+        },
+        {
+          "word": "অথচ",
+          "start": 20.14,
+          "end": 20.48
+        },
+        {
+          "word": "মানুষটির",
+          "start": 20.48,
+          "end": 21.25
+        },
+        {
+          "word": "মুখে",
+          "start": 21.25,
+          "end": 21.67
+        },
+        {
+          "word": "সবসময়",
+          "start": 21.67,
+          "end": 22.18
+        },
+        {
+          "word": "এক",
+          "start": 22.18,
+          "end": 22.44
+        },
+        {
+          "word": "অদ্ভুত",
+          "start": 22.44,
+          "end": 23.03
+        },
+        {
+          "word": "শান্ত",
+          "start": 23.03,
+          "end": 23.54
+        },
+        {
+          "word": "তৃপ্তি",
+          "start": 23.54,
+          "end": 24.14
+        },
+        {
+          "word": "লেগে",
+          "start": 24.14,
+          "end": 24.56
+        },
+        {
+          "word": "থাকে।",
+          "start": 24.56,
+          "end": 25.33
+        }
+      ],
+      "highlightWords": [
+        "সিনিয়র ডিজাইনার রফিক",
+        "পঁয়ত্রিশ হাজার টাকা",
+        "বেতনের ঠিক অর্ধেক",
+        "শান্ত তৃপ্তি"
+      ],
+      "character": "rakib",
+      "characterPose": "walking",
+      "characterPoses": [
+        {
+          "pose": "walking",
+          "start": 0,
+          "duration": 6.5
+        },
+        {
+          "pose": "nervous",
+          "start": 6.5,
+          "duration": 10
+        },
+        {
+          "pose": "concerned",
+          "start": 16.5,
+          "duration": 8.83
+        }
+      ],
+      "characterPosition": "right",
+      "secondaryCharacter": "elder_uncle",
+      "secondaryPose": "sitting_desk",
+      "secondaryPoses": [
+        {
+          "pose": "using_computer",
+          "start": 0,
+          "duration": 6
+        },
+        {
+          "pose": "sitting_desk",
+          "start": 6,
+          "duration": 9
+        },
+        {
+          "pose": "presenting",
+          "start": 15,
+          "duration": 10.33
+        }
+      ],
+      "secondaryPosition": "left",
+      "backgroundTheme": "warm_study",
+      "hookCard": {
+        "line1": "★ বেতন তুলনা ★",
+        "line2": "আসিফ: ৳৭০,০০০ | রফিক সাহেব: ৳৩৫,০০০",
+        "subtext": "অথচ মুখে এক অদ্ভুত শান্ত তৃপ্তি!"
+      },
+      "prop": {
+        "type": "executive_desk",
+        "deskPosition": "left",
+        "deskName": "RAFIQ • SR. DESIGNER"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-5.mp3",
+      "start": 60.23,
+      "duration": 25.33,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 6,
+      "start": 85.56,
+      "duration": 12.64,
+      "subtitle": "\"রফিক ভাই... আমাকে কি ৫ হাজার টাকা ধার দেওয়া যাবে?\"",
+      "narration": "আসিফ আমতা আমতা করে বলল— \"রফিক ভাই... খুব বিপদে পড়েছি। আগামী সপ্তাহের আগে বাড়িভাড়া দিতে না পারলে বাড়িওয়ালা বাসা ছাড়তে বলেছে। আমাকে কি পাঁচটা হাজার টাকা ধার দেওয়া যাবে?\"",
+      "words": [
+        {
+          "word": "আসিফ",
+          "start": 0,
+          "end": 0.35
+        },
+        {
+          "word": "আমতা",
+          "start": 0.35,
+          "end": 0.71
+        },
+        {
+          "word": "আমতা",
+          "start": 0.71,
+          "end": 1.06
+        },
+        {
+          "word": "করে",
+          "start": 1.06,
+          "end": 1.35
+        },
+        {
+          "word": "বলল—",
+          "start": 1.35,
+          "end": 1.81
+        },
+        {
+          "word": "\"রফিক",
+          "start": 1.81,
+          "end": 2.23
+        },
+        {
+          "word": "ভাই...",
+          "start": 2.23,
+          "end": 2.73
+        },
+        {
+          "word": "খুব",
+          "start": 2.73,
+          "end": 3.01
+        },
+        {
+          "word": "বিপদে",
+          "start": 3.01,
+          "end": 3.43
+        },
+        {
+          "word": "পড়েছি।",
+          "start": 3.43,
+          "end": 4.14
+        },
+        {
+          "word": "আগামী",
+          "start": 4.14,
+          "end": 4.57
+        },
+        {
+          "word": "সপ্তাহের",
+          "start": 4.57,
+          "end": 5.2
+        },
+        {
+          "word": "আগে",
+          "start": 5.2,
+          "end": 5.49
+        },
+        {
+          "word": "বাড়িভাড়া",
+          "start": 5.49,
+          "end": 6.13
+        },
+        {
+          "word": "দিতে",
+          "start": 6.13,
+          "end": 6.48
+        },
+        {
+          "word": "না",
+          "start": 6.48,
+          "end": 6.69
+        },
+        {
+          "word": "পারলে",
+          "start": 6.69,
+          "end": 7.12
+        },
+        {
+          "word": "বাড়িওয়ালা",
+          "start": 7.12,
+          "end": 7.82
+        },
+        {
+          "word": "বাসা",
+          "start": 7.82,
+          "end": 8.18
+        },
+        {
+          "word": "ছাড়তে",
+          "start": 8.18,
+          "end": 8.6
+        },
+        {
+          "word": "বলেছে।",
+          "start": 8.6,
+          "end": 9.31
+        },
+        {
+          "word": "আমাকে",
+          "start": 9.31,
+          "end": 9.74
+        },
+        {
+          "word": "কি",
+          "start": 9.74,
+          "end": 9.95
+        },
+        {
+          "word": "পাঁচটা",
+          "start": 9.95,
+          "end": 10.44
+        },
+        {
+          "word": "হাজার",
+          "start": 10.44,
+          "end": 10.87
+        },
+        {
+          "word": "টাকা",
+          "start": 10.87,
+          "end": 11.22
+        },
+        {
+          "word": "ধার",
+          "start": 11.22,
+          "end": 11.51
+        },
+        {
+          "word": "দেওয়া",
+          "start": 11.51,
+          "end": 11.93
+        },
+        {
+          "word": "যাবে?\"",
+          "start": 11.93,
+          "end": 12.64
+        }
+      ],
+      "highlightWords": [
+        "খুব বিপদে পড়েছি",
+        "বাড়িভাড়া দিতে না পারলে",
+        "পাঁচটা হাজার টাকা ধার"
+      ],
+      "character": "rakib",
+      "characterPose": "tremble",
+      "characterPoses": [
+        {
+          "pose": "tremble",
+          "start": 0,
+          "duration": 4
+        },
+        {
+          "pose": "concerned",
+          "start": 4,
+          "duration": 8.64
+        }
+      ],
+      "characterPosition": "right",
+      "secondaryCharacter": "elder_uncle",
+      "secondaryPose": "sitting_desk",
+      "secondaryPosition": "left",
+      "backgroundTheme": "warm_study",
+      "speechBubble": {
+        "text": "রফিক ভাই... খুব বিপদে পড়েছি। আমাকে কি ৫ হাজার টাকা ধার দেওয়া যাবে?",
+        "speakerPosition": "right",
+        "speakerName": "আসিফ",
+        "type": "dialogue"
+      },
+      "prop": {
+        "type": "executive_desk",
+        "deskPosition": "left",
+        "deskName": "RAFIQ • SR. DESIGNER"
+      },
+      "metaphor": {
+        "type": "sweat_drop"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-6.mp3",
+      "start": 85.56,
+      "duration": 12.64,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 7,
+      "start": 98.2,
+      "duration": 11.68,
+      "subtitle": "ড্রয়ার থেকে টাকা ও গরম চা এগিয়ে দিলেন রফিক সাহেব",
+      "narration": "রফিক সাহেব কোনো দ্বিধা না করে ড্রয়ার থেকে টাকাটা বের করে আসিফের হাতে তুলে দিলেন। তারপর এক কাপ গরম চা এগিয়ে দিয়ে নিজের ব্যাগ থেকে একটি পুরনো লাল ডায়েরি বের করলেন।",
+      "words": [
+        {
+          "word": "রফিক",
+          "start": 0,
+          "end": 0.35
+        },
+        {
+          "word": "সাহেব",
+          "start": 0.35,
+          "end": 0.76
+        },
+        {
+          "word": "কোনো",
+          "start": 0.76,
+          "end": 1.11
+        },
+        {
+          "word": "দ্বিধা",
+          "start": 1.11,
+          "end": 1.6
+        },
+        {
+          "word": "না",
+          "start": 1.6,
+          "end": 1.81
+        },
+        {
+          "word": "করে",
+          "start": 1.81,
+          "end": 2.09
+        },
+        {
+          "word": "ড্রয়ার",
+          "start": 2.09,
+          "end": 2.57
+        },
+        {
+          "word": "থেকে",
+          "start": 2.57,
+          "end": 2.92
+        },
+        {
+          "word": "টাকাটা",
+          "start": 2.92,
+          "end": 3.41
+        },
+        {
+          "word": "বের",
+          "start": 3.41,
+          "end": 3.68
+        },
+        {
+          "word": "করে",
+          "start": 3.68,
+          "end": 3.96
+        },
+        {
+          "word": "আসিফের",
+          "start": 3.96,
+          "end": 4.45
+        },
+        {
+          "word": "হাতে",
+          "start": 4.45,
+          "end": 4.8
+        },
+        {
+          "word": "তুলে",
+          "start": 4.8,
+          "end": 5.14
+        },
+        {
+          "word": "দিলেন।",
+          "start": 5.14,
+          "end": 5.84
+        },
+        {
+          "word": "তারপর",
+          "start": 5.84,
+          "end": 6.26
+        },
+        {
+          "word": "এক",
+          "start": 6.26,
+          "end": 6.47
+        },
+        {
+          "word": "কাপ",
+          "start": 6.47,
+          "end": 6.74
+        },
+        {
+          "word": "গরম",
+          "start": 6.74,
+          "end": 7.02
+        },
+        {
+          "word": "চা",
+          "start": 7.02,
+          "end": 7.23
+        },
+        {
+          "word": "এগিয়ে",
+          "start": 7.23,
+          "end": 7.65
+        },
+        {
+          "word": "দিয়ে",
+          "start": 7.65,
+          "end": 8
+        },
+        {
+          "word": "নিজের",
+          "start": 8,
+          "end": 8.41
+        },
+        {
+          "word": "ব্যাগ",
+          "start": 8.41,
+          "end": 8.83
+        },
+        {
+          "word": "থেকে",
+          "start": 8.83,
+          "end": 9.18
+        },
+        {
+          "word": "একটি",
+          "start": 9.18,
+          "end": 9.52
+        },
+        {
+          "word": "পুরনো",
+          "start": 9.52,
+          "end": 9.94
+        },
+        {
+          "word": "লাল",
+          "start": 9.94,
+          "end": 10.22
+        },
+        {
+          "word": "ডায়েরি",
+          "start": 10.22,
+          "end": 10.71
+        },
+        {
+          "word": "বের",
+          "start": 10.71,
+          "end": 10.98
+        },
+        {
+          "word": "করলেন।",
+          "start": 10.98,
+          "end": 11.68
+        }
+      ],
+      "highlightWords": [
+        "ড্রয়ার থেকে টাকাটা",
+        "হাতে তুলে দিলেন",
+        "এক কাপ গরম চা",
+        "পুরনো লাল ডায়েরি"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "concerned",
+          "start": 0,
+          "duration": 4.5
+        },
+        {
+          "pose": "drinking_tea",
+          "start": 4.5,
+          "duration": 7.18
+        }
+      ],
+      "characterPosition": "right",
+      "secondaryCharacter": "elder_uncle",
+      "secondaryPose": "standing",
+      "secondaryPoses": [
+        {
+          "pose": "counting_money",
+          "start": 0,
+          "duration": 4.5
+        },
+        {
+          "pose": "presenting",
+          "start": 4.5,
+          "duration": 4
+        },
+        {
+          "pose": "reading_document",
+          "start": 8.5,
+          "duration": 3.18
+        }
+      ],
+      "secondaryPosition": "left",
+      "backgroundTheme": "warm_study",
+      "hookCard": {
+        "line1": "★ সহানুভূতি ও প্রজ্ঞা ★",
+        "line2": "ব্যাগ থেকে বের করলেন পুরনো লাল ডায়েরি..."
+      },
+      "prop": {
+        "type": "executive_desk",
+        "deskPosition": "left",
+        "deskName": "RAFIQ • SR. DESIGNER"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-7.mp3",
+      "start": 98.2,
+      "duration": 11.68,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 8,
+      "start": 109.88,
+      "duration": 29.13,
+      "subtitle": "ফুটো বালতির মেটাফর — সমস্যা বেতনে নয়, অপচয়ে!",
+      "narration": "রফিক সাহেব শান্ত গলায় বললেন— \"টাকাটা নিয়ে ভেবো না আসিফ, সময়মতো ফেরত দিলেই হবে। তবে তোমাকে একটা ছোট কথা বলি... তুমি কি কখনো ফুটো বালতিতে পানি ভরেছো? বালতিতে যদি দশটা ছোট ছোট ফুটো থাকে, তুমি যত দ্রুতই পানি ঢালো না কেন, বালতি কিন্তু কখনো ভরবে না। সমস্যা তোমার বেতনের পরিমাণে নয় আসিফ... সমস্যা তোমার খরচের এই অদৃশ্য ফুটোগুলোতে।\"",
+      "words": [
+        {
+          "word": "রফিক",
+          "start": 0,
+          "end": 0.42
+        },
+        {
+          "word": "সাহেব",
+          "start": 0.42,
+          "end": 0.93
+        },
+        {
+          "word": "শান্ত",
+          "start": 0.93,
+          "end": 1.44
+        },
+        {
+          "word": "গলায়",
+          "start": 1.44,
+          "end": 1.87
+        },
+        {
+          "word": "বললেন—",
+          "start": 1.87,
+          "end": 2.59
+        },
+        {
+          "word": "\"টাকাটা",
+          "start": 2.59,
+          "end": 3.27
+        },
+        {
+          "word": "নিয়ে",
+          "start": 3.27,
+          "end": 3.69
+        },
+        {
+          "word": "ভেবো",
+          "start": 3.69,
+          "end": 4.12
+        },
+        {
+          "word": "না",
+          "start": 4.12,
+          "end": 4.37
+        },
+        {
+          "word": "আসিফ,",
+          "start": 4.37,
+          "end": 5.01
+        },
+        {
+          "word": "সময়মতো",
+          "start": 5.01,
+          "end": 5.61
+        },
+        {
+          "word": "ফেরত",
+          "start": 5.61,
+          "end": 6.03
+        },
+        {
+          "word": "দিলেই",
+          "start": 6.03,
+          "end": 6.54
+        },
+        {
+          "word": "হবে।",
+          "start": 6.54,
+          "end": 7.22
+        },
+        {
+          "word": "তবে",
+          "start": 7.22,
+          "end": 7.56
+        },
+        {
+          "word": "তোমাকে",
+          "start": 7.56,
+          "end": 8.15
+        },
+        {
+          "word": "একটা",
+          "start": 8.15,
+          "end": 8.58
+        },
+        {
+          "word": "ছোট",
+          "start": 8.58,
+          "end": 8.92
+        },
+        {
+          "word": "কথা",
+          "start": 8.92,
+          "end": 9.26
+        },
+        {
+          "word": "বলি...",
+          "start": 9.26,
+          "end": 9.85
+        },
+        {
+          "word": "তুমি",
+          "start": 9.85,
+          "end": 10.28
+        },
+        {
+          "word": "কি",
+          "start": 10.28,
+          "end": 10.53
+        },
+        {
+          "word": "কখনো",
+          "start": 10.53,
+          "end": 10.96
+        },
+        {
+          "word": "ফুটো",
+          "start": 10.96,
+          "end": 11.38
+        },
+        {
+          "word": "বালতিতে",
+          "start": 11.38,
+          "end": 12.06
+        },
+        {
+          "word": "পানি",
+          "start": 12.06,
+          "end": 12.48
+        },
+        {
+          "word": "ভরেছো?",
+          "start": 12.48,
+          "end": 13.33
+        },
+        {
+          "word": "বালতিতে",
+          "start": 13.33,
+          "end": 14.01
+        },
+        {
+          "word": "যদি",
+          "start": 14.01,
+          "end": 14.35
+        },
+        {
+          "word": "দশটা",
+          "start": 14.35,
+          "end": 14.78
+        },
+        {
+          "word": "ছোট",
+          "start": 14.78,
+          "end": 15.12
+        },
+        {
+          "word": "ছোট",
+          "start": 15.12,
+          "end": 15.46
+        },
+        {
+          "word": "ফুটো",
+          "start": 15.46,
+          "end": 15.88
+        },
+        {
+          "word": "থাকে,",
+          "start": 15.88,
+          "end": 16.52
+        },
+        {
+          "word": "তুমি",
+          "start": 16.52,
+          "end": 16.94
+        },
+        {
+          "word": "যত",
+          "start": 16.94,
+          "end": 17.2
+        },
+        {
+          "word": "দ্রুতই",
+          "start": 17.2,
+          "end": 17.79
+        },
+        {
+          "word": "পানি",
+          "start": 17.79,
+          "end": 18.22
+        },
+        {
+          "word": "ঢালো",
+          "start": 18.22,
+          "end": 18.64
+        },
+        {
+          "word": "না",
+          "start": 18.64,
+          "end": 18.9
+        },
+        {
+          "word": "কেন,",
+          "start": 18.9,
+          "end": 19.45
+        },
+        {
+          "word": "বালতি",
+          "start": 19.45,
+          "end": 19.96
+        },
+        {
+          "word": "কিন্তু",
+          "start": 19.96,
+          "end": 20.55
+        },
+        {
+          "word": "কখনো",
+          "start": 20.55,
+          "end": 20.98
+        },
+        {
+          "word": "ভরবে",
+          "start": 20.98,
+          "end": 21.4
+        },
+        {
+          "word": "না।",
+          "start": 21.4,
+          "end": 22
+        },
+        {
+          "word": "সমস্যা",
+          "start": 22,
+          "end": 22.59
+        },
+        {
+          "word": "তোমার",
+          "start": 22.59,
+          "end": 23.1
+        },
+        {
+          "word": "বেতনের",
+          "start": 23.1,
+          "end": 23.69
+        },
+        {
+          "word": "পরিমাণে",
+          "start": 23.69,
+          "end": 24.37
+        },
+        {
+          "word": "নয়",
+          "start": 24.37,
+          "end": 24.63
+        },
+        {
+          "word": "আসিফ...",
+          "start": 24.63,
+          "end": 25.31
+        },
+        {
+          "word": "সমস্যা",
+          "start": 25.31,
+          "end": 25.9
+        },
+        {
+          "word": "তোমার",
+          "start": 25.9,
+          "end": 26.41
+        },
+        {
+          "word": "খরচের",
+          "start": 26.41,
+          "end": 26.92
+        },
+        {
+          "word": "এই",
+          "start": 26.92,
+          "end": 27.18
+        },
+        {
+          "word": "অদৃশ্য",
+          "start": 27.18,
+          "end": 27.77
+        },
+        {
+          "word": "ফুটোগুলোতে।\"",
+          "start": 27.77,
+          "end": 29.13
+        }
+      ],
+      "highlightWords": [
+        "ফুটো বালতিতে পানি",
+        "দশটা ছোট ছোট ফুটো",
+        "বালতি কিন্তু কখনো ভরবে না",
+        "অদৃশ্য ফুটোগুলোতে"
+      ],
+      "character": "elder_uncle",
+      "characterPose": "explaining",
+      "characterPosition": "left",
+      "backgroundTheme": "warm_study",
+      "prop": {
+        "type": "leaky_bucket",
+        "waterInflowLabel": "মাসিক বেতন (৳৭০,০০০)",
+        "leaksLabel": "১০টি অদৃশ্য ফুটো (অপচয়)"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-8.mp3",
+      "start": 109.88,
+      "duration": 29.13,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 9,
+      "start": 139.01,
+      "duration": 9.64,
+      "subtitle": "ডেস্কে ফিরে শেষ তিন মাসের ব্যাঙ্ক স্টেটমেন্ট চেক করতে বসল",
+      "narration": "কথাটি আসিফের বুকে গিয়ে তীরের মতো বিঁধল। রফিক সাহেবের কথামতো সে ডেস্কে ফিরে নিজের শেষ তিন মাসের ব্যাঙ্ক স্টেটমেন্ট চেক করতে বসল।",
+      "words": [
+        {
+          "word": "কথাটি",
+          "start": 0,
+          "end": 0.43
+        },
+        {
+          "word": "আসিফের",
+          "start": 0.43,
+          "end": 0.94
+        },
+        {
+          "word": "বুকে",
+          "start": 0.94,
+          "end": 1.29
+        },
+        {
+          "word": "গিয়ে",
+          "start": 1.29,
+          "end": 1.65
+        },
+        {
+          "word": "তীরের",
+          "start": 1.65,
+          "end": 2.09
+        },
+        {
+          "word": "মতো",
+          "start": 2.09,
+          "end": 2.37
+        },
+        {
+          "word": "বিঁধল।",
+          "start": 2.37,
+          "end": 3.09
+        },
+        {
+          "word": "রফিক",
+          "start": 3.09,
+          "end": 3.45
+        },
+        {
+          "word": "সাহেবের",
+          "start": 3.45,
+          "end": 4.03
+        },
+        {
+          "word": "কথামতো",
+          "start": 4.03,
+          "end": 4.53
+        },
+        {
+          "word": "সে",
+          "start": 4.53,
+          "end": 4.75
+        },
+        {
+          "word": "ডেস্কে",
+          "start": 4.75,
+          "end": 5.25
+        },
+        {
+          "word": "ফিরে",
+          "start": 5.25,
+          "end": 5.61
+        },
+        {
+          "word": "নিজের",
+          "start": 5.61,
+          "end": 6.04
+        },
+        {
+          "word": "শেষ",
+          "start": 6.04,
+          "end": 6.33
+        },
+        {
+          "word": "তিন",
+          "start": 6.33,
+          "end": 6.62
+        },
+        {
+          "word": "মাসের",
+          "start": 6.62,
+          "end": 7.05
+        },
+        {
+          "word": "ব্যাঙ্ক",
+          "start": 7.05,
+          "end": 7.63
+        },
+        {
+          "word": "স্টেটমেন্ট",
+          "start": 7.63,
+          "end": 8.42
+        },
+        {
+          "word": "চেক",
+          "start": 8.42,
+          "end": 8.7
+        },
+        {
+          "word": "করতে",
+          "start": 8.7,
+          "end": 9.06
+        },
+        {
+          "word": "বসল।",
+          "start": 9.06,
+          "end": 9.64
+        }
+      ],
+      "highlightWords": [
+        "বুকে গিয়ে তীরের মতো",
+        "ব্যাঙ্ক স্টেটমেন্ট চেক",
+        "তিন মাসের হিসেব"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "using_computer",
+          "start": 0,
+          "duration": 4.5
+        },
+        {
+          "pose": "shocked",
+          "start": 4.5,
+          "duration": 5.14
+        }
+      ],
+      "characterPosition": "center",
+      "backgroundTheme": "corporate_office",
+      "pinNote": {
+        "title": "ব্যাঙ্ক স্টেটমেন্ট অডিট (শেষ ৩ মাস)",
+        "color": "#f59e0b",
+        "side": "top_right"
+      },
+      "prop": {
+        "type": "office_desk_computer",
+        "deskName": "ASIF • AUDIT DESK",
+        "fileLabel": "ব্যাঙ্ক হিসেব",
+        "hudCard": {
+          "title": "📊 ব্যাঙ্ক স্টেটমেন্ট অডিট",
+          "items": [
+            "☕ ক্যাফে ও রেস্তোরাঁ বিল",
+            "🚕 অহেতুক ক্যাব রাইড",
+            "🎬 ওটিটি সাবস্ক্রিপশন"
+          ],
+          "footer": "উধাও প্রায় ২৫,০০০ - ৩০,০০০ টাকা!"
+        }
+      },
+      "metaphor": {
+        "type": "exclamation"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-9.mp3",
+      "start": 139.01,
+      "duration": 9.64,
+      "volume": 1
+    },
+    {
+      "type": "motion-graphics-scene",
+      "start": 148.65,
+      "duration": 13.17,
+      "mgType": "checklist",
+      "title": "মাসিক উধাও ৩০,০০০ টাকা!",
+      "subtitle": "হিসেব মেলাতেই চোখ কপালে উঠল আসিফের",
+      "badge": "অদৃশ্য ফুটোর সত্য",
+      "narration": "হিসেব মেলাতেই তার চোখ কপালে উঠল! অপ্রয়োজনীয় ক্যাফে বিল, অহেতুক ক্যাব রাইড, আর অবহেলায় ফেলে রাখা ওটিটি সাবস্ক্রিপশনেই প্রতি মাসে উধাও হয়ে যাচ্ছিল প্রায় পঁচিশ থেকে ত্রিশ হাজার টাকা!",
+      "words": [
+        {
+          "word": "হিসেব",
+          "start": 0,
+          "end": 0.42
+        },
+        {
+          "word": "মেলাতেই",
+          "start": 0.42,
+          "end": 0.98
+        },
+        {
+          "word": "তার",
+          "start": 0.98,
+          "end": 1.25
+        },
+        {
+          "word": "চোখ",
+          "start": 1.25,
+          "end": 1.53
+        },
+        {
+          "word": "কপালে",
+          "start": 1.53,
+          "end": 1.95
+        },
+        {
+          "word": "উঠল!",
+          "start": 1.95,
+          "end": 2.51
+        },
+        {
+          "word": "অপ্রয়োজনীয়",
+          "start": 2.51,
+          "end": 3.28
+        },
+        {
+          "word": "ক্যাফে",
+          "start": 3.28,
+          "end": 3.76
+        },
+        {
+          "word": "বিল,",
+          "start": 3.76,
+          "end": 4.22
+        },
+        {
+          "word": "অহেতুক",
+          "start": 4.22,
+          "end": 4.7
+        },
+        {
+          "word": "ক্যাব",
+          "start": 4.7,
+          "end": 5.12
+        },
+        {
+          "word": "রাইড,",
+          "start": 5.12,
+          "end": 5.64
+        },
+        {
+          "word": "আর",
+          "start": 5.64,
+          "end": 5.85
+        },
+        {
+          "word": "অবহেলায়",
+          "start": 5.85,
+          "end": 6.41
+        },
+        {
+          "word": "ফেলে",
+          "start": 6.41,
+          "end": 6.76
+        },
+        {
+          "word": "রাখা",
+          "start": 6.76,
+          "end": 7.11
+        },
+        {
+          "word": "ওটিটি",
+          "start": 7.11,
+          "end": 7.53
+        },
+        {
+          "word": "সাবস্ক্রিপশনেই",
+          "start": 7.53,
+          "end": 8.57
+        },
+        {
+          "word": "প্রতি",
+          "start": 8.57,
+          "end": 8.99
+        },
+        {
+          "word": "মাসে",
+          "start": 8.99,
+          "end": 9.34
+        },
+        {
+          "word": "উধাও",
+          "start": 9.34,
+          "end": 9.69
+        },
+        {
+          "word": "হয়ে",
+          "start": 9.69,
+          "end": 9.96
+        },
+        {
+          "word": "যাচ্ছিল",
+          "start": 9.96,
+          "end": 10.52
+        },
+        {
+          "word": "প্রায়",
+          "start": 10.52,
+          "end": 10.94
+        },
+        {
+          "word": "পঁচিশ",
+          "start": 10.94,
+          "end": 11.36
+        },
+        {
+          "word": "থেকে",
+          "start": 11.36,
+          "end": 11.71
+        },
+        {
+          "word": "ত্রিশ",
+          "start": 11.71,
+          "end": 12.12
+        },
+        {
+          "word": "হাজার",
+          "start": 12.12,
+          "end": 12.54
+        },
+        {
+          "word": "টাকা!",
+          "start": 12.54,
+          "end": 13.17
         }
       ],
       "highlightWords": [],
-      "flowSteps": [
+      "checklistItems": [
+        "☕ অপ্রয়োজনীয় ক্যাফে বিল: ৳৮,০০০",
+        "🚕 অহেতুক ক্যাব রাইড: ৳১২,০০০",
+        "🎬 ফেলে রাখা ওটিটি: ৳৫,০০০+",
+        "💸 মোট মাসিক অপচয়: ৳৩০,০০০"
+      ],
+      "countUp": {
+        "from": 0,
+        "to": 30000,
+        "prefix": "৳",
+        "label": "প্রতি মাসে অপচয়"
+      },
+      "markerHighlight": {
+        "text": "পঁচিশ থেকে ত্রিশ হাজার টাকা"
+      }
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-10.mp3",
+      "start": 148.65,
+      "duration": 13.17,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 11,
+      "start": 161.82,
+      "duration": 8.68,
+      "subtitle": "ভুল বুঝতে পেরে নিজের জীবনের বাজেট নতুন করে সাজাল",
+      "narration": "আসিফ নিজের ভুল বুঝতে পারল। দেখনদারি আর ছোট ছোট অযথা খরচে লাগাম টেনে সে নিজের জীবনের বাজেট নতুন করে সাজাল।",
+      "words": [
         {
-          "step": 1,
-          "title": "অর্ডার প্লেস",
-          "desc": "কাস্টমার অ্যাপ থেকে অর্ডার দিল"
+          "word": "আসিফ",
+          "start": 0,
+          "end": 0.39
         },
         {
-          "step": 2,
-          "title": "অটো ভেরিফিকেশন",
-          "desc": "AI ফ্রড চেক ও কনফার্ম করল"
+          "word": "নিজের",
+          "start": 0.39,
+          "end": 0.85
         },
         {
-          "step": 3,
-          "title": "ইনস্ট্যান্ট ডেলিভারি",
-          "desc": "রাইডারকে সরাসরি এসাইন করা হলো"
+          "word": "ভুল",
+          "start": 0.85,
+          "end": 1.16
+        },
+        {
+          "word": "বুঝতে",
+          "start": 1.16,
+          "end": 1.63
+        },
+        {
+          "word": "পারল।",
+          "start": 1.63,
+          "end": 2.33
+        },
+        {
+          "word": "দেখনদারি",
+          "start": 2.33,
+          "end": 3.02
+        },
+        {
+          "word": "আর",
+          "start": 3.02,
+          "end": 3.25
+        },
+        {
+          "word": "ছোট",
+          "start": 3.25,
+          "end": 3.56
+        },
+        {
+          "word": "ছোট",
+          "start": 3.56,
+          "end": 3.88
+        },
+        {
+          "word": "অযথা",
+          "start": 3.88,
+          "end": 4.26
+        },
+        {
+          "word": "খরচে",
+          "start": 4.26,
+          "end": 4.65
+        },
+        {
+          "word": "লাগাম",
+          "start": 4.65,
+          "end": 5.12
+        },
+        {
+          "word": "টেনে",
+          "start": 5.12,
+          "end": 5.5
+        },
+        {
+          "word": "সে",
+          "start": 5.5,
+          "end": 5.74
+        },
+        {
+          "word": "নিজের",
+          "start": 5.74,
+          "end": 6.2
+        },
+        {
+          "word": "জীবনের",
+          "start": 6.2,
+          "end": 6.74
+        },
+        {
+          "word": "বাজেট",
+          "start": 6.74,
+          "end": 7.21
+        },
+        {
+          "word": "নতুন",
+          "start": 7.21,
+          "end": 7.59
+        },
+        {
+          "word": "করে",
+          "start": 7.59,
+          "end": 7.9
+        },
+        {
+          "word": "সাজাল।",
+          "start": 7.9,
+          "end": 8.68
         }
       ],
+      "highlightWords": [
+        "ভুল বুঝতে পারল",
+        "খরচে লাগাম টেনে",
+        "বাজেট নতুন করে সাজাল"
+      ],
+      "character": "rakib",
+      "characterPose": "standing",
+      "characterPoses": [
+        {
+          "pose": "writing_pen",
+          "start": 0,
+          "duration": 4.5
+        },
+        {
+          "pose": "celebrating",
+          "start": 4.5,
+          "duration": 4.18
+        }
+      ],
+      "characterPosition": "center",
+      "backgroundTheme": "home_study",
+      "pinNote": {
+        "title": "নতুন বাজেট ও সঞ্চয়ের সূচনা",
+        "color": "#10b981",
+        "side": "top_left"
+      },
+      "metaphor": {
+        "type": "idea_bulb"
+      },
+      "screenShake": false,
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-11.mp3",
+      "start": 161.82,
+      "duration": 8.68,
+      "volume": 1
+    },
+    {
+      "type": "animated-scene",
+      "sceneIndex": 12,
+      "start": 170.5,
+      "duration": 15.57,
+      "subtitle": "টাকা ধরে রাখাই ভবিষ্যৎ নির্ধারণ করে",
+      "narration": "ছয় মাস পর আসিফ শুধু দেনামুক্তই হলো না, নিজের জরুরি ফান্ডের জন্যও নিয়মিত সঞ্চয় শুরু করল। মনে রাখবেন—টাকা বেশি আয় করাই সফলতার চাবিকাঠি নয়... টাকা কীভাবে ধরে রাখছেন এবং কোথায় অপচয় করছেন, সেটাই আপনার ভবিষ্যৎ নির্ধারণ করে।",
+      "words": [
+        {
+          "word": "ছয়",
+          "start": 0,
+          "end": 0.27
+        },
+        {
+          "word": "মাস",
+          "start": 0.27,
+          "end": 0.54
+        },
+        {
+          "word": "পর",
+          "start": 0.54,
+          "end": 0.74
+        },
+        {
+          "word": "আসিফ",
+          "start": 0.74,
+          "end": 1.08
+        },
+        {
+          "word": "শুধু",
+          "start": 1.08,
+          "end": 1.42
+        },
+        {
+          "word": "দেনামুক্তই",
+          "start": 1.42,
+          "end": 2.16
+        },
+        {
+          "word": "হলো",
+          "start": 2.16,
+          "end": 2.43
+        },
+        {
+          "word": "না,",
+          "start": 2.43,
+          "end": 2.8
+        },
+        {
+          "word": "নিজের",
+          "start": 2.8,
+          "end": 3.21
+        },
+        {
+          "word": "জরুরি",
+          "start": 3.21,
+          "end": 3.61
+        },
+        {
+          "word": "ফান্ডের",
+          "start": 3.61,
+          "end": 4.15
+        },
+        {
+          "word": "জন্যও",
+          "start": 4.15,
+          "end": 4.56
+        },
+        {
+          "word": "নিয়মিত",
+          "start": 4.56,
+          "end": 5.03
+        },
+        {
+          "word": "সঞ্চয়",
+          "start": 5.03,
+          "end": 5.51
+        },
+        {
+          "word": "শুরু",
+          "start": 5.51,
+          "end": 5.84
+        },
+        {
+          "word": "করল।",
+          "start": 5.84,
+          "end": 6.38
+        },
+        {
+          "word": "মনে",
+          "start": 6.38,
+          "end": 6.65
+        },
+        {
+          "word": "রাখবেন—টাকা",
+          "start": 6.65,
+          "end": 7.57
+        },
+        {
+          "word": "বেশি",
+          "start": 7.57,
+          "end": 7.9
+        },
+        {
+          "word": "আয়",
+          "start": 7.9,
+          "end": 8.11
+        },
+        {
+          "word": "করাই",
+          "start": 8.11,
+          "end": 8.44
+        },
+        {
+          "word": "সফলতার",
+          "start": 8.44,
+          "end": 8.92
+        },
+        {
+          "word": "চাবিকাঠি",
+          "start": 8.92,
+          "end": 9.52
+        },
+        {
+          "word": "নয়...",
+          "start": 9.52,
+          "end": 9.93
+        },
+        {
+          "word": "টাকা",
+          "start": 9.93,
+          "end": 10.27
+        },
+        {
+          "word": "কীভাবে",
+          "start": 10.27,
+          "end": 10.74
+        },
+        {
+          "word": "ধরে",
+          "start": 10.74,
+          "end": 11.01
+        },
+        {
+          "word": "রাখছেন",
+          "start": 11.01,
+          "end": 11.48
+        },
+        {
+          "word": "এবং",
+          "start": 11.48,
+          "end": 11.75
+        },
+        {
+          "word": "কোথায়",
+          "start": 11.75,
+          "end": 12.16
+        },
+        {
+          "word": "অপচয়",
+          "start": 12.16,
+          "end": 12.5
+        },
+        {
+          "word": "করছেন,",
+          "start": 12.5,
+          "end": 13.07
+        },
+        {
+          "word": "সেটাই",
+          "start": 13.07,
+          "end": 13.48
+        },
+        {
+          "word": "আপনার",
+          "start": 13.48,
+          "end": 13.88
+        },
+        {
+          "word": "ভবিষ্যৎ",
+          "start": 13.88,
+          "end": 14.42
+        },
+        {
+          "word": "নির্ধারণ",
+          "start": 14.42,
+          "end": 15.03
+        },
+        {
+          "word": "করে।",
+          "start": 15.03,
+          "end": 15.57
+        }
+      ],
+      "highlightWords": [],
+      "character": "rakib",
+      "characterPose": "celebrating",
+      "characterPoses": [
+        {
+          "pose": "celebrating",
+          "start": 0,
+          "duration": 6.5
+        },
+        {
+          "pose": "presenting",
+          "start": 6.5,
+          "duration": 9.07
+        }
+      ],
+      "characterPosition": "center",
+      "backgroundTheme": "golden_sunrise",
+      "screenShake": false,
       "particleBurst": {
-        "type": "sparkles"
-      }
+        "type": "confetti"
+      },
+      "tornPaperCard": {
+        "title": "সফলতার চাবিকাঠি",
+        "headline": "অর্থনৈতিক স্বাধীনতা",
+        "points": [
+          "আয় বেশি করাই সব নয়",
+          "অদৃশ্য খরচের ফুটোগুলো বন্ধ করুন",
+          "আজকের সঞ্চয় আগামী দিনের স্বাধীনতা"
+        ],
+        "top": 120
+      },
+      "parallax": true
+    },
+    {
+      "type": "audio",
+      "src": "media/vo-asif-12.mp3",
+      "start": 170.5,
+      "duration": 15.57,
+      "volume": 1
     }
   ],
   "soundEffects": [
@@ -219,31 +2658,185 @@
     },
     {
       "src": "media/sfx/whoosh.wav",
-      "frame": 120,
+      "frame": 204,
       "durationInFrames": 11,
       "volume": 0.18
     },
     {
       "src": "media/sfx/ding.wav",
-      "frame": 128,
+      "frame": 212,
       "durationInFrames": 21,
       "volume": 0.22
     },
     {
       "src": "media/sfx/whoosh.wav",
-      "frame": 255,
+      "frame": 645,
       "durationInFrames": 11,
       "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 653,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 1321,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 1329,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 1807,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 1815,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 2567,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/pop.wav",
+      "frame": 2567,
+      "durationInFrames": 6,
+      "volume": 0.25
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 2946,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 2954,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 3296,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 4170,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 4178,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 4460,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 4468,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/cash.wav",
+      "frame": 4466,
+      "durationInFrames": 12,
+      "volume": 0.28
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 4855,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 4863,
+      "durationInFrames": 21,
+      "volume": 0.22
+    },
+    {
+      "src": "media/sfx/whoosh.wav",
+      "frame": 5115,
+      "durationInFrames": 11,
+      "volume": 0.18
+    },
+    {
+      "src": "media/sfx/ding.wav",
+      "frame": 5123,
+      "durationInFrames": 21,
+      "volume": 0.22
     }
   ],
   "voiceIntervals": [
     {
       "startFrame": 0,
-      "endFrame": 120
+      "endFrame": 204
     },
     {
-      "startFrame": 120,
-      "endFrame": 255
+      "startFrame": 204,
+      "endFrame": 645
+    },
+    {
+      "startFrame": 645,
+      "endFrame": 1321
+    },
+    {
+      "startFrame": 1321,
+      "endFrame": 1807
+    },
+    {
+      "startFrame": 1807,
+      "endFrame": 2567
+    },
+    {
+      "startFrame": 2567,
+      "endFrame": 2946
+    },
+    {
+      "startFrame": 2946,
+      "endFrame": 3296
+    },
+    {
+      "startFrame": 3296,
+      "endFrame": 4170
+    },
+    {
+      "startFrame": 4170,
+      "endFrame": 4459
+    },
+    {
+      "startFrame": 4460,
+      "endFrame": 4855
+    },
+    {
+      "startFrame": 4855,
+      "endFrame": 5115
+    },
+    {
+      "startFrame": 5115,
+      "endFrame": 5582
     }
   ],
   "cinematicOverlay": true

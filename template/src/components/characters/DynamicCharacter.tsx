@@ -53,7 +53,8 @@ export const DynamicCharacter: React.FC<DynamicCharacterProps> = ({
     isSeated ||
     pose === "sitting_desk" ||
     pose === "using_computer" ||
-    pose === "sitting_stool";
+    pose === "sitting_stool" ||
+    pose === "writing_pen";
 
   const isWalking = pose === "walking" || pose === "walking_phone";
   const walkBob = isWalking ? Math.abs(Math.sin(frame * 0.28)) * 4.5 : 0;
@@ -1066,6 +1067,51 @@ function renderArms(
         <path d="M 105 250 Q 120 320 148 335" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
         <path d="M 215 250 Q 200 320 172 335" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
         <ellipse cx="160" cy={335 + twitch} rx="18" ry="14" fill={skinBase} stroke="#0f172a" strokeWidth="1.5" />
+      </>
+    );
+  }
+
+  if (pose === "head_in_hands") {
+    // Both arms raised up to temples / clutching head in deep thought or despair
+    return (
+      <>
+        {/* Left arm reaching up to left temple */}
+        <path d="M 105 250 Q 80 190 120 160" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 105 250 Q 80 190 120 160" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="120" cy="158" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+
+        {/* Right arm reaching up to right temple */}
+        <path d="M 215 250 Q 240 190 200 160" stroke="#0f172a" strokeWidth="28" strokeLinecap="round" fill="none" />
+        <path d="M 215 250 Q 240 190 200 160" stroke={sleeveColor} strokeWidth="22" strokeLinecap="round" fill="none" />
+        <circle cx="200" cy="158" r="14" fill={skinBase} stroke="#0f172a" strokeWidth="2" />
+      </>
+    );
+  }
+
+  if (pose === "writing_pen") {
+    // Left hand holding paper, right hand actively moving pen in writing loop
+    const penJitter = Math.sin(frame * 0.7) * 3;
+    return (
+      <>
+        {/* White Budget Notebook / Paper on table */}
+        <g transform="translate(125, 370) rotate(-4)">
+          <rect x="0" y="0" width="85" height="58" rx="4" fill="#ffffff" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="10" y1="14" x2="75" y2="14" stroke="#3b82f6" strokeWidth="2" />
+          <line x1="10" y1="26" x2="70" y2="26" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="6 2" />
+          <line x1="10" y1="38" x2="72" y2="38" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="6 2" />
+          <line x1="10" y1="48" x2="50" y2="48" stroke="#10b981" strokeWidth="2" />
+        </g>
+
+        {/* Left arm resting on desk holding paper */}
+        <path d="M 105 250 Q 110 330 135 400" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <ellipse cx="135" cy="400" rx="14" ry="10" fill={skinBase} />
+
+        {/* Right arm holding pen and writing */}
+        <path d="M 215 250 Q 200 330 185 398" stroke={sleeveColor} strokeWidth="26" strokeLinecap="round" fill="none" />
+        <circle cx="185" cy="398" r="13" fill={skinBase} />
+        {/* Pen in right hand */}
+        <line x1={180 + penJitter} y1="380" x2={190 + penJitter} y2="410" stroke="#2563eb" strokeWidth="4.5" strokeLinecap="round" />
+        <circle cx={190 + penJitter} cy="410" r="2.5" fill="#0f172a" />
       </>
     );
   }
